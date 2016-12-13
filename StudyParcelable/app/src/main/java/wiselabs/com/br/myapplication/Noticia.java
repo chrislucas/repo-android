@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.security.acl.NotOwnerException;
+import java.util.Random;
 
 /**
  * Created by C.Lucas on 12/12/2016.
@@ -20,14 +21,32 @@ import java.security.acl.NotOwnerException;
  */
 public class Noticia implements Parcelable {
 
-    private int id;
+    private Integer id, idClass;
     private String text, reference;
 
+    public Noticia(Integer id, String text, String reference) {
+        this.id = id;
+        this.text = text;
+        this.reference = reference;
+    }
+
+    protected Noticia(Parcel in) {
+        this.id = in.readByte() == 0x00 ? null : in.readInt();
+        this.text = in.readString();
+        this.reference = in.readString();
+        Random rdm = new Random();
+        this.idClass = rdm.nextInt(Integer.MAX_VALUE - (1 << 15)) + (1 << 15);
+    }
+
+    /*
+    *
+    *
+    * */
     public static final Parcelable.Creator<Noticia> CREATOR = new Parcelable.Creator<Noticia>() {
 
         @Override
         public Noticia createFromParcel(Parcel source) {
-            return null;
+            return new Noticia(source);
         }
 
         @Override
@@ -36,14 +55,27 @@ public class Noticia implements Parcelable {
         }
     };
 
-
+    /*
+    * Devolver um Inteiro como identificador da classe
+    * */
     @Override
     public int describeContents() {
-        return 0;
+        return this.idClass;
     }
-
+    /*
+    *
+    * Metodo responsavel por serializar a classe
+    * */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeInt(this.id);
+        dest.writeString(this.reference);
+        dest.writeString(this.text);
     }
 }
+
+/*
+* Explicacao interessate sobre Parcelable
+* http://pt.stackoverflow.com/questions/38492/quando-e-como-implementar-o-parcelable-vs-serializable
+*
+* */
