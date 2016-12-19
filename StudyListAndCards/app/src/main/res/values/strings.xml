@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">StudyListAndCards</string>
+
+    <!-- String fake para noticias -->
+    <string name="mock_id_noticia">#1</string>
+    <string name="mock_titulo_noticia">Câmera adia votação a PEC 55</string>
+    <string name="mock_texto_noticia">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non metus finibus orci posuere laoreet.
+        Donec sodales porttitor leo, et mollis massa auctor at.
+    </string>
+
+    <string name="mock_referencia">12/2016</string>
+    <string name="mudar_layout">Mudar Layout</string>
+    <string name="adicionar">Adicionar</string>
+
 </resources>

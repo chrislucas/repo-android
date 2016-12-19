@@ -24,16 +24,38 @@ public class Noticia implements Parcelable {
     private Integer id, idClass;
     private String title, text, reference;
 
-    public Noticia(Integer id, String text, String reference) {
+    public Integer getId() {
+        return id;
+    }
+
+    public Integer getIdClass() {
+        return idClass;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public Noticia(Integer id, String title, String text, String reference) {
         this.id = id;
         this.text = text;
         this.reference = reference;
+        this.title = title;
     }
 
     protected Noticia(Parcel in) {
         this.id = in.readByte() == 0x00 ? null : in.readInt();
         this.text = in.readString();
         this.reference = in.readString();
+        this.title = in.readString();
         Random rdm = new Random();
         this.idClass = rdm.nextInt(Integer.MAX_VALUE - (1 << 15)) + (1 << 15);
     }
@@ -85,6 +107,7 @@ public class Noticia implements Parcelable {
         dest.writeInt(this.id);
         dest.writeString(this.reference);
         dest.writeString(this.text);
+        dest.writeString(this.title);
     }
 }
 

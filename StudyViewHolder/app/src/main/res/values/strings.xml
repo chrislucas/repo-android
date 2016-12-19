@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">StudyViewHolder</string>
+    <string name="action_settings">Settings</string>
+    <string name="_1">#1</string>
+    <string name="um_texto_qualquer">Um texto qualquer</string>
+    <string name="imagetest">ImageTest</string>
+</resources>
