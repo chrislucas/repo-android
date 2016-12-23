@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">HttpRequest</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="facebook_app_id">1803782456547096</string>
+    <string name="title_activity_login_facebook">LoginFacebook</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
