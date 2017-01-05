@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Br0adCastReceiver</string>
+    <string name="title_activity_open_by_receiver">Tela aberta por um broadcastreceiver</string>
+    <string name="text_open_activity_by_receiver">Essa tela foi aberta atraves de um BroadcastReceiver</string>
+</resources>

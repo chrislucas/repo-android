@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.br.br0adcastreceiver">
+
+    <!-- oermissao para aplicacao receber uma mensagem quando o boot do SO terminar -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activities.MainActivity">
+        </activity>
+        <activity android:name=".Menu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".ExampleRC1">
+            <intent-filter>
+                <action android:name="ACTION_RC1"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Receiver2 sera registrado de forma dinamica, atraves do metodo registerReceiver -->
+        <receiver android:name=".ExampleRC2"/>
+
+        <receiver android:name=".ExampleRC3">
+            <intent-filter>
+                <action android:name="ACTION_RC3_ABRIR_ACTIVITY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".ErrorANR">
+            <intent-filter>
+                <action android:name="ACTION_RC_ERROR_ANR"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Quando o boot do SO terminar a mensagem BOOT_COMPLETED sera capturada por esse filtro -->
+        <receiver android:name=".boot.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- um listener para quando o app for instalado ou desinstalado
+        <receiver android:name=".MyAppBroadcastReceiver">
+            <intent-filter android:priority="999">
+                <action android:name="android.intent.action.PACKAGE_INSTALL"/>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+            action todas obsoletas
+         -->
+        <activity
+            android:name=".activities.OpenByReceiver"
+            android:label="@string/title_activity_open_by_receiver"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+    </application>
+
+</manifest>

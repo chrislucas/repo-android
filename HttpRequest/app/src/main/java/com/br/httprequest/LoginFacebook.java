@@ -16,6 +16,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -47,6 +48,26 @@ public class LoginFacebook extends AppCompatActivity {
             public void onError(FacebookException error) {
                 Log.e("LOGIN_FACEBOOK_ERROR", error.getMessage());
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        /*
+        * Verificar status do login: https://developers.facebook.com/docs/facebook-login/android/
+        * */
+        LoginManager.getInstance().registerCallback(cbManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
             }
         });
 

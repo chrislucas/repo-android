@@ -1,0 +1,13 @@
+How to receiving broadcast when application installed or removed
+http://stackoverflow.com/questions/11246326/how-to-receiving-broadcast-when-application-installed-or-removed
+
+
+BroadcastReceiver
+https://developer.android.com/guide/topics/manifest/receiver-element.html
+
+1) ponto interessante segundo a documentacao:
+Se um receiver nao possuir filtro, ele ira interceptar uma mensagem enviada pela
+Intent que foi instanciada usando exatamente o nome da classe que esta responsavel por
+receber a mensagem (pelo que entendi uma classe que herde de BroadcastReceiver)
+
+2) diferenca entre registrar um receiver no arquivo manifest e dinamicamente
