@@ -1,0 +1,11 @@
+coordinator layout
+https://lab.getbase.com/introduction-to-coordinator-layout-on-android/
+http://saulmm.github.io/mastering-coordinator
+https://guides.codepath.com/android/Handling-Scrolls-with-CoordinatorLayout
+
+
+/*
+    Coordinator layout eh um gerenciador de layout baseado no Framelayout
+    mas com recursos a mais. Nas palavras da documentação da google: CoordinatorLayout is a super-powered FrameLayout..
+    Ele permite coordenar os componentes filhos dele (Views filhas)
+*/
