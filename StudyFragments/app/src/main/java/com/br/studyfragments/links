@@ -1,8 +1,17 @@
+http://www.vogella.com/tutorials/AndroidFragments/article.html#what-are-single-pane-or-multi-pane-layouts
+
 http://www.vogella.com/tutorials/AndroidFragments/article.html
 https://developer.android.com/training/basics/fragments/fragment-ui.html
 http://stackoverflow.com/questions/10609268/difference-between-fragment-and-fragmentactivity
 http://www.concretepage.com/android/android-fragmentactivity-listfragment-fragment-example
 https://developer.android.com/training/basics/fragments/creating.html
+
+
+Headless Fragments android tutorial
+http://luboganev.github.io/blog/headless-fragments/
+http://stackoverflow.com/questions/22799759/what-is-the-difference-between-a-headless-fragment-and-a-service-in-android
+
+http://stackoverflow.com/questions/4540754/dynamically-add-elements-to-a-listview-android
 
 https://www.codepuppet.com/2013/10/06/using-fragments-in-android-with-fragmentactivity/
 http://scientistengineer.blogspot.com.br/2013/03/simple-example-of-fragment-and.html
@@ -10,3 +19,8 @@ https://examples.javacodegeeks.com/android/core/app/fragment/android-fragments-e
 
 https://developer.android.com/guide/components/fragments.html
 https://developer.android.com/training/basics/fragments/index.html
+
+
+Diagrama com ciclo de vida de um Fragment
+https://medium.com/square-corner-blog/advocating-against-android-fragments-81fd0b462c97#.ajqux7kfu
+https://www.codepuppet.com/2013/10/06/using-fragments-in-android-with-fragmentactivity/

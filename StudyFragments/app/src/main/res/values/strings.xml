@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">StudyFragments</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Blank fragment</string>
+    <string name="remover_fragment">Remover Fragment</string>
 </resources>

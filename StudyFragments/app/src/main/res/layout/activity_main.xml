@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
@@ -9,10 +9,46 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.br.studyfragments.MainActivity">
+    android:orientation="vertical"
+    tools:context="com.br.studyfragments.MainActivity"
+    android:baselineAligned="false">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-</RelativeLayout>
+        android:layout_weight="1"
+        android:baselineAligned="false">
+        <FrameLayout
+            android:id="@+id/container_subs_frag_detail"
+            class="com.br.studyfragments.tutorial.vogella.FragmentDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:ignore="NestedWeights" />
+
+        <FrameLayout
+            android:id="@+id/container_subs_frag_list"
+            class="com.br.studyfragments.tutorial.vogella.FragmentList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/remover_frag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/remover_fragment"
+            android:onClick="removeFragment" />
+
+    </LinearLayout>
+
+</LinearLayout>

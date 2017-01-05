@@ -1,0 +1,24 @@
+http://saulmm.github.io/mastering-coordinator
+http://saulmm.github.io/avoding-android-cold-starts,
+https://developer.android.com/reference/android/support/design/widget/CoordinatorLayout.html
+
+https://medium.com/@hitherejoe/exploring-the-android-design-support-library-bottom-navigation-drawer-548de699e8e0#.9raagnj2m
+http://www.android4devs.com/2015/06/navigation-view-material-design-support.html
+
+
+Push notification
+http://searchmobilecomputing.techtarget.com/definition/push-notification
+https://code.tutsplus.com/tutorials/how-to-get-started-with-push-notifications-on-android--cms-25
+https://developers.google.com/cloud-messaging/870
+
+
+Looper
+https://developer.android.com/reference/android/os/Looper.html
+http://stackoverflow.com/questions/7597742/what-is-the-purpose-of-looper-and-how-to-use-it
+https://developer.android.com/training/multiple-threads/communicate-ui.html
+
+https://github.com/pwittchen/android-looper-sample
+
+https://blog.nikitaog.me/2014/10/11/android-looper-handler-handlerthread-i/
+http://androidsrc.net/android-loopers-and-handlers-code-tutorial/
+http://www.programcreek.com/java-api-examples/index.php?class=android.os.Looper&method=getMainLooper
