@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BroadcastReceiverStart</string>
+    <string name="texto_inicial">Esse app pode ter sido aberto atraves de um Br0adCastReceiver</string>
+</resources>

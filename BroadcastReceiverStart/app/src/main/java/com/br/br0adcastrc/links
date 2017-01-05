@@ -1,0 +1,10 @@
+Br0adcastReceive
+https://developer.android.com/guide/topics/manifest/receiver-element.html
+http://www.vogella.com/tutorials/AndroidBroadcastReceiver/article.html
+
+
+applications with the same user ID.
+http://stackoverflow.com/questions/6354035/two-android-applications-with-the-same-user-id
+
+How to receiving broadcast when application installed or removed
+http://stackoverflow.com/questions/11246326/how-to-receiving-broadcast-when-application-installed-or-removed
