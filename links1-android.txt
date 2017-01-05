@@ -22,3 +22,12 @@ https://github.com/pwittchen/android-looper-sample
 https://blog.nikitaog.me/2014/10/11/android-looper-handler-handlerthread-i/
 http://androidsrc.net/android-loopers-and-handlers-code-tutorial/
 http://www.programcreek.com/java-api-examples/index.php?class=android.os.Looper&method=getMainLooper
+
+
+http://www.appance.com/solution-for-problems-found-loading-plugins-google-services-was-not-loaded/
+
+
+http://www.androidpro.com.br/android-material-design-introducao/
+http://www.andreanolanusse.com/en/android-findviewbyid-vs-injectview/
+https://material.io/guidelines/material-design/introduction.html#introduction-principles
+https://github.com/kaaes/spotify-web-api-android
