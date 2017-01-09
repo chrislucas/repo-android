@@ -1,0 +1,14 @@
+WorkerThread
+Pesquisar: WorkerThread android
+https://developer.android.com/reference/android/support/annotation/WorkerThread.html
+https://developer.android.com/guide/components/processes-and-threads.html
+http://stackoverflow.com/questions/31872790/difference-between-ui-thread-and-worker-thread-in-android/31872922
+http://mcomella.xyz/blog/2016/thread-annotations.html
+
+
+WorkerThread java
+https://docs.oracle.com/javase/tutorial/uiswing/concurrency/worker.html
+http://www.journaldev.com/1069/threadpoolexecutor-java-thread-pool-example-executorservice
+http://winterbe.com/posts/2015/04/07/java8-concurrency-tutorial-thread-executor-examples/
+http://www.math.uni-hamburg.de/doc/java/tutorial/essential/threads/group.html
+http://www.javatpoint.com/java-thread-pool

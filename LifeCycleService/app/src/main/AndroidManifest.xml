@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.r028367.tutorialservice">
+    package="com.example.r028367.lifecycleservice">
 
     <application
         android:allowBackup="true"
@@ -15,12 +15,9 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".ExampleService"
-            android:enabled="true"
-            android:exported="true">
+        <service android:name=".ServiceWorkerThread">
             <intent-filter>
-                <action android:name="SERVICE_1" />
+                <action android:name="THREAD_WORKER_SERVICE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
