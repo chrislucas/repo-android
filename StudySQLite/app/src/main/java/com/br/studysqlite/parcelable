@@ -1,0 +1,18 @@
+https://developer.android.com/reference/android/os/Parcelable.html
+
+Difference between startActivity and startActivites
+http://stackoverflow.com/questions/26337805/difference-between-startactivity-and-startactivites
+
+Parcelable generic
+http://stackoverflow.com/questions/18797399/is-it-possible-to-parcel-a-generic-class
+https://rakitech.wordpress.com/2014/07/31/generic-parcelable-implementation/
+
+
+Null Pointer Array Parcelable
+http://stackoverflow.com/questions/10898116/make-custom-parcelable-containing-byte-array
+http://stackoverflow.com/questions/8902380/getparcelablearraylistextra-return-nullpointerexception
+http://www.itgo.me/a/592163367722367933/parcelable-arraylist-passed-partially-with-null-elements/18505607
+
+
+ContextWrapper
+https://developer.android.com/reference/android/content/ContextWrapper.html
