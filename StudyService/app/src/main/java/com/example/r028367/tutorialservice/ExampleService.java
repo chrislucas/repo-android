@@ -59,7 +59,8 @@ https://android-developers.googleblog.com/2010/02/service-api-changes-starting-w
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+        // throw new UnsupportedOperationException("Not yet implemented");
+        return null;
     }
 
 

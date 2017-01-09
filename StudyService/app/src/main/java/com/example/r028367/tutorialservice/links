@@ -10,3 +10,9 @@ https://en.wikipedia.org/wiki/Push_technology
 
 
 https://developer.android.com/guide/components/services.html
+
+Thread
+http://stackoverflow.com/questions/20370755/inner-class-runnable-in-java
+http://stackoverflow.com/questions/10186466/creating-threads-through-annomyous-inner-class
+https://docs.oracle.com/javase/tutorial/essential/concurrency/runthread.html
+https://examples.javacodegeeks.com/core-java/lang/runnable/java-runnable-example/
