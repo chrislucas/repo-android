@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by r028367 on 09/01/2017.
  */
 
-public class User extends Entity implements Parcelable  {
+public class User extends Entity implements Parcelable {
 
     private String name, pwd;
 
@@ -75,5 +75,4 @@ public class User extends Entity implements Parcelable  {
             return new User[size];
         }
     };
-
 }

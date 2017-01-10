@@ -22,13 +22,13 @@ import java.util.Properties;
 
 public class HelperDB extends SQLiteOpenHelper {
 
-    public static final String DB_NAME     = "HelperDB.db";
-    public static final String CATEGORY    = "HelperDB";
+    public static final String DB_NAME     = "helper.db";
+    public static final String CATEGORY    = "HELPER_DB";
 
     private Properties properties;
     private Context context;
 
-    public HelperDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) throws IllegalArgumentException {
+    public HelperDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
@@ -42,6 +42,12 @@ public class HelperDB extends SQLiteOpenHelper {
         setContext(context);
     }
 
+
+    public HelperDB(Context context, AbstractDBHelper abstractDBHelper) {
+        this(context, DB_NAME, null, getVersion(context));
+        setContext(context);
+    }
+
     public Context getContext() {
         return context;
     }
@@ -49,6 +55,7 @@ public class HelperDB extends SQLiteOpenHelper {
     public void setContext(Context context) {
         this.context = context;
     }
+
 
     /**
      * Called when the database is created for the first time. This is where the
@@ -69,7 +76,6 @@ public class HelperDB extends SQLiteOpenHelper {
         *
         * */
         boolean wasCreate = createStructre();
-        //
         if(wasCreate) {
             Properties properties = getProperties();
             if(properties != null) {
@@ -77,6 +83,8 @@ public class HelperDB extends SQLiteOpenHelper {
                     String query = pair.getValue().toString();
                     try {
                         db.execSQL(query);
+                        String table = pair.getKey().toString();
+                        Log.i(CATEGORY + "INSERT", table);
                     } catch(SQLException sqlexp) {
                         Log.e("SQLEXCEPTION_CREATE", sqlexp.getMessage());
                     }
@@ -93,8 +101,6 @@ public class HelperDB extends SQLiteOpenHelper {
         this.properties = properties;
     }
 
-
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         deleteStructure();
@@ -104,13 +110,19 @@ public class HelperDB extends SQLiteOpenHelper {
         }
     }
 
-    public static boolean existsDB(ContextWrapper context) {
-        File file = context.getDatabasePath(HelperDB.DB_NAME);
-        return file != null ? file.exists() : false;
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        super.onDowngrade(db, oldVersion, newVersion);
     }
 
-    public static String getPathDatabase(ContextWrapper context) {
+
+    public static String getPathDatabase(Context context) {
         return context.getDatabasePath(HelperDB.DB_NAME).getPath();
+    }
+
+    public static boolean existsDB(Context context) {
+        File file = context.getDatabasePath(HelperDB.DB_NAME);
+        return file != null ? file.exists() : false;
     }
 
     public static boolean existsDB() {
@@ -150,10 +162,6 @@ public class HelperDB extends SQLiteOpenHelper {
     @Override
     public SQLiteDatabase getWritableDatabase() {
         return super.getWritableDatabase();
-    }
-
-    public synchronized boolean destroyDB(Activity activity) {
-        return activity != null ? activity.deleteDatabase(DB_NAME) : false;
     }
 
     private boolean createStructre() {
@@ -212,7 +220,6 @@ public class HelperDB extends SQLiteOpenHelper {
 
     private static int getVersion(Context context)  {
         InputStream in;
-        // /*getResourceAsStream*/
         int n = 0;
         try {
             AssetManager assetManager = context.getAssets();
@@ -227,7 +234,13 @@ public class HelperDB extends SQLiteOpenHelper {
         } catch (IOException e) {
             Log.e(CATEGORY, e.getMessage());
         }
-
+        Log.i(CATEGORY + " VERSION", String.valueOf(n));
         return n;
+    }
+
+
+    public static boolean destroy(Context context) {
+        Log.v(CATEGORY, String.format("DELETE %s", DB_NAME));
+        return context!= null ? context.deleteDatabase(DB_NAME) : false;
     }
 }

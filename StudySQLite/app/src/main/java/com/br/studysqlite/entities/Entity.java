@@ -14,7 +14,6 @@ public abstract class Entity {
 
     protected Integer id;
 
-
     public Integer getId() {
         return id;
     }
@@ -25,7 +24,4 @@ public abstract class Entity {
 
     public Entity() {
     }
-
-
-
 }

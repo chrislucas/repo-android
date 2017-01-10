@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.br.studysqlite.R;
-import com.br.studysqlite.db.DBHelper;
-import com.br.studysqlite.db.UserDBHelper;
 import com.br.studysqlite.entities.User;
 
 import java.util.ArrayList;
@@ -20,13 +18,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UserDBHelper userDb = new UserDBHelper(this);
-        userDb.open();
-        userDb.close();
-        //passListParcelable();
+        //InstallProcess.build(this);
+        passListParcelable();
     }
 
-    public void passListParcelable() {
+    private void passListParcelable() {
         ArrayList<User> users = new ArrayList<>();
         Random random = new Random();
         users.add(new User(random.nextInt(100), "Alonso"));
@@ -48,6 +44,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ActivityListUsers.class);
         intent.putParcelableArrayListExtra(INTENT_LU, users);
         startActivity(intent);
-
     }
 }
