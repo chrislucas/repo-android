@@ -17,8 +17,6 @@ public class AbstractDBHelper {
 
     public AbstractDBHelper(Context context) {
         this.dbHelper = new DBHelper(context);
-        this.sqLiteDatabase = dbHelper.getWritableDatabase(); //dbHelper.getInstanceDB();
-
     }
 
     public DBHelper getDbHelper() {
@@ -43,6 +41,11 @@ public class AbstractDBHelper {
 
     public Cursor getCursor(SQLiteDatabase db, String sql) {
         return getCursor(db, sql, null);
+    }
+
+
+    public void open() {
+        this.sqLiteDatabase = dbHelper.getWritableDatabase();
     }
 
     public void close() {

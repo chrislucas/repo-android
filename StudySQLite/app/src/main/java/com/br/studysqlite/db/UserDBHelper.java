@@ -9,9 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class UserDBHelper extends AbstractDBHelper {
 
-    private SQLiteDatabase db;
-    private DBHelper dbHelper;
-
     private static final String [] FIELDS = {"_id", "name", "pwd"};
 
     public UserDBHelper(Context context) {
