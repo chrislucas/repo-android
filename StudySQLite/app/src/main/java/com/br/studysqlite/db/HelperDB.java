@@ -3,6 +3,7 @@ package com.br.studysqlite.db;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.res.AssetManager;
 import android.database.DatabaseErrorHandler;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,7 +13,6 @@ import android.util.Log;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.ConnectException;
 import java.util.Map;
 import java.util.Properties;
 
@@ -20,26 +20,25 @@ import java.util.Properties;
  * Created by r028367 on 09/01/2017.
  */
 
-public class DBHelper extends SQLiteOpenHelper {
+public class HelperDB extends SQLiteOpenHelper {
 
-    private static final String DB_NAME     = "db";
-    private static final String CATEGORY    = "DBHelper";
-    public static final int VERSION         = 1;
+    public static final String DB_NAME     = "HelperDB.db";
+    public static final String CATEGORY    = "HelperDB";
 
     private Properties properties;
     private Context context;
 
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public HelperDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) throws IllegalArgumentException {
         super(context, name, factory, version);
     }
 
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
+    public HelperDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
         super(context, name, factory, version, errorHandler);
     }
 
 
-    public DBHelper(Context context) {
-        super(context, DB_NAME, null, 1);
+    public HelperDB(Context context) {
+        this(context, DB_NAME, null, getVersion(context));
         setContext(context);
     }
 
@@ -98,22 +97,27 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        deleteStructure();
+        boolean wasUpdate = updateStructure();
+        if(wasUpdate) {
 
+        }
     }
 
     public static boolean existsDB(ContextWrapper context) {
-        String SUFFIX_PATH = "/data/data/com.br.studysqlite/databases/";
-        //File file = context.getDatabasePath(SUFFIX_PATH.concat(DB_NAME));
-        //return file != null ? file.exists() : false;
-        return false;
+        File file = context.getDatabasePath(HelperDB.DB_NAME);
+        return file != null ? file.exists() : false;
     }
 
+    public static String getPathDatabase(ContextWrapper context) {
+        return context.getDatabasePath(HelperDB.DB_NAME).getPath();
+    }
 
     public static boolean existsDB() {
         SQLiteDatabase db = null;
         try {
             db = SQLiteDatabase.openDatabase(DB_NAME, null, SQLiteDatabase.OPEN_READONLY);
-            db.close();
+            //db.close();
         } catch (Exception e) {
             Log.e("TEST_DB_EXISTS", e.getMessage());
         }
@@ -154,27 +158,48 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private boolean createStructre() {
         InputStream in;
-        in = getClass().getClassLoader().getResourceAsStream("assets/create_tables.properties");
-        if(in != null) {
-            setProperties(new Properties());
-            try {
-                getProperties().load(in);
-                return true;
-            } catch (IOException e) {
-                Log.e(CATEGORY, e.getMessage());
+        //in = getClass().getClassLoader().getResourceAsStream("assets/create_tables.properties");
+        try {
+            in = getContext().getAssets().open("create_tables.properties");
+            if(in != null) {
+                setProperties(new Properties());
+                try {
+                    getProperties().load(in);
+                    return true;
+                } catch (IOException e) {
+                    Log.e(CATEGORY, e.getMessage());
+                }
             }
+        } catch (IOException e) {
+            Log.e("OPEN_PROPERTIES_TABLE", "problemas ao tentar ler o arquivo create_tables.properties");
         }
         Log.e("CREATE_TABLES_PROBLEM", "problemas ao tentar ler o arquivo create_tables.properties");
         return false;
     }
 
-    private void updateStructure() {
-        return;
+    private boolean updateStructure() {
+        InputStream in;
+        try {
+            in = getContext().getAssets().open("update_tables.properties");
+            if(in != null) {
+                setProperties(new Properties());
+                try {
+                    getProperties().load(in);
+                    return true;
+                } catch (IOException e) {
+                    Log.e(CATEGORY, e.getMessage());
+                }
+            }
+        } catch (IOException e) {
+            Log.e("OPEN_PROPERTIES_TABLE", "problemas ao tentar ler o arquivo update_tables.properties");
+        }
+        Log.e("UPDATE_TABLES_PROBLEM", "problemas ao tentar ler o arquivo update_tables.properties");
+        return false;
     }
 
     private void deleteStructure() {
         InputStream in;
-        in = getClass().getClassLoader().getResourceAsStream("assets/detele_tables.properties");
+        in = getClass().getClassLoader().getResourceAsStream("detele_tables.properties");
         if(in != null) {
             setProperties(new Properties());
             try {
@@ -185,19 +210,24 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    private static int getVersion() {
+    private static int getVersion(Context context)  {
         InputStream in;
-        in = DBHelper.class.getResourceAsStream("assets/versiondb.properties");
+        // /*getResourceAsStream*/
         int n = 0;
-        if(in != null) {
-            Properties prop = new Properties();
-            try {
+        try {
+            AssetManager assetManager = context.getAssets();
+            in = assetManager.open("versiondb.properties");
+            //Class clazz = HelperDB.class;
+            //in = clazz.getResource("src/main/assets/versiondb.properties").openStream();
+            if(in != null) {
+                Properties prop = new Properties();
                 prop.load(in);
                 n = Integer.parseInt(prop.getProperty("version"));
-            } catch (IOException e) {
-                Log.e(CATEGORY, e.getMessage());
             }
+        } catch (IOException e) {
+            Log.e(CATEGORY, e.getMessage());
         }
+
         return n;
     }
 }
