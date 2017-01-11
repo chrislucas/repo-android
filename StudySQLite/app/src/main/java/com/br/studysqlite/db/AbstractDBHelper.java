@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by r028367 on 09/01/2017.
@@ -16,14 +17,16 @@ public class AbstractDBHelper {
     protected HelperDB dbHelper;
     protected Context context;
 
-
-
-
     private static String ABS_DB_HELPER_SQLEX       = "ABS_DB_HELPER_SQLEX";
     private static String ABS_DB_HELPER_ILLEGALEX   = "ABS_DB_HELPER_IllegalEx";
 
     public AbstractDBHelper(Context context) {
-        this.dbHelper = new HelperDB(context);
+        try {
+            this.dbHelper = new HelperDB(context);
+        } catch (IllegalArgumentException e) {
+            String message = String.format("Erro ao atualizar as tabelas. Versão atual: %d.\n Verrificar arquivo de versão", HelperDB.getCurVersionDB(context));
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+        }
     }
 
 
@@ -48,8 +51,6 @@ public class AbstractDBHelper {
             } catch(SQLiteException sqlex) {
                 Log.e(ABS_DB_HELPER_SQLEX, sqlex.getMessage());
             }
-
-
         }
         return cursor;
     }

@@ -9,7 +9,8 @@ import android.os.Parcelable;
 
 public class User extends Entity implements Parcelable {
 
-    private String name, pwd;
+    private String name, pwd, imei;
+
 
     public String getName() {
         return name;
@@ -25,6 +26,14 @@ public class User extends Entity implements Parcelable {
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
+    }
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
     }
 
     public User() {
@@ -57,11 +66,15 @@ public class User extends Entity implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(name);
+        dest.writeString(imei);
+        dest.writeString(pwd);
     }
 
     public void readFromParcel(Parcel in) {
         this.id = in.readInt();
         this.name = in.readString();
+        this.imei = in.readString();
+        this.pwd = in.readString();
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {

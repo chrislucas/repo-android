@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">StudySQLite</string>
+    <string name="welcome">Bem vindo, após a instalação do app para realizar o 1º Login você precisará ter acesso a Internet</string>
 </resources>

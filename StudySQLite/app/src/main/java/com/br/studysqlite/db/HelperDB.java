@@ -1,14 +1,15 @@
 package com.br.studysqlite.db;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.res.AssetManager;
 import android.database.DatabaseErrorHandler;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.br.studysqlite.activities.IActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +28,10 @@ public class HelperDB extends SQLiteOpenHelper {
 
     private Properties properties;
     private Context context;
+
+    private IActivity iActivity;
+
+
 
     public HelperDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -75,21 +80,65 @@ public class HelperDB extends SQLiteOpenHelper {
         * num objeto Properies
         *
         * */
-        boolean wasCreate = createStructre();
+        // defineStructureDB();
+        boolean wasCreate = readProperties("create_tables.properties", "CREATE_TABLES_PROBLEM", "problemas ao tentar ler o arquivo create_tables.properties");
         if(wasCreate) {
-            Properties properties = getProperties();
-            if(properties != null) {
-                for(Map.Entry pair : properties.entrySet()) {
-                    String query = pair.getValue().toString();
-                    try {
-                        db.execSQL(query);
-                        String table = pair.getKey().toString();
-                        Log.i(CATEGORY + "INSERT", table);
-                    } catch(SQLException sqlexp) {
-                        Log.e("SQLEXCEPTION_CREATE", sqlexp.getMessage());
-                    }
+            Log.i(CATEGORY, String.format("CREATE TABLES"));
+            executeQueryInProperties(db, "CREATE");
+        }
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        boolean wasDelete = deleteStructure();
+        executeQueryInProperties(db, "DELETE");
+        if(wasDelete) {
+            boolean wasUpdate = updateStructure();
+            if(wasUpdate) {
+                Log.i(CATEGORY, String.format("UPDATE TABLES - versao antiga: %d, versao nova: %d", oldVersion, newVersion));
+                executeQueryInProperties(db, "UPDATE");
+            }
+        }
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // esse metodo soh lanca uma exception
+        //super.onDowngrade(db, oldVersion, newVersion);
+
+        boolean wasDelete = deleteStructure();
+        executeQueryInProperties(db, "DELETE");
+        if(wasDelete) {
+            boolean wasCreate = defineStructureDB();
+            if(wasCreate) {
+                Log.i(CATEGORY, String.format("DOWNGRADE, CREATE TABLES"));
+                executeQueryInProperties(db, "DEFINE");
+            } else {
+                Context context = getContext();
+                if(context != null) {
+                    String message = String.format("Erro ao efetuar Downgrade da versao %d para %d", newVersion, oldVersion);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                 }
             }
+        }
+    }
+
+    private void executeQueryInProperties(SQLiteDatabase db, String category) {
+        Properties properties = getProperties();
+        if(properties != null) {
+            db.beginTransaction();
+            for(Map.Entry pair : properties.entrySet()) {
+                String query = pair.getValue().toString();
+                try {
+                    db.execSQL(query);
+                    String table = pair.getKey().toString();
+                    Log.i(category, table);
+                } catch(SQLException sqlexp) {
+                    Log.e("SQLEXCEPTION_CREATE", sqlexp.getMessage());
+                }
+            }
+            db.setTransactionSuccessful();
+            db.endTransaction();
         }
     }
 
@@ -101,21 +150,6 @@ public class HelperDB extends SQLiteOpenHelper {
         this.properties = properties;
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        deleteStructure();
-        boolean wasUpdate = updateStructure();
-        if(wasUpdate) {
-
-        }
-    }
-
-    @Override
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        super.onDowngrade(db, oldVersion, newVersion);
-    }
-
-
     public static String getPathDatabase(Context context) {
         return context.getDatabasePath(HelperDB.DB_NAME).getPath();
     }
@@ -125,15 +159,32 @@ public class HelperDB extends SQLiteOpenHelper {
         return file != null ? file.exists() : false;
     }
 
-    public static boolean existsDB() {
+    public static boolean checkDB(Context context) {
         SQLiteDatabase db = null;
         try {
-            db = SQLiteDatabase.openDatabase(DB_NAME, null, SQLiteDatabase.OPEN_READONLY);
-            //db.close();
+            String path = getPathDatabase(context);
+            db = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
+            db.close();
         } catch (Exception e) {
-            Log.e("TEST_DB_EXISTS", e.getMessage());
+            Log.e(CATEGORY, e.getMessage());
+            return false;
+        } finally {
+            return db != null;
         }
-        return db != null;
+    }
+
+    public  static int getCurVersionDB(Context context) {
+        SQLiteDatabase db = null;
+        int version = -1;
+        try {
+            String path = getPathDatabase(context);
+            db = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
+            version = db.getVersion();
+            db.close();
+        } catch (Exception e) {
+            Log.e(CATEGORY, e.getMessage());
+        }
+        return version;
     }
 
     /*
@@ -144,7 +195,8 @@ public class HelperDB extends SQLiteOpenHelper {
     public SQLiteDatabase getInstanceDB() {
         Context context = getContext();
         if(context != null) {
-            return context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
+            SQLiteDatabase db = context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
+            return db;
         }
         return null;
     }
@@ -164,7 +216,16 @@ public class HelperDB extends SQLiteOpenHelper {
         return super.getWritableDatabase();
     }
 
-    private boolean createStructre() {
+    /*
+    *
+    * Esse metodo le o arquivo create_tables.properties. O arquivo
+    * possui uma lista de queries para criar as tabelas desse aplicativo.
+    * essas queries sao armazenadas num objeto Property
+    *
+    * @return boolean
+    * Se foi possivel ler o arquivo retorna TRUE, do contrario FALSE
+    * */
+    private boolean defineStructureDB() {
         InputStream in;
         //in = getClass().getClassLoader().getResourceAsStream("assets/create_tables.properties");
         try {
@@ -179,9 +240,8 @@ public class HelperDB extends SQLiteOpenHelper {
                 }
             }
         } catch (IOException e) {
-            Log.e("OPEN_PROPERTIES_TABLE", "problemas ao tentar ler o arquivo create_tables.properties");
+            Log.e("CREATE_TABLES_PROBLEM", "problemas ao tentar ler o arquivo create_tables.properties");
         }
-        Log.e("CREATE_TABLES_PROBLEM", "problemas ao tentar ler o arquivo create_tables.properties");
         return false;
     }
 
@@ -199,23 +259,46 @@ public class HelperDB extends SQLiteOpenHelper {
                 }
             }
         } catch (IOException e) {
-            Log.e("OPEN_PROPERTIES_TABLE", "problemas ao tentar ler o arquivo update_tables.properties");
+            Log.e("UPDATE_TABLES_PROBLEM", "problemas ao tentar ler o arquivo update_tables.properties");
         }
-        Log.e("UPDATE_TABLES_PROBLEM", "problemas ao tentar ler o arquivo update_tables.properties");
         return false;
     }
 
-    private void deleteStructure() {
+    private boolean deleteStructure() {
         InputStream in;
-        in = getClass().getClassLoader().getResourceAsStream("detele_tables.properties");
-        if(in != null) {
-            setProperties(new Properties());
-            try {
-                getProperties().load(in);
-            } catch (IOException e) {
-                Log.e(CATEGORY, e.getMessage());
+        try {
+            in = getContext().getAssets().open("delete_tables.properties");
+            if(in != null) {
+                setProperties(new Properties());
+                try {
+                    getProperties().load(in);
+                } catch (IOException e) {
+                    Log.e(CATEGORY, e.getMessage());
+                }
             }
+            return true;
+        } catch(IOException e) {
+            Log.e("DELETE_TABLES_PROBLEM", "problemas ao tentar ler o arquivo detele_tables.properties");
         }
+        return false;
+    }
+
+    private boolean readProperties(String fileName, String category, String messageError) {
+        InputStream in;
+        try {
+            in = getContext().getAssets().open(fileName);
+            if(in != null) {
+                setProperties(new Properties());
+                try {
+                    getProperties().load(in);
+                } catch (IOException e) {
+                    Log.e(CATEGORY, e.getMessage());
+                }
+            }
+        } catch(IOException e) {
+            Log.e(category, messageError);
+        }
+        return false;
     }
 
     private static int getVersion(Context context)  {
@@ -241,6 +324,7 @@ public class HelperDB extends SQLiteOpenHelper {
 
     public static boolean destroy(Context context) {
         Log.v(CATEGORY, String.format("DELETE %s", DB_NAME));
-        return context!= null ? context.deleteDatabase(DB_NAME) : false;
+        boolean D = context.deleteDatabase(DB_NAME);
+        return context!= null ?  D : false;
     }
 }
