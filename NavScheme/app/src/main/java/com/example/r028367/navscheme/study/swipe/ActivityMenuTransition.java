@@ -52,8 +52,6 @@ public class ActivityMenuTransition extends AppCompatActivity
     * */
     Map<String, AbstractFeatures> featuresSystem;
 
-
-
     /*
         * Mapa<Funcionalidade, Tela de acao>
         *     Esse mapa vincula uma funcionalidade a
@@ -109,7 +107,7 @@ public class ActivityMenuTransition extends AppCompatActivity
         * Configuracao do menu lateral
         *
         * */
-        ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
@@ -146,14 +144,14 @@ public class ActivityMenuTransition extends AppCompatActivity
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                setTitle(title);
+                actionBar.setTitle(title);
                 //supportInvalidateOptionsMenu();
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                setTitle(title);
+                actionBar.setTitle(title);
                 //supportInvalidateOptionsMenu();
             }
         };
@@ -244,5 +242,10 @@ public class ActivityMenuTransition extends AppCompatActivity
     @Override
     public void passPosition(int pos) {
         setTitle(itemsMenuFragment[pos]);
+    }
+
+    @Override
+    protected boolean onPrepareOptionsPanel(View view, Menu menu) {
+        return super.onPrepareOptionsPanel(view, menu);
     }
 }
