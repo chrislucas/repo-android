@@ -134,6 +134,7 @@ public class ActivityMenuTransition extends AppCompatActivity
         * Classe Filha da puta
         * ActionBarDrawerToggle na api v4 support o contrutor
         * e esse abaixo, na v7 ele muda
+        * 
         * */
         drawerToggle = new ActionBarDrawerToggle(
                 this
