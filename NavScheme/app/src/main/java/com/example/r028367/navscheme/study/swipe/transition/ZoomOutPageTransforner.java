@@ -10,7 +10,7 @@ import android.view.View;
 public class ZoomOutPageTransforner implements ViewPager.PageTransformer {
 
     private static final float MIN_SCALE = 0.85f;
-    private static final float MIN_ALPHA = 0.5f;
+    private static final float MIN_ALPHA = 0.2f;
 
     @Override
     public void transformPage(View page, float position) {
@@ -19,10 +19,11 @@ public class ZoomOutPageTransforner implements ViewPager.PageTransformer {
 
         if(position < -1) {
             page.setAlpha(0.0f);
-        } else if(position <= 1) {
+        }
+        else if(position <= 1) {
             float scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position));
-            float vertMargin = height * (1 - scaleFactor) / 2;
-            float horzMargin = width * (1 - scaleFactor) / 2;
+            float vertMargin  = height * (1 - scaleFactor) / 2;
+            float horzMargin  = width * (1 - scaleFactor) / 2;
             if(position < 0) {
                 page.setTranslationX(horzMargin - vertMargin / 2);
             } else {

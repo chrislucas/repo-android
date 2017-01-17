@@ -25,18 +25,18 @@ public class PageChangeImpl implements ViewPager.OnPageChangeListener {
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        Log.i("onPageScrolled", String.format("%d %f %d", position, positionOffset, positionOffsetPixels));
-        ia.passPosition(position);
+        //Log.i("onPageScrolled", String.format("%d %f %d", position, positionOffset, positionOffsetPixels));
     }
 
     @Override
     public void onPageSelected(int position) {
         Log.i("onPageSelected", String.format("%d", position));
+        ia.passPosition(position);
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
-        Log.i("PageScrollStateChanged", String.format("%d", state));
+        //Log.i("PageScrollStateChanged", String.format("%d", state));
         if(state == ViewPager.SCROLL_STATE_IDLE) {
 
         }
