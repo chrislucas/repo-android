@@ -9,8 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.r028367.navscheme.R;
-import com.example.r028367.navscheme.study.swipe.fragments.entities.AbstractFeature;
-import com.example.r028367.navscheme.study.swipe.fragments.entities.ServiceOrder;
+import com.example.r028367.navscheme.study.swipe.fragments.entities.ServiceOrderFeatures;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,13 +23,13 @@ public class MenuAccessServiceOrders extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public void setServiceOrder(ServiceOrder serviceOrder) {
+    public void setServiceOrder(ServiceOrderFeatures serviceOrder) {
         this.serviceOrder = serviceOrder;
     }
 
-    private ServiceOrder serviceOrder;
+    private ServiceOrderFeatures serviceOrder;
 
-    public ServiceOrder getServiceOrder() {
+    public ServiceOrderFeatures getServiceOrder() {
         return serviceOrder;
     }
 
@@ -46,7 +45,7 @@ public class MenuAccessServiceOrders extends Fragment {
     }
 */
 
-    public static MenuAccessServiceOrders newInstance(ServiceOrder serviceOrder) {
+    public static MenuAccessServiceOrders newInstance(ServiceOrderFeatures serviceOrder) {
         MenuAccessServiceOrders fragment = new MenuAccessServiceOrders();
         fragment.setServiceOrder(serviceOrder);
         return fragment;
@@ -105,5 +104,13 @@ public class MenuAccessServiceOrders extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String title = serviceOrder.getDescription();
+        if(title != null)
+            getActivity().setTitle(title);
     }
 }

@@ -8,21 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.r028367.navscheme.R;
-import com.example.r028367.navscheme.study.swipe.fragments.entities.Materials;
-import com.example.r028367.navscheme.study.swipe.fragments.entities.ServiceOrder;
+import com.example.r028367.navscheme.study.swipe.fragments.entities.MaterialsFeatures;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MenuAccessMaterials extends Fragment {
 
-    public void setMaterials(Materials materials) {
+    public void setMaterials(MaterialsFeatures materials) {
         this.materials = materials;
     }
 
-    private Materials materials;
+    private MaterialsFeatures materials;
 
-    public Materials getMaterials() {
+    public MaterialsFeatures getMaterials() {
         return materials;
     }
 
@@ -35,7 +34,7 @@ public class MenuAccessMaterials extends Fragment {
         return fragment;
     }
 */
-    public static MenuAccessMaterials newInstance(Materials materials) {
+    public static MenuAccessMaterials newInstance(MaterialsFeatures materials) {
         MenuAccessMaterials fragment = new MenuAccessMaterials();
         fragment.setMaterials(materials);
         return fragment;
@@ -49,4 +48,11 @@ public class MenuAccessMaterials extends Fragment {
         return inflater.inflate(R.layout.fragment_menu_access_materials, container, false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        String title = materials.getDescription();
+        if(title != null)
+            getActivity().setTitle(title);
+    }
 }
