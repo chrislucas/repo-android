@@ -35,7 +35,6 @@ public class ZoomOutPageTransforner implements ViewPager.PageTransformer {
         } else {
             page.setAlpha(0.0f);
         }
-
     }
 }
 
