@@ -1,5 +1,6 @@
 package com.example.r028367.tutorialservice;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,30 +29,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // essa eh a forma explicita de declarar uma intent
         intent = new Intent(this, ExampleService.class);
-        /*
-        start = (Button) findViewById(R.id.start_service);
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startService(intent);
-            }
-        });
-        stop = (Button) findViewById(R.id.stop_service);
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startService(intent);
-            }
-        });
-        */
     }
 
     public void initService(View view) {
-        startService(intent);
-        //Log.i("LOG", String.valueOf(System.currentTimeMillis()));
+        // Poos clircar varias vezes, iniciar varios servicos
+        // um unico clique no boao stop encerrara todos
+        ComponentName componentName = startService(intent);
+        Log.i("LOG", String.valueOf(System.currentTimeMillis()));
     }
 
     public void stopService(View view) {
+        // Independentemente de quantas vezs startService(Intent) foi executada
+        // uma unica chamada stopService(intent) encerrara o Service
         stopService(intent);
     }
 

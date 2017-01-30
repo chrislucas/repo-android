@@ -6,6 +6,8 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /*
 *
 * Um compoenente que permite fazer operacoes longaas em segundo plano
@@ -41,12 +43,22 @@ public class ExampleService extends Service implements Runnable {
     *
     * */
 
+    public interface Communicator {
+        public void notify(int id);
+    }
+
+    private Communicator communicator;
+
     public static final String CATEGORY = "SERVICE_CREATE_EXAMPLE";
     public static final int MAX_EXEC = 30;
     private int count;
     private boolean status;
 
     public ExampleService() {
+    }
+
+    public ExampleService(Communicator communicator) {
+        this.communicator = communicator;
     }
 
 /*
@@ -57,6 +69,8 @@ https://android-developers.googleblog.com/2010/02/service-api-changes-starting-w
         super.onStart(intent, startId);
     }
 */
+    ArrayList<Integer> threadsId;
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         count = 0;
@@ -65,6 +79,12 @@ https://android-developers.googleblog.com/2010/02/service-api-changes-starting-w
         * para controlar as Threads que sao criadas (caso o service implemente sua propria Thread),
         * utilizamos o argumento int startId
         * */
+
+        // comunicar quem iniciou esse Service da nvova THread
+        if(communicator != null) {
+            communicator.notify(startId);
+        }
+
         String text = String.format("onStartCommand() Thread ID: %d", startId);
         (new Thread(this, text)).start();
         Log.i(CATEGORY, text);
@@ -106,6 +126,7 @@ https://android-developers.googleblog.com/2010/02/service-api-changes-starting-w
     @Override
     public void onCreate() {
         super.onCreate();
+        threadsId = new ArrayList<>();
         Log.i(CATEGORY, "onCreate() Inicio Exemplo Service");
     }
 

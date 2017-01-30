@@ -1,0 +1,80 @@
+
+Gradiente Insta
+https://medium.com/@daniele.orlando/how-to-implement-a-login-like-instagram-transition-background-gradient-e833291cb00a#.ga7wfqbyx
+https://github.com/danieleorlando/GradientTransition/blob/master/app/src/main/java/me/danieleorlando/gradienttransition/MainActivity.java
+https://github.com/danieleorlando/GradientTransition/tree/master/app/src/main/res
+https://blog.mindorks.com/how-i-decreased-my-app-size-to-70-using-apk-analyser-4a6f79512072#.7ms44tylz
+https://medium.com/@daniele.orlando/beautiful-circular-reveal-animation-on-android-1b5aaca2dd1f#.x69ha8jlx
+
+
+Line Divider View
+http://stackoverflow.com/questions/19115332/android-draw-a-horizontal-line-between-views
+http://stackoverflow.com/questions/5049852/android-drawing-separator-divider-line-in-layout
+
+Facebook SDK
+https://developers.facebook.com/docs/android/getting-started?locale=pt_BR
+https://developers.facebook.com/docs/app-events/android
+http://stackoverflow.com/questions/29517667/android-facebook-sdk-4-x-how-to-get-email-address-and-facebook-access-token-to
+http://stackoverflow.com/questions/32196682/facebook-android-sdk-4-5-0-get-email-address
+http://stackoverflow.com/questions/29295987/android-facebook-4-0-sdk-how-to-get-email-date-of-birth-and-gender-of-user
+
+Procurar por GraphRequest facebook sdk
+
+Animate Background
+http://stackoverflow.com/questions/2614545/animate-change-of-view-background-color-in-android
+http://stackoverflow.com/questions/34791277/how-has-instagram-implemented-their-login-screen
+http://stackoverflow.com/questions/36726598/how-background-changes-at-login-in-instagram-app
+http://stackoverflow.com/questions/35439573/how-to-create-animated-background-gradient-like-instagram-app
+https://github.com/frogermcs/InstaMaterial
+background color effect android app
+
+Material design
+
+http://hmkcode.com/material-design-app-android-design-support-library-appcompat/
+https://android-developers.googleblog.com/2015/05/android-design-support-library.html
+
+
+
+https://developer.android.com/reference/android/support/design/widget/BottomNavigationView.html
+https://developer.android.com/reference/android/support/design/widget/package-summary.html
+https://www.sitepoint.com/material-design-android-design-support-library/
+
+https://developers.facebook.com/docs/android/
+
+
+Android Sliding Menu using Navigation Drawer
+http://www.androidhive.info/2013/11/android-sliding-menu-using-navigation-drawer/
+
+
+
+
+Animation ViewPager
+https://developer.android.com/training/animation/screen-slide.html
+https://github.com/daentech/FlippableStackView
+http://android-kaizen.com/2014/11/23/tutorial-view-pager-with-pagetransformer-animation/
+
+
+https://developer.android.com/training/improving-layouts/reusing-layouts.html
+
+
+http://www.truiton.com/2015/06/android-tabs-example-fragments-viewpager/
+
+Livro casa do codigo
+https://github.com/joaobmonteiro/livro-android
+
+Android Sliding Menu using Navigation Drawer
+http://www.androidhive.info/2013/11/android-sliding-menu-using-navigation-drawer/
+
+
+https://developer.android.com/training/implementing-navigation/nav-drawer.html
+http://stackoverflow.com/questions/35639454/method-setdrawerlistener-is-deprecated
+
+Tutorial
+https://developer.android.com/design/index.html
+https://material.io/guidelines/patterns/confirmation-acknowledgement.html#confirmation-acknowledgement-usage
+https://material.io/guidelines/motion/material-motion.html
+https://material.io/guidelines/components/bottom-navigation.html
+
+
+
+

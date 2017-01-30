@@ -1,0 +1,23 @@
+http://novatec.com.br/livros/dominando-android-2ed/
+http://www.nglauber.com.br/2016/02/dominando-o-android-2-edicao-correcoes.html
+
+data binding android tutorial
+https://developer.android.com/topic/libraries/data-binding/index.html
+http://www.vogella.com/tutorials/AndroidDatabinding/article.html
+http://www.androidauthority.com/android-m-data-binding-615674/
+
+
+Thread
+WorkerThread android
+https://developer.android.com/reference/android/support/annotation/WorkerThread.html
+https://developer.android.com/guide/components/processes-and-threads.html
+http://tutorials.jenkov.com/java-concurrency/creating-and-starting-threads.html
+https://docs.oracle.com/javase/tutorial/essential/concurrency/runthread.html
+
+ORM
+https://realm.io/docs/java/latest/
+https://realm.io/docs/java/latest/	
+https://realm.io/news/realm-for-android/
+
+Http
+https://square.github.io/retrofit/
