@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.r028367.tutorialservice">
+          package="com.example.r028367.tutorialservice">
 
     <application
         android:allowBackup="true"
@@ -10,9 +10,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
@@ -21,15 +21,28 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="SERVICE_1" />
+                <action android:name="SERVICE_1"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </service>
         <service
             android:name=".ServiceHttpRq"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"/>
+        <service
+            android:name=".ServiceWorkerThread"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+
+        <activity android:name=".ActivityWorkerService">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
