@@ -9,7 +9,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceWorkerThread extends Service {
+public class ServiceWorkerThread extends Servic {
     private static final int MAX = 200;
     private List<WorkerThread> threads;
 
