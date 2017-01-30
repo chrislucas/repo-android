@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         // Poos clircar varias vezes, iniciar varios servicos
         // um unico clique no boao stop encerrara todos
         ComponentName componentName = startService(intent);
-        Log.i("LOG", String.valueOf(System.currentTimeMillis()));
+        Log.i("LOG", String.format("%d %s", System.currentTimeMillis(), componentName.toString()));
     }
 
     public void stopService(View view) {

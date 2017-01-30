@@ -9,11 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
 
         <service
@@ -22,7 +18,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="SERVICE_1"/>
-
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </service>
@@ -36,10 +31,10 @@
             android:exported="true">
         </service>
 
-        <activity android:name=".ActivityWorkerService">
+        <activity android:name=".ActivityWorkerService"
+            android:label="Worker Service">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>

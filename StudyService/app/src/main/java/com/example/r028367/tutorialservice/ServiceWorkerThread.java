@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceWorkerThread extends Service {
-    private static final int MAX = 10;
+    private static final int MAX = 20;
     private List<WorkerThread> threads;
 
     public class WorkerThread extends Thread {
@@ -52,7 +52,7 @@ public class ServiceWorkerThread extends Service {
     @Override
     public void onCreate() {
         //super.onCreate();
-        Log.i("ON_CREATE", "no clicl de vida do Service esse metodo sera chamado 1 unica vez");
+        Log.i("ON_CREATE", "no ciclo de vida do Service esse metodo sera chamado 1 unica vez");
         threads = new ArrayList<>();
     }
 
@@ -64,5 +64,14 @@ public class ServiceWorkerThread extends Service {
         threads.add(workerThread);
         workerThread.start();
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Override
+    public void onDestroy() {
+        for(WorkerThread thread : threads)
+            thread.status = false;
+        threads.clear();
+        Log.i("ON_DESTROY_SERVICE", "Service onDestroy");
+        super.onDestroy();
     }
 }
