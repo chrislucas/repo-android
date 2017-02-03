@@ -20,7 +20,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".ActivityImageViewer"></activity>
+        <activity android:name=".ActivityImageViewer" />
+        <activity android:name=".TestNotification"></activity>
     </application>
 
 </manifest>

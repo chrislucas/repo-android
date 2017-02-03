@@ -98,6 +98,6 @@ public class ServiceDownload extends Service {
 
         Intent intent = new Intent(this, activity);
         intent.putExtra("image", buffer);
-
+        // usar NotificationUtils
     }
 }
