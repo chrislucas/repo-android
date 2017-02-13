@@ -1,4 +1,4 @@
-package com.br.maps;
+package com.br.maps.fragments;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -10,13 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.br.maps.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -39,6 +48,7 @@ public class MapFragment1 extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
     private static Context context;
+    private static GoogleMapOptions googleMapOptions;
 
     private OnFragmentInteractionListener mListener;
 
@@ -67,6 +77,14 @@ public class MapFragment1 extends Fragment implements OnMapReadyCallback {
     public static MapFragment1 newInstance(Context ctx) {
         MapFragment1 fragment = new MapFragment1();
         context = ctx;
+        return fragment;
+    }
+
+
+    public static MapFragment1 newInstance(Context ctx , GoogleMapOptions gmo) {
+        MapFragment1 fragment = new MapFragment1();
+        context = ctx;
+        googleMapOptions = gmo;
         return fragment;
     }
 
@@ -116,31 +134,32 @@ public class MapFragment1 extends Fragment implements OnMapReadyCallback {
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             googleMap.setMyLocationEnabled(true);
-                /*
-                *
-                * Poli USP
-                * -23.5570464,-46.7328786,15
-                * IME USP
-                * -23.5595922,-46.7313849,15
-                * X
-                * -23.5506027,-46.3775692
-                * */
-            double latitude = -23.5506027, longitude = -46.3775692;
-            LatLng location = new LatLng(latitude, longitude);
-            int zoom = 13;
-            // Posiciona o mapa na coordenada X com zoom 13
-            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(location, zoom);
-            googleMap.moveCamera(update);
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.title("Meu Mapa")
-                    .snippet("")            //
-                    .position(location);
-            googleMap.addMarker(markerOptions);
+            int zoom = 16;
+            Map<LatLng, String> positions = new HashMap<>();
+            positions.put(new LatLng(-23.5506027, -46.3775692), "R");
+            positions.put(new LatLng(-23.5141430, -46.6027294), "P");
+            positions.put(new LatLng(-23.5595922, -46.7313849), "IME USP");
+            positions.put(new LatLng(-23.5570464, -46.7328786), "Poli USP");
+
+            for(Map.Entry<LatLng, String> pair : positions.entrySet()) {
+                // Posiciona o mapa na coordenada X com zoom 13
+                LatLng location = pair.getKey();
+                String text  = pair.getValue();
+                CameraUpdate update = CameraUpdateFactory.newLatLngZoom(location, zoom);
+                googleMap.moveCamera(update);
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.title("Meu Mapa")
+                        .snippet(text)            //
+                        .position(location);
+                Marker marker = googleMap.addMarker(markerOptions);
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+            }
             // tipo
             googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            googleMap.setMyLocationEnabled(true);
         }
-
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

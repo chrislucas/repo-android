@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.br.maps.MapActivity1">
+    tools:context="com.br.maps.activities.MapActivity1">
 
 
     <FrameLayout
