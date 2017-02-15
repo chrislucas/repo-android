@@ -2,3 +2,33 @@ https://www.caelum.com.br/curso-android-avancado/
 https://www.caelum.com.br/curso-android/
 
 http://jakewharton.github.io/butterknife/
+
+
+Multidex
+https://developer.android.com/studio/build/multidex.html?hl=pt-br
+
+
+Google API
+https://developers.google.com/android/reference/packages
+https://developers.google.com/android/guides/http-auth
+https://developers.google.com/maps/documentation/android-api/code-samples
+https://developers.google.com/maps/documentation/android-api/code-samples
+https://source.android.com/source/requirements.html
+https://github.com/googlemaps/android-samples/tree/master/ApiDemos
+https://github.com/googlemaps/android-samples/tree/master/ApiDemos/app
+
+Google Map
+https://developers.google.com/maps/documentation/android-api/map
+
+Marcadores
+https://developers.google.com/maps/documentation/android-api/map
+https://developers.google.com/maps/documentation/android-api/code-samples
+
+MapView
+https://inducesmile.com/android/android-mapview-example-tutorial/
+
+GoogleMapOptions
+https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMapOptions
+
+Making Your App Location-Aware
+https://developer.android.com/training/location/index.html

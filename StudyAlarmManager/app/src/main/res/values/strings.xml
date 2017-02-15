@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">StudyAlarmManager</string>
+    <string name="text_head_up_not">Executar HeadUpNot</string>
+    <string name="text_create_not">Simples Notificação</string>
+    <string name="text_big_not">Notificação grande</string>
+    <string name="text_alerm_date_d">Alarme com data definida</string>
+    <string name="text_alerm_date_u">Alarme com data indefinida</string>
+    <string name="text_cancel_alarm">Cancelar Alarmes</string>
+    <string name="text_alerm_date_d_r">Alarme com hora definida Repetido</string>
+</resources>
