@@ -2,6 +2,7 @@ package com.br.maps.activities;
 
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -49,8 +50,12 @@ public class MapActivity1 extends AppCompatActivity implements
             FragmentTransaction ft = fm.beginTransaction();
             ft.add(R.id.model_layout, map);
             ft.commit();
+            /*
             SupportMapFragment supportMapFragment = (SupportMapFragment) fm.findFragmentById(R.id.map_fragment);
-            supportMapFragment.getMapAsync(map);
+            if(supportMapFragment != null) {
+                supportMapFragment.getMapAsync(map);
+            }
+            */
         }
     }
 
@@ -78,14 +83,19 @@ public class MapActivity1 extends AppCompatActivity implements
 
                 }
                 else {
-                    /*
-                    * Numa explioacao sobre o pq de pedir autorizacao para acessar um recurso
-                    * precisa ser dada? Entao so precisamos pedir autorizacao
-                    * */
                     ActivityCompat.requestPermissions(this, new String[] {permission}, key);
                 }
             }
         }
         return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        String v = PERMISSION_REQUEST.get(requestCode);
+        if(grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+
+        }
     }
 }
