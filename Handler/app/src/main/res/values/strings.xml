@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">StudyHandler</string>
+    <string name="run">run</string>
+    <string name="send_message">Send Message</string>
+    <string name="post_message">Post Message</string>
 </resources>
