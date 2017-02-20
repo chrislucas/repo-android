@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_example_download_image"
     android:layout_width="match_parent"
@@ -8,6 +9,43 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.br.studyhandler.book.gooand.ExampleDownloadImage">
 
-</RelativeLayout>
+    <ProgressBar
+        android:id="@+id/progress_bar_download_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16sp"
+        android:paddingBottom="16sp"
+        android:indeterminate="true"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
+
+
+    <Button
+        android:id="@+id/postDelayed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_post_delayed"
+        android:paddingTop="16sp"
+        android:paddingBottom="16sp" />
+
+
+    <Button
+        android:id="@+id/doDownload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_download"
+        android:paddingTop="16sp"
+        android:paddingBottom="16sp" />
+
+
+    <ImageView
+        android:id="@+id/img_downloaded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:contentDescription="@string/image_download" />
+
+</LinearLayout>

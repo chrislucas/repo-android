@@ -29,3 +29,20 @@ https://developer.android.com/training/camera/cameradirect.html
 get realtime data using camera android -opencv
 http://stackoverflow.com/questions/32063524/how-to-get-each-frame-data-using-camera2-api-in-android5-0-in-realtime
 http://stackoverflow.com/questions/39777820/how-to-get-real-time-image-processing-using-constrained-high-speed-capture-sessi
+
+
+OPEN URL
+https://docs.oracle.com/javase/tutorial/networking/urls/readingURL.html
+
+Problema com variavel local no android studio
+http://stackoverflow.com/questions/27909613/cannot-see-parameter-value-in-android-studio-when-breakpoint-is-in-first-line-of
+http://stackoverflow.com/questions/37142275/android-studio-debugger-does-not-show-local-variables
+colocar isso no build.gradle (module)
+android {
+    buildTypes {
+        debug {
+            ...
+            testCoverageEnabled true
+        }
+    }
+}

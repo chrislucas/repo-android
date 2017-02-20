@@ -68,4 +68,20 @@ public class DownloadTask implements Runnable {
             }
         }
     }
+
+    public void readDataFromURL(String urlStr) {
+        try {
+            URL url =  new URL(urlStr);
+            InputStream is = url.openStream();
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(is));
+            String in;
+            while( (in = buffer.readLine()) != null) {
+
+            }
+            buffer.close();
+            is.close();
+        } catch (Exception e) {
+
+        }
+    }
 }

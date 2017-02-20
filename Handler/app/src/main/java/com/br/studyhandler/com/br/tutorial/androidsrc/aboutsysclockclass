@@ -1,0 +1,40 @@
+SystemClock
+https://developer.android.com/reference/android/os/SystemClock.html
+
+Android: How to convert from SystemClock.elapsedRealTime to a human readable CharSeq?
+http://stackoverflow.com/questions/31574615/android-how-to-convert-from-systemclock-elapsedrealtime-to-a-human-readable-cha
+
+
+http://stackoverflow.com/questions/24935500/how-to-use-elapsed-real-time-in-android
+
+http://stackoverflow.com/questions/31574615/android-how-to-convert-from-systemclock-elapsedrealtime-to-a-human-readable-cha
+
+
+Pesquisar sobre
+PersistableBundle
+https://developer.android.com/reference/android/os/PersistableBundle.html
+
+
+How does Android sendMessageAtTime() really work?
+http://stackoverflow.com/questions/21585854/how-does-android-sendmessageattime-really-work
+
+
+android CountDownTimer - additional milliseconds delay between ticks
+http://stackoverflow.com/questions/12762272/android-countdowntimer-additional-milliseconds-delay-between-ticks
+
+
+android.os.NetworkOnMainThreadException
+https://developer.android.com/reference/android/os/NetworkOnMainThreadException.html
+
+http://stackoverflow.com/questions/6343166/how-to-fix-android-os-networkonmainthreadexception
+
+http://www.guj.com.br/t/erro-com-o-httpresponse-android-os-networkonmainthreadexception/245279
+
+http://blog.vandersonguidi.com.br/programacao-2/android/resolvendo-o-erro-networkonmainthreadexception-no-desenvolvimento-android/
+
+
+How to save an instance of a custom class in onSaveInstanceState?
+http://stackoverflow.com/questions/3172333/how-to-save-an-instance-of-a-custom-class-in-onsaveinstancestate
+
+
+
