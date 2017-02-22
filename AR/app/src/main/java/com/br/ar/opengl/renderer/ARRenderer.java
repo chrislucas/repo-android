@@ -69,7 +69,7 @@ import com.beyondar.android.world.World;
  * Renderer for drawing the {@link World World} with
  * OpenGL.
  */
-public class ARRenderer implements GLSurfaceView.Renderer, BeyondarSensorListener,
+public class ARRenderer extends com.beyondar.android.opengl.renderer.ARRenderer implements GLSurfaceView.Renderer, BeyondarSensorListener,
 		BitmapCache.OnExternalBitmapLoadedCacheListener, Plugable<GLPlugin> {
 
 	/**
@@ -205,9 +205,10 @@ public class ARRenderer implements GLSurfaceView.Renderer, BeyondarSensorListene
 		mWorld = world;
 		mWorld.getBitmapCache().addOnExternalBitmapLoadedCahceListener(this);
 		mReloadWorldTextures = true;
+		final ARRenderer that = this;
 		synchronized (lockPlugins) {
 			for (GLPlugin plugin : plugins) {
-				plugin.setup(mWorld, this);
+				plugin.setup(mWorld, that);
 			}
 		}
 	}

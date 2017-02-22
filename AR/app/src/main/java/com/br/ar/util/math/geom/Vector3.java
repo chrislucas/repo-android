@@ -350,4 +350,5 @@ public class Vector3 extends com.beyondar.android.util.math.geom.Point3 {
 		out.zModule = zModule;
 	}
 
+
 }
