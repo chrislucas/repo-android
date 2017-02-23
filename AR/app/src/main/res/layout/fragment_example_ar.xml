@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorAccent"
-    tools:context="com.br.ar.FragmentExampleAR">
+    tools:context="com.br.ar.my.samples.FragmentExampleAR">
 
     <Spinner
         android:id="@+id/geolocations"

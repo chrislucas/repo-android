@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.br.ar.MainActivity">
+    tools:context="com.br.ar.my.samples.MainActivity">
 
     <fragment
         android:id="@+id/frag_ar"
