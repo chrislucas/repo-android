@@ -61,7 +61,7 @@ public class ExampleDownloadImage extends AppCompatActivity {
 
         Button btnExecDownload = (Button) findViewById(R.id.doDownload);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar_download_img);
-        progressBar.setVisibility(View.VISIBLE);
+
         btnExecDownload.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
@@ -70,7 +70,7 @@ public class ExampleDownloadImage extends AppCompatActivity {
            }
         );
         warning = (TextView) findViewById(R.id.warning);
-        downloadImage(urls[1]);
+        //downloadImage(urls[1]);
     }
 
     private void downloadImage(final String url) {
@@ -79,15 +79,16 @@ public class ExampleDownloadImage extends AppCompatActivity {
             @Override
             public void run() {
                 try {
+                    setProgressBarVisibility(View.VISIBLE);
                     final Bitmap bitmap = downloadTask.downloadBitmap(url);
                     if(bitmap != null) {
                         updateImageView(bitmap);
                     }
                     else {
+                        setProgressBarVisibility(View.INVISIBLE);
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                progressBar.setVisibility(View.INVISIBLE);
                                 //Toast.makeText(context, "Não foi realizado o Download da imagem", Toast.LENGTH_LONG).show();
                                 warning.setText(String.format("Não foi realizado o Download da imagem\n%s", url));
                             }
@@ -104,12 +105,22 @@ public class ExampleDownloadImage extends AppCompatActivity {
         }.start();
     }
 
+    private void setProgressBarVisibility(final int visibiliy) {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(visibiliy);
+            }
+        }, 3000L);
+    }
+
     private void executeDownloading(final String urls [], int idx) {
         final Context context = this;
         final int newIdx = ++idx;
         final int id = newIdx % urls.length ;
         if(newIdx > 10) {
             Toast.makeText(this, "FIM da operacao", Toast.LENGTH_LONG).show();
+            setProgressBarVisibility(View.INVISIBLE);
             return;
         }
         String url = urls[id];
@@ -119,7 +130,7 @@ public class ExampleDownloadImage extends AppCompatActivity {
             public void run() {
                 executeDownloading(urls, newIdx);
             }
-        }, 250);
+        }, 1500);
 
         /*
         new Thread() {
@@ -171,17 +182,21 @@ public class ExampleDownloadImage extends AppCompatActivity {
          * o que é proibido pela arquitetura do android
          **/
         // runOnUiThread() encapsula a chamada a handler.post(Runnable r)
-
+/*
         Runnable r = new Runnable() {
             @Override
+            public void run() {}
+        };
+        //runOnUiThread(r);
+*/
+        handler.post(new Runnable() {
+            @Override
             public void run() {
-                progressBar.setVisibility(View.INVISIBLE);
                 ImageView imageView = (ImageView) findViewById(R.id.img_downloaded);
                 imageView.setImageBitmap(bitmap);
             }
-        };
-        //runOnUiThread(r);
-        handler.post(r);
+        });
+        setProgressBarVisibility(View.INVISIBLE);
     }
 
 
@@ -217,7 +232,6 @@ public class ExampleDownloadImage extends AppCompatActivity {
                     resource = openStreamHttpsConn(url);
                     bitmap = resourceToBitmap(resource);
                 }
-
             }
             catch (final Exception excp) {
                 handlerDownloadTask.post(new Runnable() {
