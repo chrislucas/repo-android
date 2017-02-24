@@ -119,7 +119,7 @@ public class ExampleDownloadImage extends AppCompatActivity {
             public void run() {
                 executeDownloading(urls, newIdx);
             }
-        }, 2000);
+        }, 250);
 
         /*
         new Thread() {
@@ -180,8 +180,8 @@ public class ExampleDownloadImage extends AppCompatActivity {
                 imageView.setImageBitmap(bitmap);
             }
         };
-        runOnUiThread(r);
-        //handler.post(r);
+        //runOnUiThread(r);
+        handler.post(r);
     }
 
 
