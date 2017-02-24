@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.br.studyhandler.R;
@@ -28,6 +29,7 @@ public class ExampleDownloadImage extends AppCompatActivity {
     private static final String HANDLER_INSTANCE = "HANDLER_INSTANCE";
     private DownloadTask downloadTask;
     private ProgressBar progressBar;
+    private TextView warning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class ExampleDownloadImage extends AppCompatActivity {
         handler = new Handler();
         downloadTask = new DownloadTask(handler);
         final String urls [] = {
-                "https://www.facebook.com/rsrc.php/v3/yD/r/2wuGfVYB2an.png"
+                 "https://www.facebook.com/rsrc.php/v3/yD/r/2wuGfVYB2an.png"
                 ,"https://www.google.com.br/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
                 ,"http://st.codeforces.com/s/18867/images/codeforces-logo-with-telegram.png"
         };
@@ -58,19 +60,17 @@ public class ExampleDownloadImage extends AppCompatActivity {
         });
 
         Button btnExecDownload = (Button) findViewById(R.id.doDownload);
-
         progressBar = (ProgressBar) findViewById(R.id.progress_bar_download_img);
         progressBar.setVisibility(View.VISIBLE);
-
-
         btnExecDownload.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
-                   executeDownloading(urls, -1);
+                   executeDownloading(urls, 1);
                }
            }
         );
-        //downloadImage(urls[2]);
+        warning = (TextView) findViewById(R.id.warning);
+        downloadImage(urls[1]);
     }
 
     private void downloadImage(final String url) {
@@ -88,12 +88,17 @@ public class ExampleDownloadImage extends AppCompatActivity {
                             @Override
                             public void run() {
                                 progressBar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(context, "Não foi realizado o Download da imagem", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(context, "Não foi realizado o Download da imagem", Toast.LENGTH_LONG).show();
+                                warning.setText(String.format("Não foi realizado o Download da imagem\n%s", url));
                             }
                         });
                     }
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     Log.e("EXCEPTION_DOWN_IMG", e.getMessage(), e);
+                }
+                finally {
+
                 }
             }
         }.start();
@@ -101,39 +106,56 @@ public class ExampleDownloadImage extends AppCompatActivity {
 
     private void executeDownloading(final String urls [], int idx) {
         final Context context = this;
-        final int id = ++idx;
-        if(id > 10) {
+        final int newIdx = ++idx;
+        final int id = newIdx % urls.length ;
+        if(newIdx > 10) {
             Toast.makeText(this, "FIM da operacao", Toast.LENGTH_LONG).show();
             return;
         }
+        String url = urls[id];
+        downloadImage(url);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                executeDownloading(urls, newIdx);
+            }
+        }, 2000);
+
+        /*
         new Thread() {
             @Override
             public synchronized void start() {
                 try {
-                    final Bitmap bitmap = downloadTask.downloadBitmap(urls[id]);
+                    final String url = urls[id];
+                    final Bitmap bitmap = downloadTask.downloadBitmap(url);
                     if(bitmap != null) {
                         updateImageView(bitmap);
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                executeDownloading(urls, id % urls.length);
-                            }
-                        }, 2000);
                     }
                     else {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
                                 progressBar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(context, "Não foi realizado o Download da imagem", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(context, String.format("Não foi realizado o Download da imagem\n%s", url), Toast.LENGTH_LONG).show();
+                                warning.setText(String.format("Não foi realizado o Download da imagem\n%s", url));
                             }
                         });
                     }
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     Log.e("EXCEPTION_DOWN_IMG", e.getMessage(), e);
+                }
+                finally {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            executeDownloading(urls, newIdx);
+                        }
+                    }, 2000);
                 }
             }
         }.start();
+        */
     }
 
     private void updateImageView(final Bitmap bitmap) {
@@ -147,7 +169,7 @@ public class ExampleDownloadImage extends AppCompatActivity {
          * Iniciamos uma nova Thread para realizar o download, e o codigo acima
          * esta tentando atualizar a View ProgressBar a partir dessa nova thread
          * o que é proibido pela arquitetura do android
-         * */
+         **/
         // runOnUiThread() encapsula a chamada a handler.post(Runnable r)
 
         Runnable r = new Runnable() {
@@ -197,11 +219,13 @@ public class ExampleDownloadImage extends AppCompatActivity {
                 }
 
             }
-            catch (final Exception e) {
+            catch (final Exception excp) {
                 handlerDownloadTask.post(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("DOWNLOAD_BITMAP", e.getMessage());
+                        if(excp != null && excp.getMessage() != null) {
+                            Log.e("DOWNLOAD_BITMAP", excp.getMessage());
+                        }
                     }
                 });
             }

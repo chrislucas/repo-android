@@ -19,6 +19,7 @@
         android:paddingTop="16sp"
         android:paddingBottom="16sp"
         android:indeterminate="true"
+        android:visibility="invisible"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
 
 
@@ -47,5 +48,12 @@
         android:layout_gravity="center"
         android:scaleType="fitCenter"
         android:contentDescription="@string/image_download" />
+
+    <TextView
+        android:id="@+id/warning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:gravity="center_horizontal" />
 
 </LinearLayout>
