@@ -26,4 +26,23 @@
         android:text="STOP INTENT SERVICE"
         tools:ignore="HardcodedText" />
 
+    <Button
+        android:id="@+id/start_intent_work_serivce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="startIntentWorkerService"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="START INTENT WORKER SERVICE"
+        tools:ignore="HardcodedText,NestedWeights" />
+
+    <Button
+        android:id="@+id/stop_intent_work_serivce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="stopIntentWorkerService"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="STOP INTENT WORKER SERVICE"
+        tools:ignore="HardcodedText" />
+
+
 </LinearLayout>
