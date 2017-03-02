@@ -11,6 +11,14 @@
     android:orientation="vertical"
     tools:context="com.project.studyalarmmanager.ActivityTestAlarm">
 
+    <TextView
+        android:id="@+id/text_hour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/colorAccent"
+        />
+
     <Button
         android:id="@+id/alarme_date_defined"
         android:layout_width="match_parent"
@@ -36,6 +44,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text_cancel_alarm"
-        android:onClick="cancelAlarm"/>
+        android:onClick="cancelAlarm" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_stop"
+        android:onClick="stop" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_continue"
+        android:onClick="start" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_call_intent_service_by_alarm"
+        android:onClick="callIntentServiceByAlarm" />
+
 
 </LinearLayout>
