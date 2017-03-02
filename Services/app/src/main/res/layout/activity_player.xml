@@ -8,4 +8,53 @@
     android:orientation="vertical"
     tools:context="com.project.services.mp3project.PlayerActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp"
+        android:layout_margin="10sp"
+        android:text="@string/tittle_player_mp3"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/play"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/play"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_gravity="center"
+            tools:ignore="ContentDescription"
+            android:onClick="play"
+            />
+
+        <ImageButton
+            android:id="@+id/pause"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/pause"
+            android:layout_gravity="center"
+            tools:ignore="ContentDescription"
+            android:onClick="pause"
+            />
+
+
+        <ImageButton
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/stop"
+            android:layout_gravity="center"
+            android:onClick="stop"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+
+
 </LinearLayout>

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Services</string>
+    <string name="tittle_player_mp3">MP3 Service</string>
 
 
     <string-array name="list_view_mock">

@@ -1,8 +1,14 @@
 package com.project.services.mp3project;
 
 import android.media.MediaPlayer;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.RemoteException;
 import android.util.Log;
 
+import java.io.FileDescriptor;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,8 +60,9 @@ public class PlayerMultimidiaInterface implements MultimidiaInterface, MediaPlay
         try {
             switch (statusPlayer) {
                 case NOVO:
-                    mediaPlayer.setDataSource(fileMp3);
-                    mediaPlayer.prepare();
+                    initializeMedia(fileMp3);
+                    mediaPlayer.start();
+                    this.statusPlayer = StatusPlayer.TOCANDO;
                     break;
 
                 case TOCANDO:
@@ -64,17 +71,42 @@ public class PlayerMultimidiaInterface implements MultimidiaInterface, MediaPlay
 
                 case PAUSADO:
                     mediaPlayer.start();
+                    this.statusPlayer = StatusPlayer.TOCANDO;
                     break;
 
                 case PARADO:
                     mediaPlayer.reset();
+                    initializeMedia(fileMp3);
+                    mediaPlayer.start();
+                    this.statusPlayer = StatusPlayer.TOCANDO;
                     break;
             }
         }
         catch (Exception e) {
             Log.e("PLAYER_MP#", e.getMessage());
         }
+
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                if(mp.isPlaying()) {
+
+                }
+            }
+        });
     }
+
+
+    private void initializeMedia(String file) {
+        try {
+            mediaPlayer.setDataSource(file);
+            mediaPlayer.prepare();
+        } catch (IOException e) {
+            Log.e("PLAYER_MP", e.getMessage());
+        }
+
+    }
+
 
     @Override
     public void pause() {
@@ -88,6 +120,7 @@ public class PlayerMultimidiaInterface implements MultimidiaInterface, MediaPlay
         statusPlayer = StatusPlayer.PARADO;
     }
 
+    @Override
     public void close() {
         stop();
         mediaPlayer.release();
@@ -96,8 +129,10 @@ public class PlayerMultimidiaInterface implements MultimidiaInterface, MediaPlay
 
     @Override
     public boolean isPlaying() {
-        boolean tocando = StatusPlayer.TOCANDO.equals(statusPlayer.getStatus());
-        boolean pausado = StatusPlayer.PAUSADO.equals(statusPlayer.getStatus());
+        // status do player eh tocando ?
+        boolean tocando = StatusPlayer.TOCANDO.status == statusPlayer.getStatus();
+        // se o status for pausado, quer dizer que nao foi
+        boolean pausado = StatusPlayer.PAUSADO.status == statusPlayer.getStatus();
         return  tocando || pausado;
     }
 
@@ -108,6 +143,51 @@ public class PlayerMultimidiaInterface implements MultimidiaInterface, MediaPlay
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        Log.i("MP_COMPLETATION", mp.toString());
+        Log.i("MP_COMPLETATION", String.valueOf(mp.isPlaying()));
+    }
+
+    @Override
+    public String getInterfaceDescriptor() throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public boolean pingBinder() {
+        return false;
+    }
+
+    @Override
+    public boolean isBinderAlive() {
+        return false;
+    }
+
+    @Override
+    public IInterface queryLocalInterface(String descriptor) {
+        return null;
+    }
+
+    @Override
+    public void dump(FileDescriptor fd, String[] args) throws RemoteException {
+
+    }
+
+    @Override
+    public void dumpAsync(FileDescriptor fd, String[] args) throws RemoteException {
+
+    }
+
+    @Override
+    public boolean transact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        return false;
+    }
+
+    @Override
+    public void linkToDeath(DeathRecipient recipient, int flags) throws RemoteException {
+
+    }
+
+    @Override
+    public boolean unlinkToDeath(DeathRecipient recipient, int flags) {
+        return false;
     }
 }
