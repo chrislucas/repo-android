@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Services</string>
+
+
+    <string-array name="list_view_mock">
+        <item>Washington</item>
+        <item>Camberra</item>
+        <item>Beijing</item>
+        <item>Alberta</item>
+        <item>damasco</item>
+        <item>Londres</item>
+        <item>Cabul</item>
+        <item>Jerusalem</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_start_intent_service"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.project.services.StartIntentServiceActivity">
+
+    <Button
+        android:id="@+id/start_intent_serivce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="startIntentService"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="START INTENT SERVICE"
+        tools:ignore="HardcodedText,NestedWeights" />
+
+    <Button
+        android:id="@+id/stop_intent_ervice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="stopIntentService"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="STOP INTENT SERVICE"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/start_intent_work_serivce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="startIntentWorkerService"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="START INTENT WORKER SERVICE"
+        tools:ignore="HardcodedText,NestedWeights" />
+
+    <Button
+        android:id="@+id/stop_intent_work_serivce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="stopIntentWorkerService"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="STOP INTENT WORKER SERVICE"
+        tools:ignore="HardcodedText" />
+
+
+</LinearLayout>

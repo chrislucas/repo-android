@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.project.services">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity" />
+
+        <receiver android:name=".broadcast.SMSIntercepterReceiver">
+            <intent-filter>
+                <action android:name="android.proiver.Telephony.SMS_RECEDIVED" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".broadcast.DinamicBroadcastReceiver" />
+
+        <service android:name=".services.SimpleService">
+            <intent-filter>
+                <action android:name="START_SIMPLE_SERVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".services.MyIntentService"
+            android:exported="false" />
+
+        <activity android:name=".StartIntentServiceActivity">
+        </activity>
+
+        <service
+            android:name=".services.ListWorkerThreadService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <service
+            android:name=".mp3project.Services.MultimidiaService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".mp3project.PlayerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
