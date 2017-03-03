@@ -78,12 +78,16 @@ public class ActivityTestAlarm extends AppCompatActivity {
         String message = String.format("Alarme sem data definida %s", simpleDateFormat.format(new Date(time)));
         intent.putExtra(MESSAGE, message);
         Intent serviceByAlarm = new Intent(this, ServiceByAlarmDateUndefined.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(ListenAlarm.BUNDLE_INTENT_SERVICE, serviceByAlarm);
-        intent.putExtras(bundle);
+        Bundle bundleService = new Bundle();
+        bundleService.putBoolean(ServiceByAlarmDateUndefined.BUNDLE_BOOL, false);
+        serviceByAlarm.putExtras(bundleService);
+
+        Bundle bundleBroadcast = new Bundle();
+        bundleBroadcast.putParcelable(ListenAlarm.BUNDLE_INTENT_SERVICE, serviceByAlarm);
+        intent.putExtras(bundleBroadcast);
+
         // agendar da hora atual + 5, de 15 em 15
         AlarmUtils.scheduleRepeat(this, intent, shiftTime, 15000);
-
     }
 
     /**
@@ -111,19 +115,21 @@ public class ActivityTestAlarm extends AppCompatActivity {
     }
 
     public void executeAlarmDateUndefined(View view) {
-        Intent intent = new Intent(ListenAlarm.ACTION_BROADCAST_RECEIVERF_LISTEN_ALARM);
-        intent.putExtra(TITLE, "Executando alarme sem data definida");
+        Intent intentCallBroadcast = new Intent(ListenAlarm.ACTION_BROADCAST_RECEIVERF_LISTEN_ALARM);
+        intentCallBroadcast.putExtra(TITLE, "Executando alarme sem data definida");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
         simpleDateFormat.applyPattern("kk:mm:ss");
         String message = String.format("Alarme sem data definida %s", simpleDateFormat.format(new Date(getTime())));
-        intent.putExtra(MESSAGE, message);
+        intentCallBroadcast.putExtra(MESSAGE, message);
         Intent serviceByAlarm = new Intent(this, MultiThreadServiceByAlarmDateUndefined.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(ListenAlarm.BUNDLE_INTENT_SERVICE, serviceByAlarm);
-        intent.putExtras(bundle);
+        Bundle bundleService = new Bundle();
+        bundleService.putString(MultiThreadServiceByAlarmDateUndefined.BUNDLE, "Segura essa mensagem, MULTITHREAD");
+        serviceByAlarm.putExtras(bundleService);
+        Bundle bundleBroadcast = new Bundle();
+        bundleBroadcast.putParcelable(ListenAlarm.BUNDLE_INTENT_SERVICE, serviceByAlarm);
+        intentCallBroadcast.putExtras(bundleBroadcast);
         // agendar da hora atual + 5, de 30 em 30s
-        AlarmUtils.scheduleRepeat(this, intent, getTime(), 15000);
-
+        AlarmUtils.scheduleRepeat(this, intentCallBroadcast, getTime(), 15000);
     }
 
     public void cancelAlarm(View view) {
@@ -151,7 +157,6 @@ public class ActivityTestAlarm extends AppCompatActivity {
     }
 
     public void callIntentServiceByAlarm(View view) {
-
         Calendar calendar = Calendar.getInstance();
         long time = calendar.getTimeInMillis();
         calendar.setTimeInMillis(System.currentTimeMillis());

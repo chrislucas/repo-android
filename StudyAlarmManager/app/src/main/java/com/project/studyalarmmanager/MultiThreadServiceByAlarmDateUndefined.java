@@ -2,11 +2,13 @@ package com.project.studyalarmmanager;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MultiThreadServiceByAlarmDateUndefined extends Service {
 
@@ -56,9 +58,17 @@ public class MultiThreadServiceByAlarmDateUndefined extends Service {
         threads = new ArrayList<>();
     }
 
+    public static final String BUNDLE = "BUNDLE";
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
+        if (intent != null) {
+            Bundle bundle = intent.getExtras();
+            if(bundle != null) {
+                Object object = bundle.get(BUNDLE);
+                Log.i("MULTITHREAD_SERVICE", object.toString());
+            }
+        }
         WorkerThread w = new WorkerThread(startId);
         threads.add(w);
         w.start();

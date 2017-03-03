@@ -24,6 +24,7 @@ public class ListenAlarm extends BroadcastReceiver {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
         Log.d(TAG, String.format("%s", Calendar.getInstance().getTime().toString()));
+
         if(intent != null) {
             String message  = intent.getStringExtra("MESSAGE");
             String title    = intent.getStringExtra("TITLE");
