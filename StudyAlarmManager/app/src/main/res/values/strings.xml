@@ -4,7 +4,10 @@
     <string name="text_create_not">Simples Notificação</string>
     <string name="text_big_not">Notificação grande</string>
     <string name="text_alerm_date_d">Alarme com data definida</string>
-    <string name="text_alerm_date_u">Alarme com data indefinida</string>
+    <string name="text_alerm_date_u">Alarm Repeat Multithread</string>
     <string name="text_cancel_alarm">Cancelar Alarmes</string>
     <string name="text_alerm_date_d_r">Alarme com hora definida Repetido</string>
+    <string name="text_stop">Stop</string>
+    <string name="text_continue">Continue</string>
+    <string name="text_call_intent_service_by_alarm">Call IntentService By Alarm</string>
 </resources>
