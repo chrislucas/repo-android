@@ -1,0 +1,17 @@
+O projeto Sharepreferences usa Tabs usando Tablayout, um recurso do Material Design para
+criar tabs com mais facilidade e com mais compatibilidade ja que usa api de suporte a design
+
+Tabs usando action bar
+https://developer.android.com/training/implementing-navigation/lateral.html
+
+Tab usando tablayout do material design
+http://www.androidhive.info/2015/09/android-material-design-working-with-tabs/
+
+Android Tabs Example – With Fragments and ViewPager
+http://www.truiton.com/2015/06/android-tabs-example-fragments-viewpager/
+
+https://guides.codepath.com/android/ViewPager-with-FragmentPagerAdapter
+
+
+Sobre FragmentPagerAdapter
+https://developer.android.com/reference/android/support/v4/app/FragmentPagerAdapter.html

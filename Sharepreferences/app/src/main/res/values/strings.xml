@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Sharepreferences</string>
+
+    <string-array name="title_swipe">
+        <item>Pagina 1</item>
+        <item>Pagina 2</item>
+        <item>Pagina 3</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment_2">Hello blank fragmentExample1 2</string>
+    <string name="hello_blank_fragment_1">Hello blank fragmentExample1 1</string>
+    <string name="title_activity_tab">TabActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
