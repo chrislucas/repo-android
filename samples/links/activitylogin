@@ -1,0 +1,19 @@
+/*
+        final Context ctx = this;
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+              Device.permissionImei(ctx);
+            }
+        });
+*/
+            //String imei = Device.getId(this);
+            //Log.i("IMEI", imei);
+            //Device.isConnected(this);
+
+
+            /*
+                    LinearLayout layout = (LinearLayout) findViewById(R.id.activity_login);
+                    for(int i=0; i<layout.getChildCount(); i++)
+                        layout.getChildAt(i);
+            */

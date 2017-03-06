@@ -1,0 +1,76 @@
+    /*
+    *
+    * Esse metodo le o arquivo create_tables.properties. O arquivo
+    * possui uma lista de queries para criar as tabelas desse aplicativo.
+    * essas queries sao armazenadas num objeto Property
+    *
+    * @return boolean
+    * Se foi possivel ler o arquivo retorna TRUE, do contrario FALSE
+    * */
+    private boolean defineStructureDB() {
+        InputStream in;
+        //in = getClass().getClassLoader().getResourceAsStream("assets/create_tables.properties");
+        try {
+            in = getContext().getAssets().open("create_tables.properties");
+            if(in != null) {
+                try {
+                    LinkedHashProperties prop = new LinkedHashProperties();
+                    prop.load(in);
+                    setProperties(prop);
+                    return true;
+                } catch (IOException e) {
+                    Log.e(CATEGORY, e.getMessage());
+                } finally {
+                    in.close();
+                }
+                return true;
+            }
+        } catch (IOException e) {
+            Log.e("CREATE_TABLES_PROBLEM", "problemas ao tentar ler o arquivo create_tables.properties");
+        }
+        return false;
+    }
+
+    private boolean updateStructure() {
+        InputStream in;
+        try {
+            in = getContext().getAssets().open("update_tables.properties");
+            if(in != null) {
+                try {
+                    LinkedHashProperties prop = new LinkedHashProperties();
+                    prop.load(in);
+                    setProperties(prop);
+                } catch (IOException e) {
+                    Log.e(CATEGORY, e.getMessage());
+                } finally {
+                    in.close();
+                }
+                return true;
+            }
+        } catch (IOException e) {
+            Log.e("UPDATE_TABLES_PROBLEM", "problemas ao tentar ler o arquivo update_tables.properties");
+        }
+        return false;
+    }
+
+    private boolean deleteStructure() {
+        InputStream in;
+        try {
+            in = getContext().getAssets().open("delete_tables.properties");
+            if(in != null) {
+                try {
+                    LinkedHashProperties prop = new LinkedHashProperties();
+                    prop.load(in);
+                    setProperties(prop);
+                } catch (IOException e) {
+                    Log.e(CATEGORY, e.getMessage());
+                } finally {
+                    in.close();
+                }
+                return true;
+            }
+        } catch(IOException e) {
+            Log.e("DELETE_TABLES_PROBLEM", "problemas ao tentar ler o arquivo detele_tables.properties");
+        }
+        return false;
+    }

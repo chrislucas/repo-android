@@ -1,14 +1,10 @@
 package com.project.studyalarmmanager;
 
 import android.app.AlarmManager;
-import android.app.IntentService;
 import android.app.PendingIntent;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
-import java.io.PipedInputStream;
 import java.util.Calendar;
 
 /**
@@ -20,19 +16,26 @@ public class AlarmUtils {
     private AlarmManager alarmManager;
     private PendingIntent alarmIntent;
     private Context context;
-
+    public static int MINIMAL_TIMER_ALARM = 1200000; // 20 * 60 * 1000
     public static final String TAG = "ALARMUTIL";
 
 
-    public AlarmUtils(Context context, Intent intent) {
+    public AlarmUtils(Context context, Intent intent, int codeRequest) {
         this.context    = context;
         alarmManager    = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmIntent     = PendingIntent.getBroadcast(context, 0, intent, 0);
+        alarmIntent     = PendingIntent.getBroadcast(context, codeRequest, intent, 0);
     }
 
 
-    public PendingIntent pIntentService(Context context, Intent intent) {
-        PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
+    public AlarmUtils(Context context, Intent intent, int codeRequest, int flag1, int flag2) {
+        this.context    = context;
+        alarmManager    = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmIntent     = PendingIntent.getBroadcast(context, codeRequest, intent, flag1 | flag2);
+    }
+
+
+    public PendingIntent pIntentService(Context context, Intent intent, int codeRequest) {
+        PendingIntent pendingIntent = PendingIntent.getService(context, codeRequest, intent, 0);
         return  pendingIntent;
     }
 
@@ -41,7 +44,6 @@ public class AlarmUtils {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         return  pendingIntent;
     }
-
 
     // AlarmManager.RTC
     // Executa o alarme numa hora especificada
@@ -67,7 +69,7 @@ public class AlarmUtils {
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, (hour % 24) == 0 ? 1 : (hour % 24) );
         calendar.set(Calendar.MINUTE, (minute % 60) == 0 ? 1 : (minute % 60));
-        Log.i(TAG, String.format("Repeat com hora definida %s", calendar.getTime().toString()));
+        //Log.i(TAG, String.format("Repeat com hora definida %s", calendar.getTime().toString()));
         defineAlartRepeat(calendar, intervalMillis, AlarmManager.RTC_WAKEUP);
     }
 
@@ -82,32 +84,29 @@ public class AlarmUtils {
     /*
     * Definir um alarme na data/hora informado
     * */
-    public static void schedule(Context context, Intent intent, long triggerAtMillis) {
+    public static void schedule(Context context, Intent intent, long triggerAtMillis, int codeRequest) {
         /**
          * PendingIntent.getBroadcast
          *
          * PendingIntent.FLAG_UPDATE_CURRENT
          *
          * */
-        PendingIntent p = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent p = PendingIntent.getBroadcast(context, codeRequest, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, p);
-        Log.i(TAG, "ALARME com data/hora definido");
+        //Log.i(TAG, "ALARME com data/hora definido");
     }
 
-    public static void scheduleRepeat(Context context, Intent intent, long triggerAtMillis, long intervalMillis) {
-        PendingIntent p = PendingIntent.getBroadcast(context, 1, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+    public static void scheduleRepeat(Context context, Intent intent, long triggerAtMillis, long intervalMillis, int codeRequest) {
+        PendingIntent p = PendingIntent.getBroadcast(context, codeRequest, intent,PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, intervalMillis, p);
-        Log.i(TAG, "ALARME com data/hora indefinido");
     }
 
 
-    public static void cancel(Context context, Intent intent) {
+    public static void cancel(Context context, Intent intent, int codeRequest) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent p = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent p = PendingIntent.getBroadcast(context, codeRequest, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(p);
-        Log.i(TAG, "ALARME cancelado");
     }
-
 }

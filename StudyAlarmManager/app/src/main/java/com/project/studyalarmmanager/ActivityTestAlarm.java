@@ -24,6 +24,13 @@ public class ActivityTestAlarm extends AppCompatActivity {
     private Handler handler;
     private Runnable runnable;
 
+
+    private final int definedRepeat = 14;
+    private final int cancel = 10;
+    private final int alarmUndefined = 15;
+    private final int alarmServiceDateUndefined = 13;
+    private final int myIntentServiceAlarm = 12;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +94,7 @@ public class ActivityTestAlarm extends AppCompatActivity {
         intent.putExtras(bundleBroadcast);
 
         // agendar da hora atual + 5, de 15 em 15
-        AlarmUtils.scheduleRepeat(this, intent, shiftTime, 15000);
+        AlarmUtils.scheduleRepeat(this, intent, shiftTime, 15000, alarmServiceDateUndefined);
     }
 
     /**
@@ -111,7 +118,8 @@ public class ActivityTestAlarm extends AppCompatActivity {
         intent.putExtra(TITLE, "Executado alarme data definida");
         intent.putExtra(MESSAGE, "Alarme com data definida, mas sem repetição");
         // agendar da hora atual + 5s
-        AlarmUtils.schedule(this, intent, getTime());
+        int alarmDefined = 12;
+        AlarmUtils.schedule(this, intent, getTime(), alarmDefined);
     }
 
     public void executeAlarmDateUndefined(View view) {
@@ -129,21 +137,22 @@ public class ActivityTestAlarm extends AppCompatActivity {
         bundleBroadcast.putParcelable(ListenAlarm.BUNDLE_INTENT_SERVICE, serviceByAlarm);
         intentCallBroadcast.putExtras(bundleBroadcast);
         // agendar da hora atual + 5, de 30 em 30s
-        AlarmUtils.scheduleRepeat(this, intentCallBroadcast, getTime(), 15000);
+
+        AlarmUtils.scheduleRepeat(this, intentCallBroadcast, getTime(), 15000, alarmUndefined);
     }
 
     public void cancelAlarm(View view) {
         Intent intent = new Intent(ListenAlarm.ACTION_BROADCAST_RECEIVERF_LISTEN_ALARM);
         intent.putExtra(TITLE, "Cancelar alarme");
         intent.putExtra(MESSAGE, "Cancelando o alarme");
-        AlarmUtils.cancel(this, intent);
+        AlarmUtils.cancel(this, intent, cancel);
     }
 
     public void executeAlarmDateDefinedRepeat(View view) {
         Intent intent = new Intent(ListenAlarm.ACTION_BROADCAST_RECEIVERF_LISTEN_ALARM);
         intent.putExtra(TITLE, "Alarme data definida e repetição");
         intent.putExtra(MESSAGE, "Alarme com repetição e hora definida");
-        AlarmUtils alarmUtils = new AlarmUtils(this, intent);
+        AlarmUtils alarmUtils = new AlarmUtils(this, intent, definedRepeat);
         alarmUtils.reapet(13, 28, 20000);
     }
 
@@ -174,6 +183,6 @@ public class ActivityTestAlarm extends AppCompatActivity {
         bundle.putParcelable(ListenAlarm.BUNDLE_INTENT_SERVICE, serviceByAlarm);
         intent.putExtras(bundle);
         // agendar da hora atual + 5, de 15 em 15
-        AlarmUtils.scheduleRepeat(this, intent, shiftTime, 15000);
+        AlarmUtils.scheduleRepeat(this, intent, shiftTime, 15000, myIntentServiceAlarm);
     }
 }

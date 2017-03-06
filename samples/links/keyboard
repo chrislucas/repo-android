@@ -1,0 +1,15 @@
+InputMethodManager
+https://developer.android.com/reference/android/view/inputmethod/InputMethodManager.html
+https://developer.android.com/reference/android/view/inputmethod/InputMethodManager.html
+
+http://www.programcreek.com/java-api-examples/index.php?class=android.view.inputmethod.InputMethodManager&method=showSoftInputFromInputMethod
+http://stackoverflow.com/questions/18393077/show-keyboard-after-pressing-a-button
+
+
+
+            //inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+            //inputMethodManager.showSoftInputFromInputMethod(view.getApplicationWindowToken(), InputMethodManager.SHOW_IMPLICIT);
+            //inputMethodManager.toggleSoftInputFromWindow(view.getWindowToken() ,InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+                //inputMethodManager.showSoftInputFromInputMethod(view.getApplicationWindowToken(), InputMethodManager.SHOW_IMPLICIT);
+                //inputMethodManager.toggleSoftInputFromWindow(view.getWindowToken() ,InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);

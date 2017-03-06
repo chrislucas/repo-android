@@ -1,0 +1,23 @@
+            /*
+                Enumeration<Object> enumemtaion = properties.keys();
+                while( enumemtaion.hasMoreElements()) {
+                    Object key = enumemtaion.nextElement();
+                    Object value = properties.get(key);
+                    String query = value.toString();
+                    try {
+                        db.beginTransaction();
+                        db.execSQL(query);
+                        String table = key.toString();
+                        Log.i(category, table);
+                        db.setTransactionSuccessful();
+                    } catch(SQLException sqlexp) {
+                        Log.e("SQLEXCEPTION_CREATE", sqlexp.getMessage());
+                    }
+                    finally {
+                        // se executar endTransaction sem executar setTransactionSuccessful
+                        // o rollback acontece automaticamente
+                        db.endTransaction();
+                    }
+                }
+            */
+            // Enumeration e = properties.elements();

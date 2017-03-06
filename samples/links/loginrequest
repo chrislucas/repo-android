@@ -1,0 +1,34 @@
+/*
+        try {
+            URL urlconn = new URL(url);
+            URLConnection conn = urlconn.openConnection();
+            conn.setConnectTimeout(10000);
+            InputStream is = conn.getInputStream();
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(is));
+            String in = "";
+            StringBuilder sb = new StringBuilder();
+            while( (in = buffer.readLine()) != null) {
+                Log.i("CONNECTION_URL", in);
+                sb.append(in);
+            }
+            JSONObject object = new JSONObject(sb.toString());
+        } catch (IOException ioex) {
+            Log.e("ERROR_CONN", ioex.getMessage());
+            return null;
+        } catch (JSONException jsonex) {
+            Log.e("ERROR_JSONEXP", jsonex.getMessage());
+            return null;
+        }
+*/
+/*
+        try {
+            OkHttpClient http = new OkHttpClient();
+            Request rq = new Request.Builder().url(url).build();
+            Response rs = http.newCall(rq).execute();
+            String answer = rs.body().string();
+            Log.i("RESPONSE", answer);
+        } catch(Exception e) {
+            Log.e("ERROR_CONN", e.getMessage());
+            return null;
+        }
+*/

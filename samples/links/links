@@ -1,0 +1,145 @@
+https://developer.android.com/training/material/index.html
+https://www.sitepoint.com/material-design-android-design-support-library/
+http://www.androidpro.com.br/android-material-design-introducao/
+http://sourcey.com/beautiful-android-login-and-signup-screens-with-material-design/
+http://www.andreanolanusse.com/en/android-findviewbyid-vs-injectview/
+https://www.sitepoint.com/material-design-android-design-support-library/
+
+Connection
+https://developer.android.com/training/basics/network-ops/connecting.html#security
+
+
+Http Request
+https://github.com/kevinsawicki/http-request
+
+
+SQLiteTransactionListener
+http://www.programcreek.com/java-api-examples/index.php?api=android.database.sqlite.SQLiteTransactionListener
+https://developer.android.com/reference/android/database/sqlite/SQLiteTransactionListener.html
+http://www.programcreek.com/java-api-examples/index.php?api=android.database.sqlite.SQLiteTransactionListener
+https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.CursorFactory.html
+
+Rollback
+http://stackoverflow.com/questions/6909221/android-sqlite-rollback
+
+
+Criar uma library para android
+https://developer.android.com/studio/projects/android-library.html
+
+Colors
+https://developer.android.com/samples/BasicMediaRouter/res/values/colors.html
+http://stackoverflow.com/questions/16564000/begintransaction-endtransaction-and-settransactionsuccessful-what-exact
+http://www.helloandroid.com/tutorials/database-transactions
+
+
+Esconder o teclado
+http://stackoverflow.com/questions/1109022/close-hide-the-android-soft-keyboard
+https://code.tutsplus.com/tutorials/creating-a-login-screen-using-textinputlayout--cms-24168
+
+
+
+Paint EditText
+https://android--code.blogspot.com.br/2015/08/android-edittext-border-color_20.html
+
+Array resource: Color
+http://stackoverflow.com/questions/9114587/how-can-i-save-colors-in-array-xml-and-get-its-back-to-color-array
+
+Permissaoes
+https://developer.android.com/training/permissions/requesting.html?hl=pt-br
+https://developer.android.com/guide/topics/security/permissions.html?hl=pt-br#normal-dangerous
+
+
+Progress Bar format
+http://stackoverflow.com/questions/7794001/how-to-remove-progress-bar-number-at-the-bottom-part-of-the-progress-bar
+https://examples.javacodegeeks.com/android/core/ui/progressdialog/android-progressdialog-example/
+
+
+ActivityCompat.OnRequestPermissionsResultCallback
+https://developer.android.com/reference/android/support/v4/app/ActivityCompat.OnRequestPermissionsResultCallback.html
+
+AlertDialog
+https://developer.android.com/guide/topics/ui/dialogs.html?hl=pt-br
+
+
+ViewHolder pattern
+http://blog.alura.com.br/utilizando-o-padrao-viewholder/
+https://www.javacodegeeks.com/2013/09/android-viewholder-pattern-example.html
+https://developer.android.com/training/improving-layouts/smooth-scrolling.html
+
+Zxing
+https://github.com/journeyapps/zxing-android-embedded
+    http://stackoverflow.com/questions/29513940/how-to-import-zxing-to-android-studio
+https://github.com/Promptus/zxing-android-minimal/tree/master
+https://github.com/jonzl/sample-zxing
+https://github.com/zxing/zxing/wiki/Getting-Started-Developing
+http://maicon.strey.nom.br/blog/2012/04/27/utilizando-zxing-para-ler-codigo-de-barras/
+
+
+<!--
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        android:shrinkColumns="*"
+        tools:ignore="UselessParent">
+
+        <TableRow
+            android:gravity="start"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/FontTextList.Title"
+                android:id="@+id/id_material"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:layout_weight="0.1"
+                android:gravity="start"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                style="@style/FontTextList.Title"
+                android:id="@+id/code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="0192-0388-2"
+                android:layout_weight="0.4"
+                android:gravity="start"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                style="@style/FontTextList.Title"
+                android:id="@+id/serial"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="aaa-bbc101"
+                android:layout_weight="0.4"
+                android:gravity="start"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:src="@drawable/ic_done"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:layout_gravity="end"
+                tools:ignore="ContentDescription" />
+        </TableRow>
+
+        <TableRow
+            android:gravity="start"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                style="@style/FontTextList.Title"
+                android:id="@+id/description_material"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modem WI-FI BHS Fibra D-LINK DNG-6661"
+                android:gravity="start"
+                tools:ignore="HardcodedText" />
+        </TableRow>
+    </TableLayout>
+
+-->

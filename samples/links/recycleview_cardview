@@ -1,0 +1,14 @@
+https://www.binpress.com/tutorial/android-l-recyclerview-and-cardview-tutorial/156
+
+Ripple effect on Android Lollipop CardView
+
+If the app minSdkVersion which you are working is level 9, you can use:
+
+android:foreground="?selectableItemBackground"
+android:clickable="true"
+Instead, starting from level 11, you use:
+
+android:foreground="?android:attr/selectableItemBackground"
+android:clickable="true"
+
+http://stackoverflow.com/questions/26942434/ripple-effect-on-android-lollipop-cardview

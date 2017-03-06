@@ -1,0 +1,22 @@
+http://stackoverflow.com/questions/21165505/mutliple-asynctasks-with-sequential-execution
+https://developer.android.com/reference/java/util/concurrent/ExecutorService.html
+https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html
+
+
+Transfer data p2p
+http://stackoverflow.com/questions/21360808/can-we-send-data-from-an-android-device-to-another-android-device-directly-p2p
+https://www.pubnub.com/
+
+Transferir dados e avisar o usuario
+https://www.quora.com/How-does-messaging-work-in-WhatsApp
+https://alty.co/blog/how-to-create-a-chat-application-like-whatsapp/
+https://firebase.google.com/docs/cloud-messaging/
+https://firebase.google.com/docs/notifications/
+
+Services
+https://developer.android.com/guide/components/services.html
+https://developer.android.com/reference/android/app/IntentService.html
+
+
+Parcelable:
+https://www.sitepoint.com/transfer-data-between-activities-with-android-parcelable/
