@@ -15,3 +15,14 @@ http://www.devmedia.com.br/datepicker-android-mostrar-a-data-em-pt-br/22242
 
 Change layout parameter dynamically
 http://stackoverflow.com/questions/4641072/how-to-set-layout-weight-attribute-dynamically-from-code
+
+
+// Contraint Layout
+https://developer.android.com/training/constraint-layout/index.html
+https://codelabs.developers.google.com/codelabs/constraint-layout/index.html?index=..%2F..%2Findex#0
+
+
+Mask TextField
+https://andremrezende.wordpress.com/tag/android-mask-mascara-edittext-java-layout-cpf-cnpj/
+https://github.com/toshikurauchi/MaskedEditText
+https://gist.github.com/alfredbaudisch/f4416061dd1858b1f4ee
