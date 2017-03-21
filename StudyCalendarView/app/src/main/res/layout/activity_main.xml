@@ -14,7 +14,7 @@
         android:layout_height="0sp"
         android:layout_weight="0.6"
         />
-
+    
     <ListView
         android:id="@+id/events"
         android:layout_width="match_parent"
