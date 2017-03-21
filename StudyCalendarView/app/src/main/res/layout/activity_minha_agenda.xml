@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layout_event"
     android:orientation="vertical"
-    tools:context="com.br.studycalendarview.AgendaPolitico">
+    tools:context="com.br.studycalendarview.MinhaAgenda">
+
 
     <CalendarView
-        android:id="@+id/calendar_event"
+        android:id="@+id/meu_calendario"
         android:layout_width="match_parent"
         android:layout_height="0sp"
         android:layout_weight="0.6"
         />
-    
+
     <ListView
-        android:id="@+id/events"
+        android:id="@+id/meus_eventos"
         android:layout_width="match_parent"
         android:layout_height="0sp"
         android:layout_weight="0.4"
         />
+
 
 </LinearLayout>

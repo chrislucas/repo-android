@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -25,7 +26,8 @@ public class AdapterEvento extends ArrayAdapter<Evento> {
     }
     
     private class ViewHolder {
-        
+        private TextView titulo, dataInicio, dataFim, segmento;
+        public ViewHolder() {}
     }
     
     
@@ -36,6 +38,24 @@ public class AdapterEvento extends ArrayAdapter<Evento> {
         Evento evento = getItem(position);
         if(evento != null) {
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            if(convertView == null) {
+                convertView = inflater.inflate(R.layout.adapter_list_eventos, null);
+                viewHolder = new ViewHolder();
+                viewHolder.titulo = (TextView) convertView.findViewById(R.id.titulo);
+                viewHolder.dataInicio = (TextView) convertView.findViewById(R.id.data_inicio);
+                viewHolder.segmento = (TextView) convertView.findViewById(R.id.segmento);
+                convertView.setTag(viewHolder);
+            }
+
+            else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+
+            viewHolder.titulo.setText(evento.getTitulo());
+            viewHolder.segmento.setText(evento.getSeguimento());
+            viewHolder.dataInicio.setText(evento.getDataInicialFormatada());
+
         }
         return  convertView;
     }
