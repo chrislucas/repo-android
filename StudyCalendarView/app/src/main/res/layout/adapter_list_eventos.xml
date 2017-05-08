@@ -1,8 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="4sp">
 
-</LinearLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alignmentMode="alignBounds"
+        android:columnCount="3"
+        android:columnOrderPreserved="true"
+        android:orientation="vertical"
+        android:useDefaultMargins="true">
+
+        <TextView
+            android:id="@+id/label_data_inicio"
+            style="@style/CardViewEvent"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:gravity="start"
+            android:text="Data Inicio: "
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/data_inicio"
+            style="@style/CardViewEvent"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:gravity="start"
+            android:text="10/10/2017"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/label_segmento"
+            style="@style/CardViewEvent"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:text="Segmento: "
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/segmento"
+            style="@style/CardViewEvent"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:text="Saúde"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/titulo"
+            style="@style/CardViewEvent"
+            android:layout_column="0"
+            android:layout_row="2"
+            android:text="Visita ao Hospital municipal de Belém"
+            tools:ignore="HardcodedText" />
+
+
+    </GridLayout>
+
+</android.support.v7.widget.CardView>

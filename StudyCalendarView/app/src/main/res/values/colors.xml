@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <item name="text_color_card_transaction" type="color">#6f7070</item>
+    <color name="transparent">#00000000</color>
 </resources>
