@@ -4,12 +4,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-public class CallServiceBackup extends BroadcastReceiver {
+
+/**
+ * Esse servico vai executar uma busca no celular a procura de arquivos .db
+ *
+ * */
+public class CallServiceBackupDbFiles extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
-        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

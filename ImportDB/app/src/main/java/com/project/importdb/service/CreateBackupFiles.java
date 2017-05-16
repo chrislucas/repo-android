@@ -21,6 +21,10 @@ public class CreateBackupFiles extends IntentService {
     private static final String EXTRA_PARAM1 = "com.project.importdb.service.extra.PARAM1";
     private static final String EXTRA_PARAM2 = "com.project.importdb.service.extra.PARAM2";
 
+    public CreateBackupFiles() {
+        super("CreateBackupFiles");
+    }
+
     /**
      * Starts this service to perform action Foo with the given parameters. If
      * the service is already performing a task this action will be queued.
@@ -49,10 +53,6 @@ public class CreateBackupFiles extends IntentService {
         intent.putExtra(EXTRA_PARAM1, param1);
         intent.putExtra(EXTRA_PARAM2, param2);
         context.startService(intent);
-    }
-
-    public CreateBackupFiles() {
-        super("CreateBackupFiles");
     }
 
     @Override
