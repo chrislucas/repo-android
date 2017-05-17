@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="project.contentprovider.Main">
+
+    <!--
+        Testando o recurso de habilitar a visualizacao da senha com
+        o widget do android e na linha de codigo
+        http://stackoverflow.com/questions/3685790/how-to-switch-between-hide-and-view-password
+    -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:passwordToggleEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/input_password_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="senha"
+            android:textSize="16sp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <EditText
+        android:id="@+id/input_password_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        />
+
+    <CheckBox
+        android:id="@+id/check_toggle_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver senha"/>
+
+</LinearLayout>
