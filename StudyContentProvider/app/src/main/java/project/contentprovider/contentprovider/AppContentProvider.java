@@ -1,4 +1,4 @@
-package project.contentprovider;
+package project.contentprovider.contentprovider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -20,6 +20,50 @@ import project.contentprovider.helperdb.HelperDB;
 
 public class AppContentProvider extends ContentProvider {
 
+    public static final String AUTHORITY            = "project.contentprovider.contentprovider.estudo";
+    // Cria uma URI valida a partir de um String
+    public static final Uri AUTHORITY_URI           = Uri.parse("content://" + AUTHORITY);
+    // Uri.withAppendedPath adiciona um segmento a URI
+    public static final String USER_PATH            = "user";
+    public static final String FEATURE_PATH         = "feature";
+    public static final String USER_FEATURE_PATH    = "userfeature";
+
+    /**
+     * Vou criar uma tabela de usuario so pra testar essa ideia de usar
+     * ContentProvider
+     **/
+    public static class User {
+        public static final String [] FIELDS_TABLE_USER = {
+            "_id"
+            ,"nome"
+            ,"senha"
+        };
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(AUTHORITY_URI, USER_PATH);
+    }
+
+    /**
+     * Vou criar uma tabela Feature que representara uma funcionalidade
+     * que o App temnha
+     **/
+    public static class Feature {
+        public static final String [] FIELDS_TABLE_FEATURE = {
+             "_id"
+            ,"code"
+            ,"description"
+        };
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(AUTHORITY_URI, FEATURE_PATH);
+    }
+
+    /**
+     * Vou criar uma tabela UserFeature que vincula um usuario a uma funcionalidade
+     * */
+    public static class UserFeature {
+        public static final String [] FIELDS_TABLE_USER_FEATURE = {
+             "id_user"
+            ,"id_feature"
+        };
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(AUTHORITY_URI, USER_FEATURE_PATH);
+    }
 
     // content provider sao definidos com a seguinte string
     // content://<authority>/<path>
@@ -30,6 +74,22 @@ public class AppContentProvider extends ContentProvider {
 
     private static final UriMatcher URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
 
+    public static final int ID_USER_PATH = 1;
+    public static final int ID_FEATURE_PATH = 2;
+    public static final int ID_FEATURE_USER_PATH = 3;
+
+    enum Path {
+        ID_USER_PATH(1), ID_FEATURE_PATH(2), ID_FEATURE_USER_PATH(3);
+        private int path;
+        Path(int path) {
+            this.path = path;
+        }
+
+        public int getPath() {
+            return this.path;
+        }
+    }
+
     static {
         /**
          * {@link} {@link UriMatcher} mapea as URIS de um content provider
@@ -37,7 +97,7 @@ public class AppContentProvider extends ContentProvider {
          *
          * */
         // <authority>, <path>
-        URI_MATCHER.addURI("project.contentprovide.provider", "db1", 1);
+        //URI_MATCHER.addURI("project.contentprovide.provider", "db1", 1);
         /**
          * Pattern Matches
          * Wildcards: * ou #
@@ -46,7 +106,19 @@ public class AppContentProvider extends ContentProvider {
          * */
         // content://project.contentprovide.provider/db1
         // content://project.contentprovide.provider/db1/#
-        URI_MATCHER.addURI("project.contentprovide.provider", "db1/#", 2);
+        //URI_MATCHER.addURI("project.contentprovide.provider", "db1/#", 2);
+        URI_MATCHER.addURI(AUTHORITY, USER_PATH, Path.ID_USER_PATH.getPath());
+        URI_MATCHER.addURI(AUTHORITY, USER_PATH + "/#", Path.ID_USER_PATH.getPath());
+        URI_MATCHER.addURI(AUTHORITY, FEATURE_PATH,  Path.ID_FEATURE_PATH.getPath());
+        URI_MATCHER.addURI(AUTHORITY, FEATURE_PATH + "/#",  Path.ID_FEATURE_PATH.getPath());
+        URI_MATCHER.addURI(AUTHORITY, USER_FEATURE_PATH, Path.ID_FEATURE_USER_PATH.getPath());
+        URI_MATCHER.addURI(AUTHORITY, USER_FEATURE_PATH + "/#", Path.ID_FEATURE_USER_PATH.getPath());
+    }
+
+    public void execute(Uri uri) {
+        if(URI_MATCHER.match(uri) == Path.ID_USER_PATH.getPath()) {
+
+        }
     }
 
     /**
@@ -84,7 +156,6 @@ public class AppContentProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         // inicia o content provider, como o comentario acima diz.
-
         helperDB = new HelperDB(getContext(), DB_NAME, null, DB_VERSION);
 
         return true;
@@ -176,6 +247,7 @@ public class AppContentProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
+
         return null;
     }
 
@@ -220,7 +292,8 @@ public class AppContentProvider extends ContentProvider {
      * @throws android.database.SQLException
      */
     @Override
-    public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+    public int delete(@NonNull Uri uri, @Nullable String selection
+            , @Nullable String[] selectionArgs) {
         return 0;
     }
 
@@ -243,7 +316,8 @@ public class AppContentProvider extends ContentProvider {
      * @return the number of rows affected.
      */
     @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
+    public int update(@NonNull Uri uri, @Nullable ContentValues values
+            , @Nullable String selection, @Nullable String[] selectionArgs) {
         return 0;
     }
 }

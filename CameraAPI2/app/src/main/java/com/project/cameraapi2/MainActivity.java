@@ -20,6 +20,7 @@ import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.android.InstallCallbackInterface;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
@@ -32,28 +33,52 @@ import java.util.List;
  * */
 public class MainActivity extends AppCompatActivity implements CvCameraViewListener2 {
 
+
     private CameraBridgeViewBase openCvCameraView;
     private Mat cannyEdges;
 
-    static {
+    private static final int REQUEST_PERMISSION_CAMERA = 0xf3;
+
+    private BaseLoaderCallback callback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            switch (status) {
+                case BaseLoaderCallback.SUCCESS:
+                    openCvCameraView.enableView();
+                    cannyEdges = new Mat();
+                    break;
+                default:
+                    super.onManagerConnected(status);
+                    break;
+            }
+        }
+
+        @Override
+        public void onPackageInstall(int operation, InstallCallbackInterface callback) {
+            super.onPackageInstall(operation, callback);
+        }
+    };
+
+    @Override
+    public void onContentChanged() {
+        super.onContentChanged();
         if(!OpenCVLoader.initDebug()){
             Log.d("TAG", "OpenCV not loaded");
-        } else {
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_2_0, this, callback);
+        }
+        else {
             Log.d("TAG", "OpenCV loaded");
+            callback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
         }
     }
-
-    private static final int REQUEST_PERMISSION_CAMERA = 0xf3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
-        //requestPermissions();
-
+        requestPermissions();
         openCvCameraView = (CameraBridgeViewBase) findViewById(R.id.camera_view_opencv);
-
         String cameraPermission = Manifest.permission.CAMERA;
         if(ActivityCompat.checkSelfPermission(this, cameraPermission)
                 !=PackageManager.PERMISSION_GRANTED) {
@@ -82,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements CvCameraViewListe
                     }
                 });
             }
-
             else {
                 ActivityCompat.requestPermissions(this, new String[] {cameraPermission}, REQUEST_PERMISSION_CAMERA);
             }
@@ -125,30 +149,15 @@ public class MainActivity extends AppCompatActivity implements CvCameraViewListe
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         Mat src = inputFrame.gray();
-        Imgproc.Canny(src, cannyEdges, 10 , 100);
-        return cannyEdges;
+        Mat edge = new Mat();
+        Imgproc.Canny(src, cannyEdges, edge, 10 , 100);
+        Log.i("MAT_SRC", src.toString());
+        Log.i("MAT_EDGE", edge.toString());
+        Log.i("MAT_CANNY", cannyEdges.toString());
+        return src;
     }
 
-    private BaseLoaderCallback callback = new BaseLoaderCallback(this) {
-        @Override
-        public void onManagerConnected(int status) {
-            //super.onManagerConnected(status);
-            switch (status) {
-                case BaseLoaderCallback.SUCCESS:
-                    openCvCameraView.enableView();
-                    cannyEdges = new Mat();
-                    break;
-                default:
-                    super.onManagerConnected(status);
-                    break;
-            }
-        }
 
-        @Override
-        public void onPackageInstall(int operation, InstallCallbackInterface callback) {
-            super.onPackageInstall(operation, callback);
-        }
-    };
 
     /**
      * Carregando OpenCV no metodo onResume
@@ -156,14 +165,6 @@ public class MainActivity extends AppCompatActivity implements CvCameraViewListe
     @Override
     protected void onResume() {
         super.onResume();
-        if(!OpenCVLoader.initDebug()){
-            Log.d("TAG", "OpenCV not loaded");
-            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_2_0, this, callback);
-        } else {
-            Log.d("TAG", "OpenCV loaded");
-            callback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
-        }
-
     }
 
     @Override

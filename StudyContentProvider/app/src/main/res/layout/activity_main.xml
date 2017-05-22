@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="project.contentprovider.Main">
-
     <!--
         Testando o recurso de habilitar a visualizacao da senha com
         o widget do android e na linha de codigo

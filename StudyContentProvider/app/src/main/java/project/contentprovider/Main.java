@@ -1,15 +1,25 @@
 package project.contentprovider;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.project.studycontentprovider.R;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import project.contentprovider.contentprovider.ContactsContentProvider;
+import project.contentprovider.contentprovider.TelephonyContentProvider;
+import project.contentprovider.utils.PermissionsUtils;
 
 public class Main extends AppCompatActivity {
 
@@ -17,7 +27,6 @@ public class Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         // Testando o metodo setTransformationMethod http://stackoverflow.com/questions/3685790/how-to-switch-between-hide-and-view-password
 
         /**
@@ -42,5 +51,43 @@ public class Main extends AppCompatActivity {
                 editText.setSelection(start, end);
             }
         });
+        verifyPermissions();
+        //ContactsContentProvider.exploreContactsContractClass(this);
+        //ContactsContentProvider.exploreContactsTable(this);
+        //ContactsContentProvider.exploreFilterContactTable(this);
+        TelephonyContentProvider.explore(this);
+    }
+
+    /**
+     * As mensagens de erro estao cada vez mais humanas, ora ora
+     * java.lang.IllegalArgumentException: Can only use lower 16 bits for requestCode
+     * */
+    private static final int REQUEST_CODE_PERMISSIONS = 0x0f;
+    public void verifyPermissions() {
+        ArrayList<String> permissions = new ArrayList<>();
+        permissions.add(Manifest.permission.READ_CONTACTS);
+        permissions.add(Manifest.permission.WRITE_CONTACTS);
+        permissions.add(Manifest.permission.WRITE_CALENDAR);
+        permissions.add(Manifest.permission.READ_CALENDAR);
+        PermissionsUtils.validatePermission(permissions, this, REQUEST_CODE_PERMISSIONS);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_CODE_PERMISSIONS) {
+            if(permissions != null && grantResults != null && permissions.length > 0 && grantResults.length > 0) {
+                if(permissions.length == grantResults.length ) {
+                    for(int i=0; i<permissions.length; i++) {
+
+                    }
+                }
+
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                }
+            }
+        }
+
     }
 }
