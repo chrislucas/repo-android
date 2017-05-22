@@ -157,8 +157,6 @@ public class MainActivity extends AppCompatActivity implements CvCameraViewListe
         return src;
     }
 
-
-
     /**
      * Carregando OpenCV no metodo onResume
      * */
