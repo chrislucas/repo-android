@@ -1,12 +1,21 @@
 package com.br.exploreapisensors;
 
 import android.annotation.SuppressLint;
+import android.hardware.Sensor;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import com.br.exploreapisensors.utils.sensors.Device;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -41,12 +50,16 @@ public class FullscreenMainActivity extends AppCompatActivity {
             // Note that some of these constants are new as of API 16 (Jelly Bean)
             // and API 19 (KitKat). It is safe to use them, as they are inlined
             // at compile-time and do nothing on earlier devices.
-            mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+            
+            if(mContentView != null) {
+                mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+            }
+            
         }
     };
     private View mControlsView;
@@ -83,17 +96,32 @@ public class FullscreenMainActivity extends AppCompatActivity {
         }
     };
 
+    
+    private ListView listViewSensors;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_fullscreen_main);
 
-        mVisible = true;
-        mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.fullscreen_content);
-
-
+        mVisible        = true;
+        mControlsView   = findViewById(R.id.fullscreen_content_controls);
+        
+    
+        listViewSensors = (ListView) findViewById(R.id.list_sensors);
+        
+        List<String> sensorNames =  exploreSensorsName();
+        ArrayAdapter<String> sensorsNameAdapter = new ArrayAdapter<String>(
+            this
+            ,android.R.layout.simple_list_item_1
+            ,sensorNames
+        );
+        
+        listViewSensors.setAdapter(sensorsNameAdapter);
+        
+        /*
+        //mContentView    = findViewById(R.id.fullscreen_content);
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,11 +129,20 @@ public class FullscreenMainActivity extends AppCompatActivity {
                 toggle();
             }
         });
-
+        */
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+    }
+    
+    private List<String> exploreSensorsName() {
+        List<Sensor> sensors = Device.Sensors.get(this);
+        List<String> strings = new ArrayList<>();
+        for(Sensor sensor : sensors) {
+            strings.add(sensor.getName());
+        }
+        return strings;
     }
 
     @Override
