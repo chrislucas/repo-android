@@ -150,11 +150,11 @@ public class MainActivity extends AppCompatActivity implements CvCameraViewListe
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         Mat src = inputFrame.gray();
         Mat edge = new Mat();
-        Imgproc.Canny(src, cannyEdges, edge, 10 , 100);
+        Imgproc.Canny(src, cannyEdges, edge, 10 , 15);
         Log.i("MAT_SRC", src.toString());
         Log.i("MAT_EDGE", edge.toString());
         Log.i("MAT_CANNY", cannyEdges.toString());
-        return src;
+        return cannyEdges;
     }
 
     /**
