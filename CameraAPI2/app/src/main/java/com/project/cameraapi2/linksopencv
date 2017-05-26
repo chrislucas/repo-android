@@ -1,0 +1,23 @@
+http://www.decom.ufop.br/imobilis/iniciando-com-opencv-e-android-studio/
+
+https://github.com/opencv/opencv/tree/master/samples/android
+
+https://sourceforge.net/projects/opencvlibrary/files/opencv-android/3.2.0/
+http://opencv.org/platforms/android/opencv4android-samples.html
+https://www.infoq.com/br/presentations/android-opencv
+
+
+Camera API 2
+https://examples.javacodegeeks.com/android/core/hardware/camera-hardware/android-camera-example/
+
+https://github.com/josnidhin/Android-Camera-Example
+
+http://www.vogella.com/tutorials/AndroidCamera/article.html
+
+https://developer.android.com/reference/android/hardware/camera2/package-summary.html
+
+https://github.com/googlesamples/android-Camera2Basic
+
+
+Problem async opencv
+http://answers.opencv.org/question/10175/async-initialization-of-opencv-on-android-using-opencvmanager/
