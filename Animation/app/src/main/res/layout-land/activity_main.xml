@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/list_animation_gradient"
     tools:context="appcode.animation.ActivityGradientBg">
 
@@ -17,16 +16,7 @@
         android:hint="@string/app_name"
         android:maxLines="1"
         android:padding="15sp"
-        android:layout_margin="5sp"
         android:textColor="@color/grey_black_1000"
         android:textSize="15sp" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:layout_margin="5sp"
-        android:background="@drawable/button_insta"
-        />
 
 </LinearLayout>
