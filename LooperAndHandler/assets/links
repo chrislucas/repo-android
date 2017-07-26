@@ -1,0 +1,44 @@
+Looper
+https://developer.android.com/reference/android/os/Looper.html
+
+Communicating with the UI Thread
+https://developer.android.com/training/multiple-threads/communicate-ui.html
+
+
+https://stackoverflow.com/questions/6766002/android-difference-between-getmainlooper-and-looper-mylooper
+
+
+
+https://stackoverflow.com/questions/13974661/runonuithread-vs-looper-getmainlooper-post-in-android
+https://stackoverflow.com/questions/34322498/android-mylooper-vs-getmainlooper
+https://stackoverflow.com/questions/3875184/cant-create-handler-inside-thread-that-has-not-called-looper-prepare
+
+
+Matematica
+http://www.prof-edigleyalexandre.com/2015/01/a-algebra-linear-por-tras-google.html
+
+
+Livro
+The Android Developer's Cookbook: Building Applications with the Android SDK
+
+
+Loopers MessageQueues e afins
+http://codetheory.in/android-handlers-runnables-loopers-messagequeue-handlerthread/
+
+
+Loopers,Handlers
+http://codetheory.in/android-handlers-runnables-loopers-messagequeue-handlerthread/
+http://androidshortnotes.blogspot.com.br/2013/02/thread-concept-in-android.html
+http://androidsrc.net/android-loopers-and-handlers-code-tutorial/
+http://android-er.blogspot.com.br/2015/05/android-example-thread-handler-and.html
+
+
+Thread é: At the lower operating system (OS) level
+
+
+https://developer.android.com/reference/android/os/HandlerThread.html
+https://developer.android.com/reference/android/os/Looper.html
+https://developer.android.com/reference/android/os/Looper.html#loop()
+http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.3_r1/android/os/Looper.java#Looper.loop%28%29
+https://developer.android.com/reference/android/os/MessageQueue.html
+http://www.uml-diagrams.org/examples/java-6-thread-state-machine-diagram-example.html
