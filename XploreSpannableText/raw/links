@@ -1,0 +1,21 @@
+https://developer.android.com/reference/android/text/SpannableStringBuilder.html
+
+SpannableString
+This is the class for text whose content is immutable but to which markup objects can be attached and detached. For mutable text, see
+
+
+Sobre string, spannable, spannableString, spannableStringBuilder
+https://stackoverflow.com/questions/17546955/android-spanned-spannedstring-spannable-spannablestring-and-charsequence/41935087#41935087
+
+Mudando o estilo substring de uma string
+https://stackoverflow.com/questions/10828182/spannablestringbuilder-to-create-string-with-multiple-fonts-text-sizes-etc-examp
+
+
+Estudar futuramente
+https://developer.android.com/reference/android/text/style/LeadingMarginSpan.html
+
+
+InputFilter
+https://developer.android.com/reference/android/text/InputFilter.html
+http://onebigfunction.com/android/2015/09/01/regex-input-filter/
+https://mobisoftinfotech.com/resources/blog/android/android-edittext-setfilters-example-numeric-text-field-patterns-and-length-restriction/

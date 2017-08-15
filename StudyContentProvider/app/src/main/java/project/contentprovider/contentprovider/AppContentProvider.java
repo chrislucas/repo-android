@@ -157,7 +157,6 @@ public class AppContentProvider extends ContentProvider {
     public boolean onCreate() {
         // inicia o content provider, como o comentario acima diz.
         helperDB = new HelperDB(getContext(), DB_NAME, null, DB_VERSION);
-
         return true;
     }
 

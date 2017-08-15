@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">XploreSpannableText</string>
+    <string name="hint_text_default">Digite aqui</string>
+</resources>
