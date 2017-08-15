@@ -1,9 +1,13 @@
 https://mobisoftinfotech.com/resources/blog/android/android-edittext-setfilters-example-numeric-text-field-patterns-and-length-restriction/
 
 Pesquisar sobre TextWatcher
+// Uma instancia de TextWatcher permite executar alguma acao no momento que o texto
+// de um Editable é alterado. Podemos por exemplo colocar um filtr e impedir que o usuario
+// digite alguma palavra que nao desejamos
 https://developer.android.com/reference/android/text/TextWatcher.html
 http://stacktips.com/tutorials/android/android-textwatcher-example
 
 InputFilter
 https://developer.android.com/reference/android/text/InputFilter.LengthFilter.html
 https://alvinalexander.com/java/jwarehouse/android/core/java/android/text/InputFilter.java.shtml
+http://stacktips.com/tutorials/android/restrict-edittext-min-and-max-value-input-range-using-android-inputfilter

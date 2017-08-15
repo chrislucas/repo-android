@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">XploreSpannableText</string>
     <string name="hint_text_default">Digite aqui</string>
+
+    <string name="all_in_one">
+        Relative Size\n\n
+        Absolute Size\n\n
+        Bold Italic\n\n
+        Underlined\n\n
+        Italic\n\n
+        Strikethrough\n\n
+        Colored\n\n
+        Highlighted\n\n
+        K Superscript\n\n
+        K Subscript\n\n
+        Url\n\n
+        Clickable\n\n
+    </string>
 </resources>

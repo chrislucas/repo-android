@@ -19,3 +19,7 @@ InputFilter
 https://developer.android.com/reference/android/text/InputFilter.html
 http://onebigfunction.com/android/2015/09/01/regex-input-filter/
 https://mobisoftinfotech.com/resources/blog/android/android-edittext-setfilters-example-numeric-text-field-patterns-and-length-restriction/
+
+
+Exemplo interessante usando a classe Spannable
+http://androidcocktail.blogspot.com.br/2014/03/android-spannablestring-example.html

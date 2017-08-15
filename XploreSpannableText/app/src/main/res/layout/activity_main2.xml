@@ -14,30 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="app.com.xplore.xplorespannabletext.MainActivity">
+        tools:context="app.com.xplore.xplorespannabletext.Main2Activity">
 
         <TextView
-            android:id="@+id/clickable_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:paddingTop="15sp"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="Hello World!!!" />
-
-
-        <TextView
-            android:id="@+id/style_text_view"
+            android:id="@+id/all_in_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:paddingTop="15sp"
             android:gravity="center_vertical|center_horizontal"
-            android:text="Hello World!!! Style BOLD"
+            android:text=""
             />
-
-
     </LinearLayout>
 </ScrollView>
-
 
