@@ -1,0 +1,714 @@
+package com.project.icomoncomvc.activities.list;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Parcelable;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.project.icomoncomvc.activities.ActivityFormAuthentication;
+import com.project.icomoncomvc.activities.adapter.AdapterListView;
+import com.project.icomoncomvc.db.DbHelper;
+import com.project.icomoncomvc.db.helper.TableHelperPost;
+import com.project.icomoncomvc.db.helper.TableHelperUser;
+import com.project.icomoncomvc.entities.Post;
+import com.project.icomoncomvc.entities.User;
+import com.project.icomoncomvc.R;
+import com.project.icomoncomvc.enums.StatusPost;
+import com.project.icomoncomvc.httprq.endpoint.SearchPosts;
+import com.project.icomoncomvc.utils.BuildProgressDialog;
+import com.project.icomoncomvc.utils.UtilsApp;
+import com.project.icomoncomvc.utils.UtilsSimpleFormatDate;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ActivityListInfo extends AppCompatActivity {
+
+    private User userLogged;
+
+    private BuildProgressDialog buildProgressDialog;
+
+    private boolean doingSearch;
+    private int sizeCompletList;
+
+    private AdapterListView postAdapterView;
+    private ListView postsListView;
+    private TextView textViewQuantityPosts;
+    private Menu mainMenu;
+    private List<Post> completeList
+    /**
+     * A busca por novos posts eh feita de N em N itens.
+     * A lista auxiliar serve para armazenar os ultimos N elementos
+     * que foram pesquisados na API do TWITTER e colocalos na lista completa dos twitts baixados
+     */
+        ,auxiliarList;
+
+    private boolean scrollUp = false;
+
+    private int countPost, countDownloadPost, remainingPosts = 0;
+    private static final int MIN_SIZE_TO_SAVE  = 8;
+
+    public static final String BUNDLE_USER_LOGGED           = "BUNDLE_USER_LOGGED";
+    public static final String BUNLDE_COMPLETE_INFO_LIST    = "BUNLDE_COMPLETE_INFO_LIST";
+    public static final String BUNLDE_AUXILIAR_INFO_LIST    = "BUNLDE_AUXILIAR_INFO_LIST";
+    public static final String BUNDLE_DOING_SEARCH          = "BUNDLE_DOING_SEARCH";
+    public static final String BUNDLE_SIZE_INFO_LIST        = "BUNDLE_SIZE_INFO_LIST";
+    public static final String BUNDLE_COUNT_DOWNLOAD        = "BUNDLE_DOING_SEARCH";
+
+    /**
+     * Classe que fornece a URL base e a porta para acesso aos metodos da API WEB
+     * */
+    private UtilsApp app;
+    private UtilsApp.BaseURLWebAPI baseURLWebAPI;
+
+    private AbsListView.OnScrollListener getOnScrollListener() {
+        return new AbsListView.OnScrollListener() {
+            private int newPosition = -1;
+            private boolean firstMovement = true;
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                final int qPosts = completeList.size();
+                final ListView listView = (ListView) view;
+                boolean scrollUp = false;
+                /**
+                 * Posicao do primeiro elemento visivel atualmente
+                 * */
+                int curFirstVisiblePosition = listView.getFirstVisiblePosition();
+                int curLastVisiblePosition  = listView.getLastVisiblePosition();
+                /**
+                 * Quando o usuario faz o movimento para cima para deslizar a lista
+                 * isso representa um scroll up. O android nao nos fornece uma forma de
+                 * saber se o usuario esta realizando scroll up ou down. Uma forma de resolvermos
+                 * isso eh: pergar o valor da posicao do primerio elemento visivel na tela
+                 * e depois que o evento de scroll acabar guarda-lo. No proximo evento de scroll
+                 * teremos o valor do elemento atual e o antigo.
+                 * */
+                int diff = qPosts - curLastVisiblePosition;
+                Log.i("SCROLL", String.format("SCROLL C: %d L: %d AUX: %d", curFirstVisiblePosition, curLastVisiblePosition, newPosition));
+                // booleano para marcar se chegamos ao um dos extremos da lista
+                boolean endList = (diff < 2)        // scroll down proximo do fim da lista
+                        ||
+                        (newPosition > curFirstVisiblePosition) && (diff > (qPosts - 2)); // SCROLL UP depois de ter feito pelo menos 1 scroll downn
+                        // || (diff == qPosts - 1);  && curFirstVisiblePosition == 0 && curLastVisiblePosition == 1  // usuario so realizou scroll UP
+
+                // scroll foi feito mais o item visivel ainda nao mudou
+                if( (newPosition == curFirstVisiblePosition || newPosition == curLastVisiblePosition) && ! endList) {
+                    return;
+                }
+                else {
+                    /*
+                    if(endList) {
+                        //se essa condicional for verdadeira o usuario fez scrollup assim que a lista foi mostrada para ele e nenhum scroll down
+                        scrollUp = (diff == (qPosts - 1)) && (curFirstVisiblePosition == 0 && curLastVisiblePosition == 1)
+                                // o usuario apos executar um ou mais scrolls down passou a executar scrolls up ate chegar no final da lista
+                                || (newPosition > curFirstVisiblePosition ) && (diff > (qPosts - 2));
+                    }
+                    else {
+                        scrollUp = newPosition > curFirstVisiblePosition;
+                    }
+                    */
+                    scrollUp = (oldestX < currentX);
+                    newPosition =  scrollUp ? curFirstVisiblePosition : curLastVisiblePosition;
+                }
+                //Log.i("SCROLL", String.format("Diferenca: %d\nItem: %d.\nTitutlo: %s", diff, newPosition, completeList.get(newPosition).getTitle()));
+                if(!doingSearch && endList) {
+                    oldestX = currentX = 0.0f;
+                    /**
+                     * TODO colocar o switch case aqui
+                     * enquando estiver fazendo a pesquisa, nao entrar no switch
+                     * */
+                    switch (scrollState) {
+                        /**
+                         * Usuario executou o scroll, a lista eh grande e a tela ainda esta
+                         * se movimentando
+                         * */
+                        case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
+                            /**
+                             * AbsListView.OnScrollListener.SCROLL_STATE_IDLE cuida do scroll up no começo da lista
+                             *
+                             * Se chegamos ao final da lista podemos fazer um request
+                             * para o servidor para buscar posts
+                             * A lista eh ordenada pela data de criação, de forma decrescente,
+                             * o primeiro item eh o mais recente. Dessa forma quando o usuario realiza
+                             * ...
+                             * */
+                            searchPosts(scrollUp, newPosition);
+                            doingSearch = true;
+                            break;
+                        /**
+                         * Momento que o scroll ja foi executado e a tela parou
+                         * Quando o usuario esta no começo da lista e faz o scroll down
+                         * ambos first and last itens sao iguais a == 0. Esse e o unico momento
+                         * em que o android consegue capturar um scroll down quando a lista mostra
+                         * o primeiro elemento. Assim conseguimos saber que o usuario esta no começo da
+                         *
+                         * */
+                        case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
+                            /**
+                             * Buscar o mais recente
+                             * */
+                            //searchPosts(scrollUp, newPosition);
+                            //doingSearch = true;
+                            break;
+                        /**
+                         * Executou o scroll e manteve o dedo na tela
+                         * */
+                        case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+                            searchPosts(scrollUp, curFirstVisiblePosition);
+                            doingSearch = true;
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem
+                    , int visibleItemCount, int totalItemCount) {}
+        };
+    }
+
+
+    private float currentX, currentY, oldestX, oldestY;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list_info);
+        initBaseURL();
+        initBuildProgressBar();
+        if(savedInstanceState == null) {
+            auxiliarList    = new ArrayList<>();
+            Intent intent = getIntent();
+            Bundle bundle = intent.getExtras();
+            if(bundle != null) {
+                userLogged  = bundle.getParcelable(BUNDLE_USER_LOGGED);
+            }
+            /**
+             * TODO
+             * Buscar a lista na base de dados
+             * */
+            try {
+                TableHelperPost tableHelperPost = new TableHelperPost(this);
+                completeList = tableHelperPost.get(userLogged);
+                if(completeList.size() == 0) {
+                    /**
+                     * Se o usuário não tiver
+                     * */
+                    requestRecentPosts();
+                }
+                else {
+                    Post recentPost = completeList.get(0);
+                    Post oldestPost = completeList.get(completeList.size() - 1);
+                    String minDate  = UtilsSimpleFormatDate.convertLongToDateFormat(oldestPost.getCreateAt()
+                            , UtilsSimpleFormatDate.DEFAULT_FORMAT_ICOMON_API);
+                    String maxDate  = UtilsSimpleFormatDate.convertLongToDateFormat(recentPost.getCreateAt()
+                            , UtilsSimpleFormatDate.DEFAULT_FORMAT_ICOMON_API);
+                    requestMostRecentPosts(maxDate);
+                    requestOldestPosts(minDate);
+                }
+            } catch (Exception e) {
+                Log.e("EXCP_GET_SAVED_POSTS", e.getMessage());
+            }
+        }
+        else {
+            completeList  = savedInstanceState.getParcelableArrayList(BUNLDE_COMPLETE_INFO_LIST);
+            auxiliarList  = savedInstanceState.getParcelableArrayList(BUNLDE_AUXILIAR_INFO_LIST);
+            userLogged    = savedInstanceState.getParcelable(BUNDLE_USER_LOGGED);
+            doingSearch   = savedInstanceState.getBoolean(BUNDLE_DOING_SEARCH);
+            countPost           = savedInstanceState.getInt(BUNDLE_SIZE_INFO_LIST);
+            countDownloadPost   = savedInstanceState.getInt(BUNDLE_COUNT_DOWNLOAD);
+            remainingPosts = savedInstanceState.getInt(BUNDLE_REMAINING_RECENTS_POSTS);
+        }
+
+        postAdapterView = new AdapterListView(this
+                , android.R.layout.simple_list_item_1, completeList);
+        postsListView   = (ListView) findViewById(R.id.list_posts);
+        postsListView.setAdapter(postAdapterView);
+
+        // Definir como o scrollListener do listview vai funcionar
+        postsListView.setOnScrollListener(getOnScrollListener());
+        postsListView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                boolean res = true;
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        oldestX = event.getX();
+                        //oldestY = event.getY();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        currentX = event.getX();
+                        //currentY = event.getY();
+                        res = false;
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        currentX = event.getX();
+                        //currentY = event.getY();
+                        res = false;
+                        break;
+                }
+                return res;
+            }
+        });
+    }
+
+    public static final int HANDLER_MESSAGE_GET_RECENT_POSTS    = 0xff;
+    public static final int HANDLER_MESSAGE_GET_OLD_POSTS       = 0xfe;
+    public static final int HANDLER_MESSAGE_SEARCH_LAST_POSTS   = 0xfd;
+    public static final String BUNDLER_GET_RECENT_POSTS         = "BUNDLER_GET_RECENT_POSTS";
+    public static final String BUNDLER_GET_OLDEST_POSTS         = "BUNDLER_GET_OLDEST_POSTS";
+    public static final String BUNDLER_SEARCH_LAST_POSTS        = "BUNDLER_SEARCH_LAST_POSTS";
+    public static final String BUNDLE_TYPE_SEARCH               = "BUNDLE_TYPE_SEARCH";
+    public static final String BUNDLE_ERROR_MESSAGE             = "BUNDLE_ERROR_MESSAGE";
+    public static final String BUNDLE_REMAINING_RECENTS_POSTS   = "BUNDLE_REMAINING_RECENTS_POSTS";
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage (Message message) {
+            if(message != null) {
+                Bundle bundle = message.getData();
+                if(bundle != null) {
+                    ArrayList<Post> posts = null;
+                    int type = 0;
+                    if(bundle.keySet().contains(BUNDLE_ERROR_MESSAGE)) {
+                        String error = bundle.getString(BUNDLE_ERROR_MESSAGE);
+                        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+                    }
+                    switch (message.what) {
+                        case HANDLER_MESSAGE_GET_RECENT_POSTS:
+                            posts = bundle.getParcelableArrayList(BUNDLER_GET_RECENT_POSTS);
+                            remainingPosts = bundle.getInt(BUNDLE_REMAINING_RECENTS_POSTS);
+                            if(mainMenu != null) {
+                                if(remainingPosts > -1) {
+                                    updateMenuItem(mainMenu);
+                                }
+                            }
+                            if(posts != null) {
+                                type = bundle.getInt(BUNDLE_TYPE_SEARCH);
+                                updateList(posts, type);
+                            }
+                            break;
+                        case HANDLER_MESSAGE_GET_OLD_POSTS:
+                            posts = bundle.getParcelableArrayList(BUNDLER_GET_OLDEST_POSTS);
+                            if(posts != null) {
+                                type = bundle.getInt(BUNDLE_TYPE_SEARCH);
+                                updateList(posts, type);
+                            }
+
+                            break;
+                        case HANDLER_MESSAGE_SEARCH_LAST_POSTS:
+                            posts = bundle.getParcelableArrayList(BUNDLER_SEARCH_LAST_POSTS);
+                            if(posts != null) {
+                                type = bundle.getInt(BUNDLE_TYPE_SEARCH);
+                                updateList(posts, type);
+                            }
+                            break;
+                    }
+                }
+                dismissProgressDialog();
+                // acabou a pesquisa, liberar o scroll
+                doingSearch = false;
+            }
+        }
+
+        private void updateList(ArrayList<Post> posts, int type) {
+            if(posts.size() == 0) {
+                Toast.makeText(getApplicationContext()
+                        , String.format("Não há mais posts %s", type == 1 ? "recentes" : "antigos")
+                        , Toast.LENGTH_LONG).show();
+                /**
+                 * Se o usuario chegou ao final da lista, e a quantidade de posts baixados
+                 * for menor que a quantidade minina para salvar, salve o que estiver na lista auxiliar
+                 * do contrario essa quantidade de posts sempre sera baixada ate que a soma chegue ou ultrapasse
+                 * o valor minimo para salvar.
+                 * */
+                if(auxiliarList.size() > 0) {
+                    Toast.makeText(getApplication(), "Atualizando base de dados de posts", Toast.LENGTH_SHORT).show();
+                    //saveOrUpdateNewPosts();
+                }
+                return;
+            }
+            Toast.makeText(getApplicationContext()
+                , String.format("Baixados %d posts mais %s", posts.size(), type == 1 ? "recentes" : "antigos")
+                , Toast.LENGTH_SHORT
+            ).show();
+            // a lista auxiliar eh a lista que ser
+            auxiliarList.addAll(posts);
+            completeList.addAll(posts);
+            // reordenar a lista
+            Collections.sort(completeList);
+            // atualizar a listview
+            postAdapterView.notifyDataSetChanged();
+            //countDownloadPost += posts.size();
+            countDownloadPost = auxiliarList.size();
+            updateCountPost();
+            /**
+             *  Se a quantidade de posts baixados
+             * */
+            if(countDownloadPost >= MIN_SIZE_TO_SAVE) {
+                countDownloadPost = 0;
+                Toast.makeText(getApplication(), "Atualizando base de dados de posts", Toast.LENGTH_SHORT).show();
+                //saveOrUpdateNewPosts();
+            }
+        }
+    };
+
+    private void updateCountPost() {
+        countPost += completeList.size();
+    }
+
+    /**
+     * Guarda ou atualiza novos posts ou posts que foram modificados pela empresa
+     * */
+    private void saveOrUpdateNewPosts() {
+        try {
+            TableHelperPost tableHelperPost = new TableHelperPost(this);
+            List<Post> insertList = new ArrayList<>();
+            List<Post> updateListPost = new ArrayList<>();
+            for(Post post : auxiliarList) {
+                post.setUserRegister(userLogged.getRegister());
+                if( post.getStatusPost() == StatusPost.CREATED) {
+                    insertList.add(post);
+                }
+                else if(post.getStatusPost() == StatusPost.UPDATED) {
+                    updateListPost.add(post);
+                }
+            }
+            if(insertList.size() > 0) {
+                tableHelperPost.insertAll(insertList);
+            }
+            if(updateListPost.size() > 0) {
+                tableHelperPost.updateList(updateListPost);
+            }
+            // renovar a lista auxiliar assim que ela servir o seu proposito
+            auxiliarList = new ArrayList<>();
+        }
+        catch (DbHelper.IOPropertyException e) {
+            Log.e("EXCP_SAVE_NEW_POSTS", e.getMessage());
+        }
+    }
+
+    /**
+     * Se o usuario nao tiver posts em sua base de dados esse metodo busca os ultimos
+     * N posts criados pela empresa
+     * */
+    private void requestRecentPosts() {
+        // http://192.168.64.91:93/Artigos/Obter
+        String url = String.format("%s:%d", baseURLWebAPI.getUrl(), baseURLWebAPI.getPortApp());
+        final SearchPosts searchPosts = new SearchPosts(handler, url);
+        searchPosts.searchLastPosts();
+    }
+
+    private void requestMostRecentPosts(String maxDate) {
+        String url = String.format("%s:%d", baseURLWebAPI.getUrl(), baseURLWebAPI.getPortApp());
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("data", maxDate);
+        final SearchPosts searchPosts = new SearchPosts(handler, url, parameter);
+        searchPosts.searchAfter();
+    }
+
+    private void requestOldestPosts(String minDate) {
+        String url = String.format("%s:%d", baseURLWebAPI.getUrl(), baseURLWebAPI.getPortApp());
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put("data", minDate);
+        final SearchPosts searchPosts = new SearchPosts(handler, url, parameter);
+        searchPosts.searchBefore();
+    }
+
+    /**
+     * Busca por posts mais antigos que o ultimo ou mais recentes que o primeiro
+     * armazenado na lista vista pelo usuario.
+     * */
+    private void searchPosts(boolean scrollUp, int idxItem) {
+        Post lastPost = completeList.get(idxItem);
+        /**
+         * TODO
+         * ... Scroll Down, os posts sao arrastados para cima e os mais antigos
+         * sao expostos. Entao pedimos um posts mais antigo que o ultimo da lista
+         * */
+        String formatCreateAtPost = null, url = null;
+        if( ! scrollUp ) {
+            Post lastOfList = completeList.get(completeList.size() - 1);
+            if(lastOfList.equals(lastPost)) {
+                formatCreateAtPost = UtilsSimpleFormatDate
+                        .convertLongToDateFormat(lastPost.getCreateAt(), UtilsSimpleFormatDate.DEFAULT_FORMAT_ICOMON_API);
+            }
+            else {
+                formatCreateAtPost = UtilsSimpleFormatDate
+                        .convertLongToDateFormat(lastOfList.getCreateAt(), UtilsSimpleFormatDate.DEFAULT_FORMAT_ICOMON_API);
+            }
+            /**
+             * TODO
+             * fazer um request pedindo mais N posts antes dessa data
+             * */
+            //Log.i("REQUEST", String.format("Buscar mais antigo que %s", formatCreateAtPost));
+            url = String.format("%s:%d", baseURLWebAPI.getUrl(), baseURLWebAPI.getPortApp());
+            Map<String, String> parameter = new HashMap<>();
+            parameter.put("data", formatCreateAtPost);
+            String message = String.format("Pesquisando posts anteriores a %s.\nAguarde."
+                    , UtilsSimpleFormatDate.convertLongToDateFormat(lastPost.getCreateAt(), UtilsSimpleFormatDate.DEFAUL_BR_FORMAT_DATE_2));
+            Log.i("SEARCH", message);
+            final SearchPosts searchPosts = new SearchPosts(handler, url, parameter);
+            searchPosts.searchBefore();
+        }
+        /**
+         *
+         * TODO
+         * ... Scroll up expoe os posts mais recentes. Entao se fizermos
+         * scroll down e chegarmos no primeiro item, vamos buscar posts com a
+         * data mais recenter
+         *
+         * */
+        else {
+            formatCreateAtPost = UtilsSimpleFormatDate.convertLongToDateFormat(lastPost.getCreateAt()
+                    , UtilsSimpleFormatDate.DEFAULT_FORMAT_ICOMON_API);;
+            /**
+             * TODO
+             * buscar N posts com a data mais recente do que a data do post
+             * mais recente que o usuario tem armazenado
+             * */
+            //Log.i("REQUEST", String.format("Buscar mais recente %s", formatCreateAtPost));
+            url = String.format("%s:%d", baseURLWebAPI.getUrl(), baseURLWebAPI.getPortApp());
+            Map<String, String> parameter = new HashMap<>();
+            parameter.put("data", formatCreateAtPost);
+            String message = String.format("Pesquisando posts posteriores a %s.\nAguarde."
+                    , UtilsSimpleFormatDate.convertLongToDateFormat(lastPost.getCreateAt(), UtilsSimpleFormatDate.DEFAUL_BR_FORMAT_DATE_2));
+            Log.i("SEARCH", message);
+            final SearchPosts searchPosts = new SearchPosts(handler, url, parameter);
+            searchPosts.searchAfter();
+        }
+    }
+
+    private void initBaseURL() {
+        app = UtilsApp.getInstance(this);
+        baseURLWebAPI = app.getBaseURLWebAPI();
+    }
+
+    private void initBuildProgressBar() {
+        buildProgressDialog = new BuildProgressDialog(this);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(outState != null) {
+            outState.putParcelableArrayList(BUNLDE_COMPLETE_INFO_LIST, (ArrayList<? extends Parcelable>) completeList);
+            outState.putParcelableArrayList(BUNLDE_AUXILIAR_INFO_LIST, (ArrayList<? extends Parcelable>) auxiliarList);
+            outState.putParcelable(BUNDLE_USER_LOGGED, userLogged);
+            outState.putBoolean(BUNDLE_DOING_SEARCH, doingSearch);
+            outState.putInt(BUNDLE_SIZE_INFO_LIST, countPost);
+            outState.putInt(BUNDLE_COUNT_DOWNLOAD, countDownloadPost);
+            outState.putInt(BUNDLE_REMAINING_RECENTS_POSTS, remainingPosts);
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState != null) {
+            completeList  = savedInstanceState.getParcelableArrayList(BUNLDE_COMPLETE_INFO_LIST);
+            auxiliarList  = savedInstanceState.getParcelableArrayList(BUNLDE_AUXILIAR_INFO_LIST);
+            userLogged    = savedInstanceState.getParcelable(BUNDLE_USER_LOGGED);
+            doingSearch   = savedInstanceState.getBoolean(BUNDLE_DOING_SEARCH);
+            countPost     = savedInstanceState.getInt(BUNDLE_SIZE_INFO_LIST);
+            countDownloadPost   = savedInstanceState.getInt(BUNDLE_COUNT_DOWNLOAD);
+            remainingPosts = savedInstanceState.getInt(BUNDLE_REMAINING_RECENTS_POSTS);
+        }
+    }
+
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    /**
+     * Inflando o layout do menu que fica no lado superior direito da tela
+     * Configurando o estado inicial do menu. Esse metodo eh executado
+     * uma unica vez se o menu nao for invalidado
+     * */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu_top_right_bar, menu);
+        this.mainMenu = menu;
+        menu.findItem(R.id.keep_me_logged).setChecked(userLogged.isKeepMeLogged());
+        MenuItem menuItem = menu.findItem(R.id.item_user_name);
+        menuItem.setTitle(String.format("Bem vindo %s.", userLogged.getName().toLowerCase()));
+        updateMenuItem(menu);
+        return true;
+    }
+
+    private void updateMenuItem(Menu menu) {
+        MenuItem menuItemRemainingPosts = menu.findItem(R.id.item_counter_remaining_posts);
+        View actionView = Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB
+                ? MenuItemCompat.getActionView(menuItemRemainingPosts) : menuItemRemainingPosts.getActionView(); ;
+        if(actionView != null) {
+            final TextView textView = (TextView) actionView.findViewById(R.id.text_view_remaining_posts);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(remainingPosts > 0) {
+                        Log.i("UPDATE_TEXT_REMAING", String.format("Faltam %d posts recentes", remainingPosts));
+                        textView.setVisibility(View.VISIBLE);
+                        textView.setText(String.valueOf(remainingPosts));
+                    }
+                    else {
+                        textView.setVisibility(View.INVISIBLE);
+                    }
+                }
+            });
+        }
+    }
+
+    private final DialogInterface.OnClickListener onClickListenerLogout = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    logout();
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    dialog.dismiss();
+                    break;
+            }
+        }
+    };
+
+    private void showAlertAboutLogout() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Sair do aplicativo")
+                .setMessage("Deseja sair do aplicativo ?\n" +
+                        "Ao sair do aplicativo, o login automático será desativado.")
+                .setNegativeButton(getResources().getString(R.string.text_default_negative)
+                        , onClickListenerLogout)
+                .setPositiveButton(getResources().getString(R.string.text_default_positive)
+                        , onClickListenerLogout);
+        builder.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.keep_me_logged:
+                boolean isChecked = item.isChecked();
+                item.setChecked(!isChecked);
+                userLogged.setKeepMeLogged(!isChecked);
+                updateUserData();
+                break;
+            case R.id.search_new_post:
+                break;
+            case R.id.logout:
+                showAlertAboutLogout();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+    private void showProgressDialog() {
+        try {
+            buildProgressDialog.safeShowing();
+        } catch (Exception e) {
+            Log.e("EXCP_SHOW_PDIALOG", e.getMessage());
+        }
+        return;
+    }
+
+    private void dismissProgressDialog() {
+        try {
+            if(buildProgressDialog != null) {
+                buildProgressDialog.safeDismiss();
+            }
+        } catch (Exception e) {
+            Log.e("EXCP_DISMISS_PDIALOG", e.getMessage());
+        }
+        return;
+    }
+
+    private boolean updateUserData() {
+        boolean res = false;
+        try {
+            /**
+             * Se o usuario fizer o logout, vamos marcar o login automatico como
+             * faço
+             * */
+            TableHelperUser tableHelperUser = new TableHelperUser(this);
+            String where = String.format("%s=? AND %s=?", TableHelperUser.FIELDS[1], TableHelperUser.FIELDS[2]);
+            String [] args = {userLogged.getRegister(), userLogged.getPwd()};
+            long lines = tableHelperUser.update(userLogged, where, args);
+            res = lines > 0;
+        }
+        catch (Exception e) {
+            Log.e("EXCP_UPDATE_USR_LOGOUT", e.getMessage());
+        }
+        return res;
+    }
+
+    public void exit(MenuItem menuItem) {
+        showAlertAboutLogout();
+        return;
+    }
+
+    private void logout() {
+        userLogged.setKeepMeLogged(false);
+        updateUserData();
+        Intent intent = new Intent(this, Authentication.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+        return;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initBaseURL();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initBaseURL();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dismissProgressDialog();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dismissProgressDialog();
+    }
+}

@@ -1,0 +1,8 @@
+https://developer.android.com/guide/topics/resources/runtime-changes.html?hl=pt-br    
+@Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE || newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+        }
+    }

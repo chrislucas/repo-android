@@ -1,0 +1,285 @@
+
+private void searchLastPosts()
+        /*
+        buildProgressDialog
+                .setTitle("Pesquisa posts antigos")
+                .setMessage("Seja bem vindo! Estamos buscando os posts mais recentes para Vc.")
+                .setStyle(ProgressDialog.STYLE_HORIZONTAL)
+                .setIndeterminate(true)
+                .setCancelableMessage(false);
+        buildProgressDialog
+                .setVisibilityProgressNumber(View.GONE)
+                .setVisibilityProgressPercent(View.GONE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            buildProgressDialog.setProgressNumberFormat(null);
+        }
+        showProgressDialog();
+        */
+
+
+
+private void searchPosts(boolean scrollUp, int idxItem)
+
+    if
+                /*
+                buildProgressDialog
+                        .setTitle("Pesquisa posts antigos")
+                        .setMessage(message)
+                        .setStyle(ProgressDialog.STYLE_HORIZONTAL)
+                        .setIndeterminate(true)
+                        .setCancelableMessage(false);
+                buildProgressDialog
+                        .setVisibilityProgressNumber(View.GONE)
+                        .setVisibilityProgressPercent(View.GONE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                    buildProgressDialog.setProgressNumberFormat(null);
+                }
+                //showProgressDialog();
+                */
+    else
+
+                 /*
+                 buildProgressDialog
+                         .setTitle("Pesquisa novos posts")
+                         .setMessage(message)
+                         .setStyle(ProgressDialog.STYLE_HORIZONTAL)
+                         .setIndeterminate(true)
+                         .setCancelableMessage(false);
+                 buildProgressDialog
+                         .setVisibilityProgressNumber(View.GONE)
+                         .setVisibilityProgressPercent(View.GONE);
+                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                     buildProgressDialog.setProgressNumberFormat(null);
+                 }
+                 //showProgressDialog();
+                 */
+
+
+    MyFirebaseMessagingService
+                     /*
+                     Bundle bundle = new Bundle();
+                     if(action != null && ! action.equals("")) {
+                         Intent background = new Intent(this, FilterFirebaseMessage.class);
+                         bundle.putInt(FilterFirebaseMessage.BUNDLE_ID_POST, id);
+                         background.setAction(action);
+                         background.putExtras(bundle);
+                     }
+                     Intent foreground = new Intent(ReceiverFilterNewPost.FILTER);
+                     bundle.putInt(ReceiverFilterNewPost.BUNDLE_ID_FILTER_NEW_POST, id);
+                     foreground.putExtras(bundle);
+                     sendBroadcast(foreground);
+                     */
+
+
+                     adaoterlistview
+                     /*
+                                 ViewTreeObserver viewTreeObserver = target.getViewTreeObserver();
+                                 viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                                     @Override
+                                     public void onGlobalLayout() {
+                                         Layout layout = target.getLayout();
+                                         if(layout != null) {
+                                             customResizableTextView.apply(target, this, 3, viewMore, true, viewMore, viewLess);
+                                         }
+                                     }
+                                 });
+                     */
+
+                         public <T extends TextView> void apply(T target
+                                 , ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener
+                                 , int maxQLines
+                                 , String textViewVisible
+                                 , boolean hasViewMore
+                                 , String strViewMore
+                                 , String strViewLess) {
+                             ViewTreeObserver innerVtObserver = target.getViewTreeObserver();
+                             innerVtObserver.removeOnGlobalLayoutListener(onGlobalLayoutListener);
+                             SpannableStringBuilder spannableStringBuilder = null;
+                             int linesOfTextView  = target.getLineCount();
+                             /**
+                              * https://developer.android.com/reference/android/widget/TextView.html#getLayout()
+                              * Recupera a view que e usado para mostrar o TextView
+                              * */
+                             Layout layout           = target.getLayout();
+                             CharSequence targetText = target.getText();
+                             Log.i("ON_PREDRAWING", String.format("%s", target.onPreDraw()));
+                             if(layout != null) {
+                                 /**
+                                  * TODO
+                                  * rever esse codigo, parece estranho
+                                  * */
+                                 if(maxQLines == 0) {
+                                     int lineEndIndex = layout.getLineEnd(0);
+                                     /**
+                                      * Concatenando o texto com a string de 'ver mais'
+                                      * */
+                                     String subStr = targetText.subSequence(0
+                                             , lineEndIndex - textViewVisible.length() + 1).toString();
+                                     //
+                                     String finalString = String.format("%s %s", subStr, textViewVisible);
+                                     target.setText(finalString);
+                                     /**
+                                      * {@link android.text.method.MovementMethod} setMovementMethod
+                                      * */
+                                     target.setMovementMethod(LinkMovementMethod.getInstance());
+                                     subStr = target.getText().toString();
+                                     // Spanned spanned = fromHTML(subStr);
+                                     spannableStringBuilder = addClickablePartTextViewResizable(
+                                             subStr
+                                             , target
+                                             , maxQLines, textViewVisible, hasViewMore, strViewMore, strViewLess);
+                                     target.setText(spannableStringBuilder, TextView.BufferType.SPANNABLE);
+                                 }
+                                 /**
+                                  * TextView.getLineCount
+                                  *
+                                  * # https://developer.android.com/reference/android/widget/TextView.html#getLineCount()
+                                  * Retonar o numero de linhas de texto ou 0 se o layout ainda nao foi construido
+                                  *
+                                  * Layout.getLineEnd(int line)
+                                  * # https://developer.android.com/reference/android/text/Layout.html#getLineEnd(int)
+                                  *  retorna a posicao do ultimo caracter de uma linha especifica
+                                  * */
+                                 else if(maxQLines > 0 && linesOfTextView >= maxQLines) {
+                                     int lineEndIndex = layout.getLineEnd(maxQLines - 1);
+                                     /**
+                                      * pegar uma substring entre idxStart e idxEnd-1
+                                      * idxStart = 0;
+                                      * idxEnd   = indice do ultimo caracter da ultima linhas - o comprimeiro da string auxilizar
+                                      * */
+                                     String subStr = targetText.subSequence(0, lineEndIndex - textViewVisible.length() + 1).toString();
+                                     String finalString = String.format("%s %s", subStr, textViewVisible);
+                                     target.setText(finalString);
+                                     /**
+                                      * {@link android.text.method.MovementMethod} setMovementMethod
+                                      * https://developer.android.com/reference/android/text/method/MovementMethod.html
+                                      *
+                                      * Essa interface prove metodos para pegar o posicionamento do cursor, scrolling
+                                      * e selecao de texto
+                                      *
+                                      * {@link LinkMovementMethod}
+                                      * Especializacao de {@link android.text.method.ScrollingMovementMethod}
+                                      * que implementa {@link android.text.method.MovementMethod}
+                                      *
+                                      * Implementa suporte a cliques em texto-link
+                                      * */
+                                     target.setMovementMethod(LinkMovementMethod.getInstance());
+                                     subStr = target.getText().toString();
+                                     //Spanned spanned = fromHTML(subStr);
+                                     spannableStringBuilder = addClickablePartTextViewResizable(subStr
+                                             , target, maxQLines, textViewVisible, hasViewMore, strViewMore, strViewLess);
+                                     target.setText(spannableStringBuilder, TextView.BufferType.SPANNABLE);
+                                 }
+                                 else {
+                                     linesOfTextView     = layout.getLineCount();
+                                     int lineEndIndex    = layout.getLineEnd(linesOfTextView - 1);
+                                     String subStr       = targetText.subSequence(0, lineEndIndex).toString();
+                                     String finalString = String.format("%s %s", subStr, textViewVisible);
+                                     target.setText(finalString);
+                                     /**
+                                      * {@link android.text.method.MovementMethod} setMovementMethod
+                                      * */
+                                     target.setMovementMethod(LinkMovementMethod.getInstance());
+                                     String text = target.getText().toString();
+                                     //Spanned spanned = fromHTML(text);
+                                     spannableStringBuilder = addClickablePartTextViewResizable(
+                                             text
+                                             , target
+                                             , lineEndIndex
+                                             , textViewVisible
+                                             , hasViewMore
+                                             , strViewMore
+                                             , strViewLess);
+                                     target.setText(spannableStringBuilder, TextView.BufferType.SPANNABLE);
+                                 }
+                             }
+                         }
+
+
+                         //viewHolder.getTitle().setPaintFlags(viewHolder.getTitle().getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+                                         /*
+                                         CustomTextView textInfo = new CustomTextView(context);
+                                         textInfo.setPadding(0,0,0,0);
+                                         textInfo.setTextAppearance(context, R.style.Info_General_Text);
+                                         viewHolder.setTextInfo(textInfo);
+                                         */
+
+
+
+
+
+                                             ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+                                                 final String viewMore = "Ver mais", viewLess = "Ver menos";
+                                                 @Override
+                                                 public void onGlobalLayout() {
+                                                     for(int idx=0; idx<customTextViews.length; idx++) {
+                                                         CustomTextView customTextView  = customTextViews[idx];
+                                                         if(customTextView != null) {
+                                                             ViewTreeObserver viewTreeObserver = customTextView.getViewTreeObserver();
+                                                             viewTreeObserver.removeOnGlobalLayoutListener(this);
+                                                             Layout layout = customTextView.getLayout();
+                                                             if(layout != null) {
+                                                                 // post.getText()
+                                                                 //String message = context.getResources().getString(R.string.example_text_info_2);
+                                                                 //message = String.format("Publicacao %s - %s", post.getTitle(), message);
+                                                                 //customTextView.setText(message);
+                                                                 //viewHolder.setTextInfo(customTextView);
+                                                                 customResizableTextView.test(customTextView, 3, viewMore, true, viewMore, viewLess);
+                                                                 viewHolder.setTextInfo(customTextView);
+                                                             }
+                                                         }
+                                                     }
+                                                 }
+                                             };
+
+
+                                             /*
+                                                         final String viewMore = "Ver mais", viewLess = "Ver menos";
+                                                         customResizableTextView.makeTextViewResizable(target, 3, viewMore, true, viewMore, viewLess);
+                                                         ViewTreeObserver viewTreeObserver = target.getViewTreeObserver();
+                                                         viewTreeObserver.addOnGlobalLayoutListener(onGlobalLayoutListener);
+                                                         customTextViews[position] = target;
+                                             */
+											 
+											 
+											 
+				
+
+ActivityPost
+				/*
+            OLD
+            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.layout_activity_post);
+            for(String urlImageLinked : urlsImages) {
+                ImageView imageView = new ImageView(this);
+                imageView.setAdjustViewBounds(true);
+                imageView.setDrawingCacheEnabled(true);
+                imageView.setPadding(0, 10, 0, 10);
+                imageView.setOnClickListener(getClickListenerOnImage(imageView, this));
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams.gravity = Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL;
+                linearLayout.addView(imageView, layoutParams);
+                insertImage(urlImageLinked, imageView);
+            }
+            */
+			
+			onSaveInstanceState
+			/*
+            if(currentImage != null)  {
+               bufferBitmap = UtilsBitmap.compressDefault(UtilsBitmap.toBitmap(currentImage.getDrawable()), 20);
+               outState.putByteArray(BUNDLE_BITMAP_ON_DIALOG, bufferBitmap);
+			              //bufferBitmap = UtilsBitmap.compressDefault(UtilsBitmap.toBitmap(currentImage.getDrawable()), 100);
+                //outState.putByteArray(BUNDLE_BITMAP_ON_DIALOG, bufferBitmap);
+            }
+            */
+			
+			onRestoreInstanceState
+			/*
+            bufferBitmap = savedInstanceState.getByteArray(BUNDLE_BITMAP_ON_DIALOG);
+            bitmapOnDialog = UtilsBitmap.uncompress(bufferBitmap);
+			            //bufferBitmap    = savedInstanceState.getByteArray(BUNDLE_BITMAP_ON_DIALOG);
+            //bitmapOnDialog  = UtilsBitmap.uncompress(bufferBitmap);
+            */
+			
+			
+			

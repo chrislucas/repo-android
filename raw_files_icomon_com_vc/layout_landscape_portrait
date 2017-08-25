@@ -1,0 +1,3 @@
+if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+    //Do some stuff
+}

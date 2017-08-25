@@ -1,0 +1,26 @@
+Toolbar
+https://developer.android.com/reference/android/support/v7/widget/Toolbar.html
+https://guides.codepath.com/android/Using-the-App-Toolbar
+
+Menus
+https://developer.android.com/guide/topics/ui/menus.html?hl=pt-br
+
+ActionBar e Toolbar
+https://developer.android.com/training/appbar/index.html?hl=pt-br
+
+
+Tipos de menus
+https://developer.android.com/guide/topics/ui/menus.html?hl=pt-br#options-menu
+
+https://guides.codepath.com/android/Using-the-App-Toolbar
+
+
+/*
+Aparentemente a unica vantagem em usar Toolbar eh poder estiliza-la como quiser e posiciona-la
+em qualquer lugar da tela
+
+import android.support.v7.widget.Toolbar;
+Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+setSupportActionBar(toolbar);
+
+*/

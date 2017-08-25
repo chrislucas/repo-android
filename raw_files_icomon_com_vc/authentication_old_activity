@@ -1,0 +1,421 @@
+package com.project.icomoncomvc.activities;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Paint;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.Editable;
+import android.util.Log;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.project.icomoncomvc.R;
+import com.project.icomoncomvc.activities.list.ActivityListPost;
+import com.project.icomoncomvc.db.DbHelper;
+import com.project.icomoncomvc.db.helper.TableHelperUser;
+import com.project.icoauth.http.OfflineAuthImpl;
+import com.project.icoauth.http.OnlineAuthImpl;
+import com.project.icomoncomvc.entities.User;
+import com.project.icomoncomvc.utils.BuildProgressDialog;
+import com.project.icomoncomvc.utils.UtilsApp;
+import com.project.icomoncomvc.utils.device.Device;
+
+import java.util.Calendar;
+import java.util.HashMap;
+
+public class Authentication extends AppCompatActivity {
+
+    private boolean appWasInstalled, hasUsers;
+    private User userLogged;
+
+    private EditText registerEText, passwordEText;
+    private CheckBox checkKeepMeLogged;
+    private TextView textViewErrorMessage;
+
+    private String register, password;
+
+    private BuildProgressDialog buildProgressDialog;
+
+    public static final String BUNDLE_APP_WAS_INSTALLED = "BUNDLE_APP_WAS_INSTALLED";
+    public static final String BUNDLE_VERIFY_HAS_USERS  = "BUNDLE_VERIFY_HAS_USERS";
+    private static final String BUNDLE_USER_LOGGED      = "BUNDLE_USER_LOGGED";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_authentication);
+        if(savedInstanceState == null) {
+            Intent intent = getIntent();
+            if(intent != null) {
+                Bundle bundle   = intent.getExtras();
+                if(bundle != null) {
+                    appWasInstalled = bundle.getBoolean(BUNDLE_APP_WAS_INSTALLED, true);
+                }
+                try {
+                    TableHelperUser tableHelperUser = new TableHelperUser(this);
+                    userLogged = tableHelperUser.getLastUserAskedToStayLoggedIn();
+                    // nenhum usuario pediu para que o app faça login automatico ?
+                    if(userLogged == null) {
+                        userLogged = new User();    // crie uma instance de usuario
+                    }
+                    hasUsers = tableHelperUser.hasUsers();
+                }
+                catch (DbHelper.IOPropertyException e) {
+                    Log.e("E", e.getMessage());
+                    Toast.makeText(this, "Erro ao tentar buscar último usuario logado", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+        else {
+            userLogged = savedInstanceState.getParcelable(BUNDLE_USER_LOGGED);
+            appWasInstalled = savedInstanceState.getBoolean(BUNDLE_APP_WAS_INSTALLED);
+            hasUsers = savedInstanceState.getBoolean(BUNDLE_VERIFY_HAS_USERS);
+        }
+        /**
+         * Objeto que encapsula um ProgressDialog
+         * */
+        buildProgressDialog  = new BuildProgressDialog(this);
+        registerEText        = (EditText) findViewById(R.id.edit_text_user_register);
+        passwordEText        = (EditText) findViewById(R.id.edit_text_user_password);
+        checkKeepMeLogged    = (CheckBox) findViewById(R.id.keep_me_logged);
+        checkKeepMeLogged.setChecked(userLogged.isKeepMeLogged());
+        checkKeepMeLogged.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                userLogged.setKeepMeLogged(isChecked);
+            }
+        });
+        textViewErrorMessage = (TextView) findViewById(R.id.message_error_authentication);
+
+        if(userLogged != null) {
+            if(userLogged.isKeepMeLogged()) {
+                authentication();
+            }
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(outState != null) {
+            outState.putParcelable(BUNDLE_USER_LOGGED, userLogged);
+            outState.putBoolean(BUNDLE_APP_WAS_INSTALLED, appWasInstalled);
+            outState.putBoolean(BUNDLE_VERIFY_HAS_USERS, hasUsers);
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState != null) {
+            userLogged      = savedInstanceState.getParcelable(BUNDLE_USER_LOGGED);
+            appWasInstalled = savedInstanceState.getBoolean(BUNDLE_APP_WAS_INSTALLED);
+            hasUsers        = savedInstanceState.getBoolean(BUNDLE_VERIFY_HAS_USERS);
+        }
+    }
+
+    public void login(View view) {
+        boolean pass = true;
+        Editable editableReg = registerEText.getText()
+                ,editablePwd = passwordEText.getText();
+        String reg = editableReg.toString()
+                ,pwd = editablePwd.toString();
+        if(reg.equals("")) {
+            registerEText.setError("Preencher o campo com seu registro");
+            pass = false;
+        }
+        if(pwd.equals("")) {
+            passwordEText.setError("Preencha o campo com sua senha");
+            pass = false;
+        }
+
+        if(pass) {
+            register = registerEText.getText().toString();
+            password = passwordEText.getText().toString();
+            userLogged.setRegister(register);
+            userLogged.setPwd(password);
+            authentication();
+        }
+    }
+
+    private void authentication() {
+        boolean hasConnection = Device.simpleIsConnected(this);
+        /**
+         * A autenticacao online eh obrigatorio na primeira vez
+         * */
+
+        if(hasConnection) {
+            // online authentication
+            /*
+            buildProgressDialog.buildDefault(true, false, "Autenticação Online"
+                    , "Por favor, Aguarde o processo de autenticação");
+            showProgressDialog();
+            */
+            onlineAuth();
+        }
+        else {
+            // Para fazer login offline, ao menos um usuario deve existir na base de dados
+            // nao pode ser o primeiro login apos a instalacao
+            if(hasUsers && appWasInstalled) {
+                // offline
+                /*
+                buildProgressDialog.buildDefault(true, false, "Autenticação Offline"
+                        , "Por favor, Aguarde o processo de autenticação");
+                showProgressDialog();
+                */
+                offlineAuth();
+            }
+            else {
+                /**
+                 * TODO
+                 * Enviar uma mensagem
+                 * */
+                printMessageErrorAuthentication("Não há usuários na base de dados local para realizar login offline");
+            }
+        }
+    }
+
+
+    private void showProgressDialog() {
+        try {
+            buildProgressDialog.safeShowing();
+        } catch (Exception e) {
+            Log.e("EXCP_SHOW_PDIALOG", e.getMessage());
+        }
+        return;
+    }
+
+    private void dismissProgressDialog() {
+        try {
+            if(buildProgressDialog != null) {
+                buildProgressDialog.safeDismiss();
+            }
+        } catch (Exception e) {
+            Log.e("EXCP_DISMISS_PDIALOG", e.getMessage());
+        }
+        return;
+    }
+
+    private OnlineAuthImpl instanceOnlineAuthImpl;
+
+    private void onlineAuth() {
+        /**
+         * TODO
+         * pegar dados com {@link com.project.icomoncomvc.utils.UtilsApp}
+         *
+         * */
+        /*
+        UtilsApp app = UtilsApp.getInstance(this);
+        UtilsApp.BaseURLWebAPI baseURLWebAPI = app.getBaseURLWebAPI();
+        String baseURL = baseURLWebAPI.getUrl();
+        */
+        // a porta da aplicacao login eh diferente do resto das aplicacoes
+        String url = "http://192.168.64.1:9021";
+        String id  = "15";
+        com.project.icoauth.http.entities.User userLib = new com.project.icoauth.http.entities.User();
+        userLib.setRegister(userLogged.getRegister());
+        userLib.setPasswd(userLogged.getPwd());
+        final Context context = this;
+
+        OnlineAuthImpl.AuthenticationCallback authenticationCallback = new OnlineAuthImpl.AuthenticationCallback() {
+            @Override
+            public void executeAfterSuccessRequest(com.project.icoauth.http.entities.User userLib) {
+                Log.i("SUCCESS_ONLINE_AUTH", userLib.getRegister());
+                /**
+                 * Varios usuarios podem acessar o aplicativo do mesmo aparelho
+                 * */
+                long id = -1;
+                try {
+                    TableHelperUser tableHelperUser = new TableHelperUser(context);
+                    // verificar se o usuario ja acessou o app desse aparelho
+                    userLogged.setName(userLib.getName());
+                    boolean exists = tableHelperUser.exists(userLogged);
+                    userLogged.setLastLogin(Calendar.getInstance().getTimeInMillis());
+                    // se não
+                    if(!exists) {
+                        // crie-o
+                        id = tableHelperUser.insert(userLogged);
+                        // se der tudo certo na insercao
+                        if(id < 1) {
+                            printMessageErrorAuthentication("Erro após a autenticação online.\nErro ao criar novo usuário na base local");
+                            return;
+                        }
+                    }
+                    // o usuario existe, atualize-o
+                    String tokenGoogleFirebase = FirebaseInstanceId.getInstance().getToken();
+                    userLogged.setToken(tokenGoogleFirebase);
+                    String whereArgs = String.format("%s=? AND %s=?"
+                            , TableHelperUser.FIELDS[1], TableHelperUser.FIELDS[2]);
+                    String args [] =  new String [] {
+                            userLogged.getRegister(), userLogged.getPwd()};
+                    updateData(whereArgs, args);
+                    // atualizar token firebase
+                    Log.i("REQUEST_LOGIN_TOKEN_FB", tokenGoogleFirebase);
+                    HashMap<String , String> parameter = new HashMap<>();
+                    parameter.put("tokenAplicacao", tokenGoogleFirebase);
+                    updateTokenFirebase(parameter);
+                    redirect();
+                }
+                catch (DbHelper.IOPropertyException ioexp) {
+                    Log.e("EXCP_AUTH_ONLINE", ioexp.getMessage());
+                }
+            }
+            @Override
+            public void executeAfterFailureRequest(String messageError) {
+                Log.e("FAILURE_ONLINE_AUTH", "FAILURE");
+                printMessageErrorAuthentication(messageError);
+                dismissProgressDialog();
+            }
+        };
+        instanceOnlineAuthImpl = new OnlineAuthImpl(this, userLib, url, id, authenticationCallback);
+        instanceOnlineAuthImpl.syncAuthentication();
+    }
+
+
+    private void updateTokenFirebase(HashMap<String, String> parameter) {
+        if(instanceOnlineAuthImpl != null) {
+            UtilsApp.BaseURLWebAPI baseURLWebAPI = UtilsApp.getInstance(this).getBaseURLWebAPI();
+            String url = String.format("%s:%d", baseURLWebAPI.getUrl(), baseURLWebAPI.getPortApp());
+            instanceOnlineAuthImpl.setUrl(url);
+            instanceOnlineAuthImpl.asyncUpdateTokenFirebase(parameter);
+        }
+        else {
+            Log.e("NULL_INST_ONLINE_AUTH", "Não sera possível atualizar token do firebase");
+        }
+    }
+
+    private void offlineAuth() {
+        OfflineAuthImpl offlineAuthImpl = new OfflineAuthImpl(this
+                , DbHelper.DB_NAME, DbHelper.getInstance().getVersion());
+        if( ! offlineAuthImpl.databaseExist() ) {
+            Log.e("EXCP_DB_DOES_NOT_EXIST", "Tabela não existe");
+            boolean create = offlineAuthImpl.createDatabaseIfNotExists();
+            String message = create ? "\nProcesso de recuperação da base foi executado. Reinicie o aplicativo"
+                    : "\nProblemas em recriar a base de dados. Desinstale o aplicativo";
+            printMessageErrorAuthentication(String.format("Base de dados não foi encontrada.\n%s", message));
+        }
+        try {
+            /**
+             * [2]
+             * */
+            String whereArgs = String.format("WHERE %s=? AND %s=?"
+                    , TableHelperUser.FIELDS[1]
+                    , TableHelperUser.FIELDS[2]);
+            String args [] =  new String [] {userLogged.getRegister(), userLogged.getPwd()};
+            boolean result = offlineAuthImpl.offlineAuth(whereArgs, args, TableHelperUser.TABLE_NAME);
+            // atualizar a ultima data de acesso ao app
+            userLogged.setLastLogin(Calendar.getInstance().getTimeInMillis());
+            if(result) {
+                /**
+                 * A string whereArgs quando estamos fazendo update nao tem a substring 'WHERE'
+                 * A classes que dao acesso ao banco de dados nao permitem o uso do WHERE, pois
+                 * provavelmente o metodo update delas ja coloca o 'WHERE' na query
+                 * */
+                whereArgs = String.format("%s=? AND %s=?"
+                        , TableHelperUser.FIELDS[1]
+                        , TableHelperUser.FIELDS[2]);
+                updateData(whereArgs, args);
+                redirect();
+            }
+            else {
+                printMessageErrorAuthentication("Erro na autenticação offline.\nUsuário ou senha inválidos");
+            }
+        }
+        catch (Exception e) {
+            Log.e("EXCP_LOGIN_OFFILINE", e.getMessage());
+        }
+        return;
+    }
+
+
+    private void printMessageErrorAuthentication(String message) {
+        int visibility = textViewErrorMessage.getVisibility();
+        if( visibility == View.GONE || visibility == View.INVISIBLE) {
+            textViewErrorMessage.setVisibility(View.VISIBLE);
+        }
+        textViewErrorMessage.setText(message);
+        // colocar o texto com underline
+        int flag = textViewErrorMessage.getPaintFlags();
+        textViewErrorMessage.setPaintFlags(flag | Paint.UNDERLINE_TEXT_FLAG);
+    }
+
+    private void dismissMessageErrorAuthentication() {
+        Handler handler = new Handler();
+    }
+
+    private void redirect() {
+        Log.i("LOGIN_SUCCESS", "AUTENTICADO");
+        /**
+         * TODO
+         * autenticacao realizada, levar o usuario a tela inicial do App
+         * */
+        Intent intent = new Intent(this, ActivityListInfo.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(ActivityListInfo.BUNDLE_USER_LOGGED, userLogged);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dismissProgressDialog();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dismissProgressDialog();
+    }
+
+    private void updateData(final String whereArgs, final String [] args) {
+        try {
+            /**
+             * Atualizar os dados do usuario
+             * */
+            final TableHelperUser tableHelperUser = new TableHelperUser(this);
+            final Handler handler = new Handler();
+            new Thread(){
+                @Override
+                public void start() {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            long affectedRows = tableHelperUser.update(userLogged, whereArgs, args);
+                            if(affectedRows == -1 ) {
+                                Log.i("UPDATE_USER", "Erro ao atualizar dados do usuário");
+                            }
+                            if(userLogged.isKeepMeLogged()) {
+                                tableHelperUser.disloggedAlmostAllUsers(userLogged);
+                            }
+                        }
+                    });
+                }
+            }.start();
+        } catch (Exception e) {
+            Log.e("EXCP_UPDATE_USER", e.getMessage());
+        }
+    }
+}

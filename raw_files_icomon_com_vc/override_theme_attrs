@@ -1,0 +1,28 @@
+https://stackoverflow.com/questions/30487616/android-overriding-a-style-per-theme
+
+Fonts
+https://stackoverflow.com/questions/13251990/change-font-for-edittext-hint
+Outra forma de mudar a fonte
+https://stackoverflow.com/questions/8607707/how-to-set-a-custom-font-in-the-actionbar-title
+
+
+// https://developer.android.com/reference/android/support/design/widget/TextInputLayout.html
+/**
+Segundo a documentacao, nem sempre que vc pedir para o sistema devolver a view parent de uma view
+o sistema vai devolver a view parent correta, num caso que implementei esse codigo, registerEText
+era um TextInputEditText e seu parent era TextInputLayout, mas o sistema me retornava um FrameLayout
+u
+*/
+//ViewParent view1 = registerEText.getParent();
+//ViewParent view2 = registerEText.getParentForAccessibility();
+
+https://stackoverflow.com/questions/39164321/appcompatedittext-getpparent-inside-textinputlayout-returns-framelayout
+
+            ForegroundColorSpan fgcspan = new ForegroundColorSpan( getResources().getColor(R.color.white));
+            SpannableStringBuilder ssbuilder = new SpannableStringBuilder(messageError);
+            ssbuilder.setSpan(fgcspan, 0, messageError.length(), 0);
+
+
+            SpannebleString
+            http://androidcocktail.blogspot.com.br/2014/03/android-spannablestring-example.html
+            https://developer.android.com/reference/android/text/SpannableString.html

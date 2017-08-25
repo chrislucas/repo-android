@@ -1,0 +1,12 @@
+Atributo
+android:uiOptions="splitActionBarWhenNarrow"
+https://developer.android.com/guide/topics/manifest/application-element.html
+https://developer.android.com/guide/topics/manifest/application-element.html
+
+
+Auto Backup for Apps
+https://developer.android.com/guide/topics/data/autobackup.html
+Since Android 6.0 (API 23), Android has offered the Auto Backup
+
+. Auto Backup preserves app data by uploading it to the user's Google Drive account
+The amount of data is limited to 25MB per user of your app
