@@ -1,0 +1,8 @@
+
+Problema interessante
+ListView: TextView with LinkMovementMethod makes list item unclickable?
+
+Quando 
+
+
+https://stackoverflow.com/questions/8558732/listview-textview-with-linkmovementmethod-makes-list-item-unclickable

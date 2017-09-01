@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="tipstoapp.br.com.xplorespotlightlib.XploreLibFeature"
+        tools:showIn="@layout/activity_xplore_lib_feature">
+
+        <TextView
+            android:id="@+id/switchAnimation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="150sp"
+            android:background="#FFA5A5"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="Switch to Fadein"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/reset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="150sp"
+            android:background="#FFFFC2"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="Reset Preference"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/resetAndPlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="150sp"
+            android:background="#C8E7ED"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="Play Again"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/changePosAndPlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="150sp"
+            android:background="#BFCFFF"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="Change Position and Play"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/startSequence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="150sp"
+            android:background="#808167F4"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="Start Sequence"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+    </LinearLayout>
+</ScrollView>
+

@@ -1,0 +1,4 @@
+{
+     XploreLibFeatures: ["switchAnimation", "reset", "resetAndPlay", "changePosAndPlay", "startSequence"]
+    ,MainActivity: ["textview", "switchview"]
+}
