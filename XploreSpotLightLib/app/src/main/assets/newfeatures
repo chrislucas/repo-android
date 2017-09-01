@@ -1,4 +1,19 @@
 {
-     XploreLibFeatures: ["switchAnimation", "reset", "resetAndPlay", "changePosAndPlay", "startSequence"]
-    ,MainActivity: ["textview", "switchview"]
+     XploreLibFeatures: [
+         "switchAnimation"
+         , "reset"
+         , "resetAndPlay"
+         , "changePosAndPlay"
+         , "startSequence"
+     ]
+
+    ,MainActivity: [
+           "textview"
+        , "switchview"
+    ]
+
+    ,ExhibitViews: [
+        "edit_text_view_1"
+        , "switch_view_1"
+    ]
 }

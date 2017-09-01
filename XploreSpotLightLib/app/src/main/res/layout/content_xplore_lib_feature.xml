@@ -26,7 +26,7 @@
             android:background="#FFA5A5"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:text="Switch to Fadein"
+            android:text="Fadein"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText" />

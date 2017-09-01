@@ -37,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void showIntro(Functionality functionality) {
-       SpotlightView.Builder builder = new SpotlightView.Builder(this);
-
+        SpotlightView.Builder builder = new SpotlightView.Builder(this);
         builder.introAnimationDuration(400)
                 .enableRevealAnimation(false)
                 .performClick(true)
