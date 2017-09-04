@@ -5,4 +5,13 @@
     <string name="off">Desligado</string>
     <string name="hint_default">Digite algo</string>
     <string name="title_activity_xplore_lib_feature">XploreLibFeature</string>
+    <string name="logout">Sair</string>
+    <string name="send_message">Enviar Mensagem</string>
+    <string name="change_passwd">Trocar Senha</string>
+    <string name="default_user_name">Android Team</string>
+    <string name="text_keep_logged">Manter Logado</string>
+
+    <string name="open">Abrir</string>
+    <string name="close">Fechar</string>
+
 </resources>

@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.MenuItemCompat;
 import android.util.JsonReader;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -38,11 +42,17 @@ public class LoadConfigTips {
         List<Functionality> functionalities = new ArrayList<>();
         try {
             String jsonFile = assetJSONFile("newfeatures.json", context);
+            // pega o objeto certo usando a chave
+            // a chave de cada objeto é o nome Simples da classe (Activity)
+            // que contem as Views que quero mapear
             JSONObject jsonObject = (new JSONObject(jsonFile)).getJSONObject(key);
             if(jsonObject != null) {
-                JSONArray jsonArray = jsonObject.getJSONArray("views");
-                for(int idx=0; idx<jsonArray.length(); idx++) {
-                    JSONObject jsonView = jsonArray.getJSONObject(idx);
+                /**
+                 * Pegar as views mapeadas de uma determinada view
+                 * */
+                JSONArray jsonViewsParent = jsonObject.getJSONArray("views");
+                for(int idx=0; idx<jsonViewsParent.length(); idx++) {
+                    JSONObject jsonView = jsonViewsParent.getJSONObject(idx);
                     Iterator<String> keys = jsonView.keys();
                     Functionality functionality = new Functionality();
                     while (keys.hasNext()) {
@@ -55,13 +65,45 @@ public class LoadConfigTips {
                             View view = ((Activity)context).findViewById(resourceId);
                             if(view != null) {
                                 functionality.setView(view);
+                                functionality.setTitleTip(title);
+                                functionality.setTextTip(text);
+                                functionality.setUniqueId(uniqueId);
+                                functionalities.add(functionality);
                             }
-                        }
-                        functionality.setTitleTip(title);
-                        functionality.setTextTip(text);
-                        functionality.setUniqueId(uniqueId);
-                        functionalities.add(functionality);
-                    }
+
+                            /**
+                             * Se essa view possui outras views como filhas abaixo dela
+                             * */
+                            if(data.has("child")) {
+                                /**
+                                 * Array de objetos filhos
+                                 * */
+                                JSONArray jsonViewsChild = data.getJSONArray("child");
+                                for(int idx2=0; idx2<jsonViewsChild.length(); idx2++) {
+                                    JSONObject jsonViewChild = jsonViewsChild.getJSONObject(idx2);
+                                    Iterator<String> keysViewChild = jsonViewChild.keys();
+                                    while (keysViewChild.hasNext()) {
+                                        functionality = new Functionality();
+                                        uniqueId = keysViewChild.next();
+                                        if( view instanceof NavigationView ) {
+                                            Menu menu = ((NavigationView) view).getMenu();
+                                            int idMenuItem = getResourceId(uniqueId, context);
+                                            MenuItem menuItem = menu.findItem(idMenuItem);
+                                            functionality.setView(menuItem.getActionView());
+                                        }
+
+                                        JSONObject dataChild = jsonViewChild.getJSONObject(uniqueId);
+                                        title = dataChild.getString("title");
+                                        text = dataChild.getString("text");
+                                        functionality.setTitleTip(title);
+                                        functionality.setTextTip(text);
+                                        functionality.setUniqueId(uniqueId);
+                                        functionalities.add(functionality);
+                                    }
+                                }
+                            } // fim if Views child
+                        } // fim context instanceof  Activity
+                    }   // fim while Views parent
                 }
             }
         }
@@ -92,7 +134,8 @@ public class LoadConfigTips {
      * */
     public static int getResourceId(String id, Context context) {
         Resources resources = context.getResources();
-        int identifier = resources.getIdentifier(id, "id", context.getPackageName());
+        String packageName = context.getPackageName();
+        int identifier = resources.getIdentifier(id, "id", packageName);
         return identifier;
     }
 

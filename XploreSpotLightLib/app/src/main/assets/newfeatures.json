@@ -65,6 +65,41 @@
 	                  ,"text": "Uma dica 'teste' para esse switch MAROTO"
 	             }
         	}
+			,{
+				"nav_view_main_menu" : {
+					"title": "Menu NavigationView"
+					,"text": "Uma dica 'teste' para esse menu NavigationView Maroto"
+					,"child": [
+						{
+							"keep_me_logged_drawer_menu" : {
+								"title": "Item Manter logado"
+								,"text": "Uma dica Item keep me logged Maroto"
+							}
+						}
+
+						,{
+							"change_pwd_drawer_menu" : {
+								"title": "Item Trocar senha"
+								,"text": "Uma dica para o item trocar de senha"
+							}
+						}
+
+						,{
+							"send_message_drawer_menu" : {
+								"title": "Item Enviar mensagem"
+								,"text": "Uma dica para o item enviar mensagem"
+							}
+						}
+
+						,{
+							"logout_drawer_menu" : {
+								"title": "Item sair do aplicativo"
+								,"text": "Uma dica para o item sair do aplicativo"
+							}
+						}
+					]
+				}
+			}
         ]
     }
 }

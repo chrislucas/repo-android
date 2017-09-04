@@ -15,7 +15,9 @@
             android:label="@string/title_activity_xplore_lib_feature"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".ExhibitViews">
+        <activity
+            android:name=".ExhibitViews"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

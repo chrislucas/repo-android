@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    android:id="@+id/main_menu_drawer"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group
+        android:id="@+id/group_username">
+        <item
+            android:id="@+id/user_name_logged"
+            android:title="@string/default_user_name" />
+    </group>
+
+    <group
+        android:id="@+id/group_settings">
+        <item
+            android:icon="@drawable/ic_wifi_black"
+            android:id="@+id/keep_me_logged_drawer_menu"
+            android:title="@string/text_keep_logged"
+            />
+        <item
+            android:id="@+id/change_pwd_drawer_menu"
+            android:icon="@drawable/ic_wifi_black"
+            android:title="@string/change_passwd"
+            />
+        <item
+            android:id="@+id/send_message_drawer_menu"
+            android:icon="@drawable/ic_wifi_black"
+            android:title="@string/send_message"
+            />
+
+        <item
+            android:id="@+id/logout_drawer_menu"
+            android:icon="@drawable/ic_wifi_black"
+            android:title="@string/logout"
+            />
+
+    </group>
+
+
+</menu>

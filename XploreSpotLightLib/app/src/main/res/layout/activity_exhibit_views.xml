@@ -1,35 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/id_drawer_layout_main_menu"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     android:orientation="vertical"
+    style="@style/AppTheme.NoActionBar"
     tools:context="tipstoapp.br.com.xplorespotlightlib.ExhibitViews">
 
-    <EditText
-        android:id="@+id/edit_text_view_1"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15sp"
-        android:layout_marginEnd="15sp"
-        android:paddingTop="15sp"
-        android:paddingBottom="15sp"
-        android:textSize="15sp"
-        android:hint="@string/hint_default"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/layout_toolbar_drawer_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/edit_text_view_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_marginEnd="15sp"
+            android:paddingTop="15sp"
+            android:paddingBottom="15sp"
+            android:textSize="15sp"
+            android:hint="@string/hint_default"
+            />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switch_view_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15sp"
+            android:layout_marginEnd="15sp"
+            android:textSize="15sp"
+            android:textOn="@string/on"
+            android:textOff="@string/off"
+            android:checked="true"
+            />
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view_main_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        app:itemIconTint="@color/black"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/layout_header_navigationview"
+        app:menu="@menu/main_menu_drawer"
+        android:visibility="invisible"
         />
 
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/switch_view_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15sp"
-        android:layout_marginEnd="15sp"
-        android:textSize="15sp"
-        android:textOn="@string/on"
-        android:textOff="@string/off"
-        android:checked="true"
-        />
-
-</LinearLayout>
+</android.support.v4.widget.DrawerLayout>

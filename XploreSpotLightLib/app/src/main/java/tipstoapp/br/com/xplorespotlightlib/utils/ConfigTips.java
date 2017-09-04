@@ -13,11 +13,11 @@ import com.wooplr.spotlight.SpotlightConfig;
 
 public class ConfigTips {
     @ColorRes
-    private static final int DEFAULT_BLACK_COLOR = Color.parseColor("#00000000");
+    private static final int DEFAULT_BLACK_COLOR        = Color.parseColor("#aa000000");
     @ColorRes
-    private static final int DEFAULT_TANSL_BLACK_COLOR = Color.parseColor("#dc000000");
+    private static final int DEFAULT_TANSL_BLACK_COLOR  = Color.parseColor("#dc000000");
     @ColorRes
-    private static final int DEFAULT_WHITE_COLOR = Color.parseColor("#ffffffff");
+    private static final int DEFAULT_WHITE_COLOR        = Color.parseColor("#ffffffff");
 
     @ColorInt
     private int colorHeadingTvColor         = DEFAULT_WHITE_COLOR;
@@ -36,14 +36,11 @@ public class ConfigTips {
     private int headingTvSize               = 15;
     private int subHeadingTvSize            = 13;
 
-
-    private boolean
-                enableRevealAnimation = false
+    private boolean enableRevealAnimation = true
             , performClick = true
             , dismissOnTouch = true
             ,dismissOnBackPress = true
             ,enableDismissAfterShown = false;
-
 
     public int getColorHeadingTvColor() {
         return colorHeadingTvColor;
