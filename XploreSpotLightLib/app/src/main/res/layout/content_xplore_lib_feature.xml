@@ -26,7 +26,7 @@
             android:background="#FFA5A5"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:text="Fadein"
+            android:text="FadeIn"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText" />
@@ -52,7 +52,7 @@
             android:background="#C8E7ED"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
-            android:text="Play Again"
+            android:text="Reset And Play"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText" />

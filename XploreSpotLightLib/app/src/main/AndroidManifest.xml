@@ -14,13 +14,13 @@
             android:name=".XploreLibFeature"
             android:label="@string/title_activity_xplore_lib_feature"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".ExhibitViews">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ExhibitViews"></activity>
     </application>
 
 </manifest>

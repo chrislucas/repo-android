@@ -1,0 +1,70 @@
+{
+     "XploreLibFeature": {
+          "views": [
+      		 {
+ 	              "switchAnimation" : {
+	                 "title": ""
+	                 ,"text": ""
+	              }
+      		 }
+      		,{
+  				"reset": {
+	                 "title": ""
+	                 ,"text": ""
+	              }
+      		}
+      		,{
+      			"resetAndPlay": {
+	                 "title": ""
+	                 ,"text": ""
+              	}
+      		}
+      		,{
+				"changePosAndPlay": {
+	                 "title": ""
+	                 ,"text": ""
+	              }
+      		}
+      		,{
+      			"startSequence": {
+	                 "title": ""
+	                 ,"text": ""
+              	}
+      		}
+        ]
+     }
+
+    ,"MainActivity": {
+        "views": [
+        	{
+	            "textview" : {
+	                 "title": ""
+	                 ,"text": ""
+	            }
+        	}
+        	,{
+				"switchview": {
+	                  "title": ""
+	                  ,"text": ""
+	             }
+        	}
+        ]
+    }
+
+    ,"ExhibitViews": {
+        "views": [
+        	{
+		      "edit_text_view_1" : {
+	                 "title": "Caixa de edição de texto"
+	                 ,"text": "Apenas uma dica 'teste' para essa caixa de edição de texto"
+	            }
+        	}
+        	,{
+	             "switch_view_1": {
+	                  "title": "Botão switch"
+	                  ,"text": "Uma dica 'teste' para esse switch MAROTO"
+	             }
+        	}
+        ]
+    }
+}

@@ -1,0 +1,43 @@
+    LoadConfigTips.java
+
+    public static String[] get(String key, Context context) {
+        String [] ids = null;
+        AssetManager assetManager = context.getAssets();
+        try {
+            InputStream inputStream = assetManager.open("newfeatures.json");
+            JsonReader jsonReader = new JsonReader(new InputStreamReader(inputStream));
+            jsonReader.beginObject();
+            while (jsonReader.hasNext()) {
+                String k = jsonReader.nextName();
+                // Activities
+                Log.i("KEY", k);
+                jsonReader.beginObject();
+                while (jsonReader.hasNext()) {
+                    // vetor de views
+                    k = jsonReader.nextName();
+                    jsonReader.beginArray();
+                    while (jsonReader.hasNext()) {
+                        // Views
+                        k = jsonReader.nextName();
+                        // titulo e texto que aparecem na animacao
+                        jsonReader.beginObject();
+                        while (jsonReader.hasNext()) {
+                            String name = jsonReader.nextName();
+                            String str  = jsonReader.nextString();
+                        }
+                        jsonReader.endObject();
+                    }
+                    jsonReader.endArray();
+                    Log.i("KEY", k);
+                }
+                jsonReader.endObject();
+            }
+            jsonReader.endObject();
+        } catch (IOException e) {
+            String message = e.getMessage() == null ? "Sistema não foi capaz de informar qual foi a exceção" : e.getMessage();
+            Log.e("EXCP_READ_FEATURES", message);
+        }
+        return ids;
+    }
+
+    //

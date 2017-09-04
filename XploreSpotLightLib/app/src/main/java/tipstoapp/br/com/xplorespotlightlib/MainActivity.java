@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         showIntro(functionality);
     }
 
-
     private void showIntro(Functionality functionality) {
         SpotlightView.Builder builder = new SpotlightView.Builder(this);
         builder.introAnimationDuration(400)
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 .dismissOnTouch(true)
                 .dismissOnBackPress(true)
                 .enableDismissAfterShown(true)
-                .usageId(functionality.getTag())
+                .usageId(functionality.getUniqueId())
                 .show();
 
     }

@@ -11,8 +11,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wooplr.spotlight.SpotlightConfig;
@@ -24,6 +24,7 @@ import com.wooplr.spotlight.utils.Utils;
 import java.util.Random;
 
 import tipstoapp.br.com.xplorespotlightlib.entities.Functionality;
+import tipstoapp.br.com.xplorespotlightlib.utils.LoadConfigTips;
 
 public class XploreLibFeature extends AppCompatActivity implements View.OnClickListener {
 
@@ -62,7 +63,6 @@ public class XploreLibFeature extends AppCompatActivity implements View.OnClickL
         startSequence.setOnClickListener(this);
         preferencesManager = new PreferencesManager(this);
 
-
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -70,14 +70,12 @@ public class XploreLibFeature extends AppCompatActivity implements View.OnClickL
             }
         }, 500);
 
-
-        //Feature.getIDNewFetueare(toString(), this);
+        LoadConfigTips.getIDNewFeature(this, getClass().getSimpleName());
     }
 
 
     private void showIntro(Functionality functionality) {
         SpotlightView.Builder builder = new SpotlightView.Builder(this);
-
         builder.introAnimationDuration(400)
                 .enableRevealAnimation(false)
                 .performClick(true)
@@ -88,14 +86,14 @@ public class XploreLibFeature extends AppCompatActivity implements View.OnClickL
                 .subHeadingTvColor(ContextCompat.getColor(this, R.color.white))
                 .subHeadingTvSize(15)
                 .subHeadingTvText("Lib marota")
-                .maskColor(Color.parseColor("#dc000000"))
+                .maskColor(Color.parseColor("#dc000000"))           // nivel de preto
                 .target(functionality.getView())
                 .lineAnimDuration(400)
-                .lineAndArcColor(Color.parseColor("#eb273f"))
+                .lineAndArcColor(Color.parseColor("#eb273f"))       // nivel de vermelho
                 .dismissOnTouch(true)
                 .dismissOnBackPress(true)
                 .enableDismissAfterShown(true)
-                .usageId(functionality.getTag())
+                .usageId(functionality.getUniqueId())
                 .show();
 
     }
@@ -140,11 +138,16 @@ public class XploreLibFeature extends AppCompatActivity implements View.OnClickL
                 switchAnimation.setText(isRevealEnabled ? "Revelar" : "FadeIn");
                 break;
             case R.id.reset:
+                Log.i("ON_CLICK", "Redefinindo configurações");
                 break;
             case R.id.resetAndPlay:
+                // redefine configuracoes da lib e mostra uma animacação a partir do botão FAB
                 handlerResetAndPlay.postDelayed(runnableResetAndPlay, 400);
                 break;
             case R.id.changePosAndPlay:
+                /**
+                 * Reposiciona aleatoriamente o botão fab
+                 * */
                 DisplayMetrics displaymetrics = new DisplayMetrics();
                 this.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
                 int screenWidth = displaymetrics.widthPixels;
@@ -187,12 +190,12 @@ public class XploreLibFeature extends AppCompatActivity implements View.OnClickL
             SpotlightConfig spotlightConfig = null;
             SpotlightSequence spotlightSequence = SpotlightSequence
                     .getInstance(XploreLibFeature.this, spotlightConfig);
-            spotlightSequence.addSpotlight(switchAnimation, "", "", INTRO_SWITCH);
-            spotlightSequence.addSpotlight(reset, "", "", INTRO_RESET);
-            spotlightSequence.addSpotlight(resetAndPlay, "", "", INTRO_REPEAT);
-            spotlightSequence.addSpotlight(changePosAndPlay, "", "", INTRO_CHANGE_POSITION);
-            spotlightSequence.addSpotlight(startSequence, "", "", INTRO_SEQUENCE);
-            spotlightSequence.addSpotlight(fab, "", "", INTRO_CARD);
+            spotlightSequence.addSpotlight(switchAnimation, "Switch Button", " Muda o texto Revelar/FadeIn", INTRO_SWITCH);
+            spotlightSequence.addSpotlight(reset, "Reset", "Redefine configuracoes", INTRO_RESET);
+            spotlightSequence.addSpotlight(resetAndPlay, "Reset And Play", "Redefine configuracoes e mostra uma animacao", INTRO_REPEAT);
+            spotlightSequence.addSpotlight(changePosAndPlay, "Change Pos", "Muda a posicao do botao FAB", INTRO_CHANGE_POSITION);
+            spotlightSequence.addSpotlight(startSequence, "Start Seq", "Inicia uma sequencia de animacacoes", INTRO_SEQUENCE);
+            spotlightSequence.addSpotlight(fab, "Fab", "Apenas um botao", INTRO_CARD);
             spotlightSequence.startSequence();
         }
     };

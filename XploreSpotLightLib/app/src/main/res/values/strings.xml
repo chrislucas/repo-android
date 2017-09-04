@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">XploreSpotLightLib</string>
     <string name="onoff">Liga/Desliga</string>
+    <string name="on">Ligado</string>
+    <string name="off">Desligado</string>
     <string name="hint_default">Digite algo</string>
     <string name="title_activity_xplore_lib_feature">XploreLibFeature</string>
 </resources>
