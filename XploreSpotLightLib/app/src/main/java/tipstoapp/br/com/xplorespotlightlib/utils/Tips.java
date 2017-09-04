@@ -142,13 +142,14 @@ public class Tips {
 
     public void showTips(ConfigTips configTips) {
         uniqueIds = new LinkedHashSet<>();
+        SpotlightConfig spotlightConfig = null;
         for(Functionality functionality : functionalities) {
             if(functionality.getView() != null) {
                 String uniqueId = functionality.getUniqueId();
                 uniqueIds.add(uniqueId);
                 configTips.setHeadingTvText(functionality.getTitleTip());
                 configTips.setSubHeadingTvText(functionality.getTextTip());
-                configTips.setMaskColor(Color.parseColor("#dc000000"));
+                configTips.setMaskColor(Color.parseColor("#aa000000"));
                 final SpotlightView.Builder builder = showTips(functionality, configTips);
                 builder.setListener(new SpotlightListener() {
                     @Override

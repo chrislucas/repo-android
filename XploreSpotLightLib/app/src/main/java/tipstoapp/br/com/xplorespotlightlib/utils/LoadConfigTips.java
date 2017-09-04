@@ -89,9 +89,11 @@ public class LoadConfigTips {
                                             Menu menu = ((NavigationView) view).getMenu();
                                             int idMenuItem = getResourceId(uniqueId, context);
                                             MenuItem menuItem = menu.findItem(idMenuItem);
-                                            functionality.setView(menuItem.getActionView());
-                                        }
+                                            View v = ((Activity) context).findViewById(menuItem.getItemId());
+                                            if(v != null) {
 
+                                            }
+                                        }
                                         JSONObject dataChild = jsonViewChild.getJSONObject(uniqueId);
                                         title = dataChild.getString("title");
                                         text = dataChild.getString("text");

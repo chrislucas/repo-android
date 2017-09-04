@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -59,7 +61,6 @@ public class ExhibitViews extends AppCompatActivity
         preferencesManager = new PreferencesManager(this);
         setupToolbar();
         setupNavigationMenu();
-        setupTipToViews();
     }
 
     @Override
@@ -118,8 +119,6 @@ public class ExhibitViews extends AppCompatActivity
             navigationView.setNavigationItemSelectedListener(this);
         }
     }
-
-
     /**
      * Called when an item in the navigation menu is selected.
      *
@@ -128,6 +127,8 @@ public class ExhibitViews extends AppCompatActivity
      */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {}
         return true;
     }
 
@@ -144,6 +145,7 @@ public class ExhibitViews extends AppCompatActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        setupTipToViews();
         return super.onPrepareOptionsMenu(menu);
     }
 
