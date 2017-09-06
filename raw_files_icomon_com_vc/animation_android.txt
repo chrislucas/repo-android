@@ -1,0 +1,30 @@
+Criar uma lib que faça isso
+https://github.com/daimajia/AndroidImageSlider
+
+
+
+ViewAnimationUtils
+https://developer.android.com/reference/android/view/ViewAnimationUtils.html
+
+
+https://guides.codepath.com/android/Circular-Reveal-Animation
+
+
+https://medium.com/@daniele.orlando/beautiful-circular-reveal-animation-on-android-1b5aaca2dd1f
+
+
+http://www.edumobile.org/android/reveal-animation-example-introduced-in-android-5-0/
+
+
+http://android-coding.blogspot.com.br/2015/02/example-of-reveal-animations-on-android.html
+
+
+
+Architecture Components
+https://developer.android.com/develop/index.html
+https://developer.android.com/topic/libraries/architecture/adding-components.html
+https://android-developers.googleblog.com/2008/12/touch-mode.html
+
+
+http://www.viralandroid.com/2017/04/android-multi-window-split-screen-and-freedom-screen-tutorial.html
+
