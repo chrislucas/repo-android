@@ -13,5 +13,11 @@
 
     <string name="open">Abrir</string>
     <string name="close">Fechar</string>
+    <string name="send_email">Enivar Email</string>
+    <string name="uninstall">Desinstalar App</string>
+    <string name="add_facebook_account">Add Facebook</string>
+    <string name="add_gmail_account">Add GMAIL</string>
+    <string name="add_github_account">Add Github</string>
+    <string name="add_bitbucket_account">Bitbucket Account</string>
 
 </resources>

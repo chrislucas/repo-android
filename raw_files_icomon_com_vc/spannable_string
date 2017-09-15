@@ -17,3 +17,7 @@ https://stackoverflow.com/questions/19675331/add-view-more-at-the-end-of-textvie
 
 how to add show more if row in list view is more than 2 lines in android
 https://stackoverflow.com/questions/28445454/how-to-add-show-more-if-row-in-list-view-is-more-than-2-lines-in-android
+
+
+Problemas que o metodo 'setMovementMethod' pode gerar
+https://stackoverflow.com/questions/8558732/listview-textview-with-linkmovementmethod-makes-list-item-unclickable

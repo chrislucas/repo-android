@@ -31,8 +31,8 @@ import tipstoapp.br.com.xplorespotlightlib.utils.ConfigTips;
 import tipstoapp.br.com.xplorespotlightlib.utils.LoadConfigTips;
 import tipstoapp.br.com.xplorespotlightlib.utils.Tips;
 
-public class ExhibitViews extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, Tips.Callback{
+public class ActivittyWithNavigationView extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, Tips.Callback {
 
     private EditText editText;
     private SwitchCompat aSwitch;

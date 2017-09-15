@@ -10,7 +10,7 @@
     tools:openDrawer="start"
     android:orientation="vertical"
     style="@style/AppTheme.NoActionBar"
-    tools:context="tipstoapp.br.com.xplorespotlightlib.ExhibitViews">
+    tools:context="tipstoapp.br.com.xplorespotlightlib.ActivittyWithNavigationView">
 
     <LinearLayout
         android:orientation="vertical"

@@ -20,4 +20,15 @@
 
     <style name="AppBarOverlay" parent="Theme.AppCompat.Light.DarkActionBar" />
 
+    <style name="nav_theme" parent="AppTheme">
+        <item name="android:textSize">16sp</item>
+
+        <!--
+        <item name="android:listPreferredItemHeight">30dp</item>
+        <item name="android:listPreferredItemHeightLarge">30dp</item>
+        <item name="android:listPreferredItemPaddingStart">60sp</item>
+        -->
+        <item name="android:listPreferredItemHeightSmall">55dp</item>
+    </style>
+
 </resources>

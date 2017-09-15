@@ -1,0 +1,25 @@
+imageview getDrawingCache return null
+
+
+Pesquisa
+imageview getDrawingCache return null when activity is rotated
+
+
+Leia para chegar numa solucao
+
+Link abaixo tem uma boa explicacao
+https://stackoverflow.com/questions/2339429/android-view-getdrawingcache-returns-null-only-null
+
+https://stackoverflow.com/questions/19856359/imageview-not-retaining-image-when-screen-rotation-occurs
+https://stackoverflow.com/questions/28784745/android-imageview-getdrawingcache-is-returning-null
+
+
+
+Pesquisa
+getDrawingCache imageview return null
+
+final imageview getDrawingCache return null
+
+imageview getDrawingCache return null when activity is rotated
+https://stackoverflow.com/questions/23235106/null-pointer-exception-in-imageview-getdrawingcache-on-secondtime
+https://stackoverflow.com/questions/3647993/android-bitmaps-loaded-from-gallery-are-rotated-in-imageview

@@ -281,5 +281,16 @@ ActivityPost
             //bitmapOnDialog  = UtilsBitmap.uncompress(bufferBitmap);
             */
 			
-			
+		CustomCompatDialogFragment
+
+        else {
+            
+            try {
+                throw new Exception("A classe que usar uma instancia de CustomCompatDialogFragment deve implementar a interface INotification");
+            }
+            catch (Exception e) {
+                String message = e.getMessage() == null ? "S.O" : e.getMessage();
+                Log.e("EXCP_", message);
+            }
+        }		
 			

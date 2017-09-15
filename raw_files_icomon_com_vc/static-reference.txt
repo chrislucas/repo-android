@@ -1,0 +1,3 @@
+https://medium.com/android-dev-br/guerra-contra-singletons-721ab89aa94
+https://stackoverflow.com/questions/32218123/can-an-activity-be-garbage-collected-if-it-has-static-member-variables-who-are-r
+https://stackoverflow.com/questions/16599137/does-java-gc-destroy-objects-if-instance-variables-still-have-reference

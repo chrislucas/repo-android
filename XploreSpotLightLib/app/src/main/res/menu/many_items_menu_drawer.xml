@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group_settings">
+
+        <item
+            android:icon="@drawable/ic_wifi_black"
+            android:title="@string/text_keep_logged"
+            />
+        <item
+            android:icon="@drawable/ic_wifi_black"
+            android:title="@string/change_passwd"
+            />
+        <item
+            android:icon="@drawable/ic_wifi_black"
+            android:title="@string/send_message"
+            />
+
+        <item
+            android:icon="@drawable/ic_wifi_black"
+            android:title="@string/logout"
+            />
+
+        <item
+            android:icon="@drawable/ic_wifi_black"
+            android:title="@string/send_email"
+            />
+
+        <item
+            android:icon="@drawable/ic_wifi_black"
+            android:title="@string/uninstall"
+            />
+        <item
+            android:icon="@drawable/ic_wifi_black"
+            android:title="@string/add_facebook_account"
+            />
+
+    </group>
+
+    <group
+        android:id="@+id/settings2">
+        <item
+            android:icon="@drawable/ic_wifi_black"
+            android:title="@string/add_gmail_account"
+            />
+
+        <item
+            android:icon="@drawable/ic_wifi_black"
+            android:title="@string/add_github_account"
+            />
+
+        <item
+            android:icon="@drawable/ic_wifi_black"
+            android:title="@string/add_bitbucket_account"
+            />
+    </group>
+</menu>
