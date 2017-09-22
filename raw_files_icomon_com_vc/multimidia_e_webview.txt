@@ -1,0 +1,21 @@
+https://developer.android.com/guide/topics/media/mediaplayer.html
+
+
+ExoPlayer
+https://developer.android.com/guide/topics/media/exoplayer.html
+
+Pesquisar por: load pdf on webview android disallowed download
+https://stackoverflow.com/questions/44428962/android-webview-with-pdf-load
+https://stackoverflow.com/questions/2655972/how-can-i-display-a-pdf-document-into-a-webview
+
+
+Pesquisar por: open video player on view android
+https://code.tutsplus.com/tutorials/streaming-video-in-android-apps--cms-19888
+https://github.com/afollestad/easy-video-player
+http://www.techotopia.com/index.php/Implementing_Video_Playback_on_Android_using_the_VideoView_and_MediaController_Classes
+
+Youtube
+https://developers.google.com/youtube/android/player/?hl=pt-br
+
+interessante
+https://stackoverflow.com/questions/16411056/how-to-adjust-layout-when-soft-keyboard-appears
