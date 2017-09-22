@@ -1,0 +1,15 @@
+Didn't find class "com.google.firebase.provider.FirebaseInitProvider" on path: DexPathList
+
+https://stackoverflow.com/questions/39812558/didnt-find-class-com-google-firebase-provider-firebaseinitprovider
+https://stackoverflow.com/questions/39825543/didnt-find-class-com-google-firebase-provider-firebaseinitprovider
+
+
+Api support v4
+https://developer.android.com/topic/libraries/support-library/features.html?hl=pt-br
+
+
+Reduza seus códigos e recursos
+https://developer.android.com/studio/build/shrink-code.html?hl=pt-br
+
+https://developer.android.com/studio/build/multidex.html
+https://developer.android.com/studio/build/shrink-code.html?hl=pt-br#keep-code

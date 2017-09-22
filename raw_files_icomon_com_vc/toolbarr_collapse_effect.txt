@@ -1,0 +1,9 @@
+Profile Collapsing Toolbar
+
+https://hackmd.io/s/SJyDOCgU
+
+http://blog.grafixartist.com/toolbar-animation-with-android-design-support-library/
+
+https://antonioleiva.com/collapsing-toolbar-layout/
+
+https://github.com/anton46/WhatsApp-ProfileCollapsingToolbar

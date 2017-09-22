@@ -1,0 +1,13 @@
+https://stfalcon-studio.github.io/
+
+https://github.com/stfalcon-studio/MultiImageView
+
+
+https://android-arsenal.com/tag/48
+
+
+https://abdelhady.net/2015/02/14/loading-images-super-fast-like-whatsapp-part-1/
+
+
+https://github.com/bumptech/glide/issues/514
+https://github.com/bumptech/glide/tree/master/samples
