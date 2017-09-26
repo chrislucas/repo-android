@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout
+    android:id="@+id/swipe_refresh_recycle_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view_complex_data"
+        android:name="xplore.br.com.xplorelistviewscrollprogrammatically.fragments.RecycleComplexDataFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="xplore.br.com.xplorelistviewscrollprogrammatically.fragments.RecycleViewComplexDataFragment"
+        tools:listitem="@layout/complex_data_view_holder"
+        />
+
+</android.support.v4.widget.SwipeRefreshLayout>
+
+

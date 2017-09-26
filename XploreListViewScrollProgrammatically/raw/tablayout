@@ -1,0 +1,10 @@
+https://developer.android.com/reference/android/support/design/widget/TabLayout.html
+
+TabLayout design
+https://material.io/guidelines/components/tabs.html#tabs-types-of-tabs
+
+tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE) ou
+app:tabMode="scrollable"
+
+Livro online
+https://commonsware.com/Android/

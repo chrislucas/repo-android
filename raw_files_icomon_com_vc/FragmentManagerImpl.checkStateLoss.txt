@@ -1,0 +1,11 @@
+Exception java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
+android.support.v4.app.FragmentManagerImpl.checkStateLoss (FragmentManager.java:1842)
+android.support.v4.app.FragmentManagerImpl.enqueueAction (FragmentManager.java:1860)
+android.support.v4.app.BackStackRecord.commitInternal (BackStackRecord.java:650)
+android.support.v4.app.BackStackRecord.commit (BackStackRecord.java:609)
+android.support.v4.app.DialogFragment.show (DialogFragment.java:143)
+com.project.icomoncomvc.entities.custom.views.CustomCompatDialogFragment.show (CustomCompatDialogFragment.java:279)
+com.project.icomoncomvc.activities.ActivityPost$1.onClick (ActivityPost.java:290)
+
+
+https://stackoverflow.com/questions/15729138/on-showing-dialog-i-get-can-not-perform-this-action-after-onsaveinstancestate
