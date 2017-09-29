@@ -1,0 +1,24 @@
+https://developer.android.com/guide/components/services.html
+
+Observacao interessante sobre services - Fonte https://developer.android.com/guide/components/services.html
+
+
+Caution: 
+A service runs in the main thread of its hosting process; 
+the service does not create its own thread and does not run in 
+a separate process unless you specify otherwise. If your service is going to 
+perform any CPU-intensive work or blocking operations, 
+such as MP3 playback or networking, you should create a new thread within the 
+service to complete that work. By using a separate thread, 
+you can reduce the risk of Application Not Responding (ANR) errors
+, and the application's main thread can remain dedicated to user interaction with your activities
+
+
+Restricoes do uso de Services na API 26 >
+
+restrictions on running background services
+https://developer.android.com/about/versions/oreo/background.html
+
+
+Intelligent Job-Scheduling
+https://developer.android.com/topic/performance/scheduling.html

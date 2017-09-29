@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="project.contentprovider.Main">
+    tools:context=".activities.Main">
     <!--
         Testando o recurso de habilitar a visualizacao da senha com
         o widget do android e na linha de codigo
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="senha"
+            android:hint="@string/default_placeholder_password"
             android:textSize="16sp" />
 
     </android.support.design.widget.TextInputLayout>
@@ -39,6 +39,6 @@
         android:id="@+id/check_toggle_pwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver senha"/>
+        android:text="@string/default_chk_label_password"/>
 
 </LinearLayout>

@@ -2,4 +2,6 @@
     <string name="app_name">StudyContentProvider</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="title_main_activity">Content Provider</string>
+    <string name="default_placeholder_password">senha</string>
+    <string name="default_chk_label_password">Ver senha</string>
 </resources>
