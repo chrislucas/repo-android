@@ -1,11 +1,46 @@
-https://android.jlelse.eu/app-optimization-with-arraymap-sparsearray-in-android-c0b7de22541a
+SparseArray
+https://developer.android.com/reference/android/util/SparseArray.html
+https://developer.android.com/reference/android/util/SparseIntArray.html
+https://developer.android.com/reference/android/support/v4/util/SparseArrayCompat.html
 https://www.programcreek.com/java-api-examples/android.util.SparseArray
 http://android.okhelp.cz/sparsearray-instead-hashmap-android-example/
+
+
+internal implementation Hashmap
+http://www.geeksforgeeks.org/internal-working-of-hashmap-java/
+Funcionamento do Hashmap segundo o link acima
+
+
+Comparacao interessante sobre Hashmap, ArrayMap e SparseArray em android
+https://android.jlelse.eu/app-optimization-with-arraymap-sparsearray-in-android-c0b7de22541a
+Funcionamento do Hashmap segundo o link acima
+
+A classe Hashmap possui uma inner class chamada Entry<K, V> que guarda o par "E" "chave" e "valor".
+esses par de dados representa um dado no mapa no mapa (Entry<>). Antes de executar uma operacao
+de insercao no mapa, é executada a funcao de hash utilizando o par "E" para obter um hash code. Esse
+hashcode torna-se um indice num array que é um atributo da classe HashMap. Cada indice desse array
+da acesso a uma lista ligada de entries<K, V>, portanto quando um par "E" gera o mesmo hashcode,
+esse par é inserido na lista que pode ser acessada através de um array cujo indice é o hashcode
+gerado pela propria entrada.
+
+
+ArrayMap: (implementa a interface Map e é uma especializacao de )
+
+Diferente do Hashmap, essa implementacao possui 2 arrays, o primeiro guarda os hashcodes gerados
+a partir do Par E<chave, valor> de forma ordenada, e o segundo, um array de objetos
+guarda no indice i = (2 * indexDoHash) a chave e no indice i+1 o valor.
+Para buscar um determinado par "E", é executada uma binary search no primeiro array pelo hashcode
+, e com o indice i do hashcode sabemos que i*2 temos a chave e i*2+1 temos o valor
+
+ArrayMap links
+https://developer.android.com/reference/android/support/v4/util/ArrayMap.html
+http://deepakmishra.me/blog/index.php/2015/10/19/hashmaps-arraymaps-and-sparsearrays-in-android/
+https://developer.android.com/reference/android/databinding/ObservableArrayMap.html
+https://developer.android.com/reference/android/support/v4/util/SimpleArrayMap.html
 http://androidjavapoint.blogspot.com.br/2017/03/app-optimization-with-arraymap-and.html
 
-https://developer.android.com/reference/android/util/SparseArray.html
-
-https://developer.android.com/reference/android/util/SparseIntArray.html
+SparseArray
 
 
-https://developer.android.com/reference/android/support/v4/util/SparseArrayCompat.html
+Comparision SparseArray vs Hashmap
+https://stackoverflow.com/questions/25560629/sparsearray-vs-hashmap

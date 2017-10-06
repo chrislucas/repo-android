@@ -1,0 +1,6 @@
+Discussão sobre Autoboxing do Java e desempenho de aplicações
+http://androidjavapoint.blogspot.com.br/2017/04/autoboxing-little-thing-can-cause-big.html
+Autoboxing
+Integer i = 10;     // boxing
+Float ft = 2.5f;    // boxing
+float f = ft;       // unboxing

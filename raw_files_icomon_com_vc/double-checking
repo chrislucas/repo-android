@@ -1,0 +1,3 @@
+singleton double checked locking problem
+http://www.javaworld.com/article/2074979/java-concurrency/double-checked-locking--clever--but-broken.html
+https://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html
