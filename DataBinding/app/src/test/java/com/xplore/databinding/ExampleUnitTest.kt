@@ -1,4 +1,4 @@
-package com.xplore.learningdatabinding
+package com.xplore.databinding
 
 import org.junit.Test
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <data>
+        <variable name="fmtTime" type="com.xplore.databinding.models.Time" />
+    </data>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@{fmtTime.formattedTime.get()}"
+        android:textAlignment="center"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="30sp"
+        />
+
+</layout>
+

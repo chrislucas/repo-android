@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.project.studycontentprovider">
-    <uses-permission
-        android:name="android.permission.READ_CALENDAR" />
-    <uses-permission
-        android:name="android.permission.WRITE_CALENDAR" />
-    <uses-permission
-        android:name="android.permission.READ_CONTACTS" />
-    <uses-permission
-        android:name="android.permission.WRITE_CONTACTS" />
+
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -19,21 +15,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.ItemListActivity"
+            android:name=".activities.list.ItemListActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.ItemDetailActivity"
+            android:name=".activities.list.ItemDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".activities.ItemListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.project.studycontentprovider.activities.ItemListActivity" />
+                android:value="com.project.studycontentprovider.activities.list.ItemListActivity" />
         </activity>
-        <activity android:name=".activities.Main"
+        <activity
+            android:name=".activities.Main"
             android:label="@string/title_main_activity">
+        </activity>
+        <activity android:name=".activities.list.ListContact">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

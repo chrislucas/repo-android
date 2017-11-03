@@ -2,6 +2,13 @@ android data binding example
 
 https://developer.android.com/topic/libraries/data-binding/index.html
 
+// tutorial com alguns erros
+// classe que extende a java.utils.Observable ao inves de implementar android.databinding.Observabl
 https://inducesmile.com/android/android-databinding-example-tutorial/
 
+https://medium.com/google-developers/android-data-binding-observability-9de4ff3fe038
+
 http://www.vogella.com/tutorials/AndroidDatabinding/article.html
+
+
+https://www.bignerdranch.com/blog/two-way-data-binding-on-android-observing-your-view-with-xml/

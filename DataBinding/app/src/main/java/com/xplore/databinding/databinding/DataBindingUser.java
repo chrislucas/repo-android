@@ -1,16 +1,16 @@
-package com.xplore.learningdatabinding.databinding;
+package com.xplore.databinding.databinding;
 
 /**
  * Created by r028367 on 27/10/2017.
  */
 
-public class DatabindUser {
+public class DataBindingUser {
 
     private String firstName, lastName;
     private long age;
 
 
-    public DatabindUser(String firstName, String lastName, long age) {
+    public DataBindingUser(String firstName, String lastName, long age) {
         this.firstName  = firstName;
         this.lastName   = lastName;
         this.age        = age;

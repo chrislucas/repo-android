@@ -14,6 +14,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 import com.project.studycontentprovider.R;
+import com.project.studycontentprovider.contentprovider.ContactsContentProvider;
 import com.project.studycontentprovider.contentprovider.TelephonyContentProvider;
 import com.project.studycontentprovider.utils.PermissionsUtils;
 
@@ -23,6 +24,28 @@ public class Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        verifyPermissions();
+    }
+
+
+    private void M() {
+        TelephonyContentProvider.explore(this);
+    }
+
+    private void T() {
+        ContactsContentProvider.exploreContactsContractClass(this);
+    }
+
+    private void R() {
+        ContactsContentProvider.exploreContactsTable(this);
+    }
+
+
+    private void S() {
+        ContactsContentProvider.exploreFilterContactTable(this);
+    }
+
+    private void U() {
         // Testando o metodo setTransformationMethod http://stackoverflow.com/questions/3685790/how-to-switch-between-hide-and-view-password
         /**
          * TransformationMethod
@@ -44,11 +67,6 @@ public class Main extends AppCompatActivity {
                 editText.setSelection(start, end);
             }
         });
-        verifyPermissions();
-        //ContactsContentProvider.exploreContactsContractClass(this);
-        //ContactsContentProvider.exploreContactsTable(this);
-        //ContactsContentProvider.exploreFilterContactTable(this);
-        TelephonyContentProvider.explore(this);
     }
 
     /**
@@ -71,11 +89,9 @@ public class Main extends AppCompatActivity {
         if(requestCode == REQUEST_CODE_PERMISSIONS) {
             if(permissions.length > 0 && grantResults.length > 0) {
                 if(permissions.length == grantResults.length ) {
-                    for (String permission : permissions) {}
+                    //for (String permission : permissions) {}
                 }
-                if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                }
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {}
             }
         }
     }

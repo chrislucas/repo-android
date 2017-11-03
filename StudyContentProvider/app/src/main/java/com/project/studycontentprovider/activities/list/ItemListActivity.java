@@ -1,4 +1,4 @@
-package com.project.studycontentprovider.activities;
+package com.project.studycontentprovider.activities.list;
 
 import android.content.Context;
 import android.content.Intent;

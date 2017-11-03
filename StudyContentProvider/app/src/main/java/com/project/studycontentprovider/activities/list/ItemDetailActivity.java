@@ -1,4 +1,4 @@
-package com.project.studycontentprovider.activities;
+package com.project.studycontentprovider.activities.list;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
+import com.project.studycontentprovider.activities.list.ItemListActivity;
 import com.project.studycontentprovider.fragments.ItemDetailFragment;
 import com.project.studycontentprovider.R;
 
