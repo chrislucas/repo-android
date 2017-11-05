@@ -60,28 +60,22 @@ public final class ContactsContentProvider {
         }
     }
 
-
     public static void exploreContactsTable(Context context) {
         ContentResolver contentResolver = context.getContentResolver();
         Uri uri = ContactsContract.Contacts.CONTENT_URI;
-
         String [] projection    = new String [] {ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts.HAS_PHONE_NUMBER};
         String selection        = null;
         String args []          = null;
         String sortOrder        = null;
-
         Cursor cursor = contentResolver.query(uri, projection, selection, args, sortOrder);
-        if(cursor != null /*&& cursor.moveToFirst()*/) {
-            int i = 0, count = cursor.getCount();
-            while(cursor.moveToNext()) {
-                //cursor.move(i++);
-                int idxName   = cursor.getColumnIndex(projection[0]);
-                int idxHasPhone = cursor.getColumnIndex(projection[1]);
-                String formatted = String.format("%s\n%s\n", cursor.getString(idxName), cursor.getString(idxHasPhone));
-                Log.i("EXPLORE_CONTACT_TABLE", formatted);
-                i++;
-            }
-            Log.i("I", String.valueOf(i));
+        if(cursor != null) {
+            cursor.moveToFirst();
+            do {
+                int idxName         = cursor.getColumnIndex(projection[0]);
+                int idxHasPhone     = cursor.getColumnIndex(projection[1]);
+                String formatted    = String.format("%s\n%s\n", cursor.getString(idxName), cursor.getString(idxHasPhone));
+                Log.i("CONTACTS_TABLE", formatted);
+            } while (cursor.moveToNext());
         }
     }
 

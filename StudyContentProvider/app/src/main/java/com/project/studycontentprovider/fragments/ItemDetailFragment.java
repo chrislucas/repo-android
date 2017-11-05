@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.project.studycontentprovider.R;
-import com.project.studycontentprovider.activities.ItemDetailActivity;
-import com.project.studycontentprovider.activities.ItemListActivity;
+import com.project.studycontentprovider.activities.list.ItemDetailActivity;
+import com.project.studycontentprovider.activities.list.ItemListActivity;
 import com.project.studycontentprovider.dummy.DummyContent;
 
 /**

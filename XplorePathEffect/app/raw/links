@@ -1,0 +1,10 @@
+PathEffect
+https://developer.android.com/reference/android/graphics/PathEffect.html
+
+DashPathEffect
+https://developer.android.com/reference/android/graphics/DashPathEffect.html
+
+PathEffect example
+https://android.googlesource.com/platform/development/+/b356564/samples/ApiDemos/src/com/example/android/apis/graphics/PathEffects.java
+http://android-coding.blogspot.com.br/2014/05/composepatheffect-example.html
+http://useof.org/java-open-source/android.graphics.PathEffect

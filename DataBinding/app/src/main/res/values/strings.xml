@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DataBinding</string>
+    <string name="title_activity_clock">Relógio</string>
+    <string name="formatted_time">00:00:00</string>
+</resources>
