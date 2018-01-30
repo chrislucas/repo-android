@@ -24,14 +24,13 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.XploreCameraOpenCVActivity">
+        <activity android:name=".activities.XploreCameraOpenCVActivity" android:label="@string/title_activity_camera_using_opencv">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.XploreCamera2Activity"></activity>
+        <activity android:name=".activities.XploreCamera2Activity" android:label="@string/title_activity_camera_using_api_camera2" />
     </application>
 
 </manifest>
