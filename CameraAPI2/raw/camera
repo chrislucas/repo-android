@@ -1,0 +1,12 @@
+https://source.android.com/devices/camera/camera3
+
+https://developer.android.com/reference/android/hardware/camera2/package-summary.html
+
+App interessante
+http://www.nerdgrl.org/en/spy-app-hidden-camera-android/
+
+https://developer.android.com/reference/android/hardware/camera2/CaptureRequest.html
+
+Filtragem baseada em recursos declarados explicitamente
+<uses-feature android:name="android.hardware.camera" android:required="true" />
+https://developer.android.com/guide/topics/manifest/uses-feature-element.html?hl=pt-br

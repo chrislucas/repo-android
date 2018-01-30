@@ -1,4 +1,4 @@
-package com.project.cameraapi2;
+package com.project.cameraapi2.activities;
 
 import android.Manifest;
 import android.content.Context;
@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.WindowManager;
+
+import com.project.cameraapi2.R;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -31,7 +33,7 @@ import java.util.List;
  * Exemplo com OpenCV
  *
  * */
-public class MainActivity extends AppCompatActivity implements CvCameraViewListener2 {
+public class XploreCameraOpenCVActivity extends AppCompatActivity implements CvCameraViewListener2 {
 
 
     private CameraBridgeViewBase openCvCameraView;
