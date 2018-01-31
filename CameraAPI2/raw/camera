@@ -10,3 +10,22 @@ https://developer.android.com/reference/android/hardware/camera2/CaptureRequest.
 Filtragem baseada em recursos declarados explicitamente
 <uses-feature android:name="android.hardware.camera" android:required="true" />
 https://developer.android.com/guide/topics/manifest/uses-feature-element.html?hl=pt-br
+
+
+CameraManager
+https://developer.android.com/reference/android/hardware/camera2/CameraManager.html
+
+Exemplo
+https://github.com/googlesamples/android-Camera2Basic
+
+LEIA ISSO Antes
+https://developer.android.com/reference/android/hardware/camera2/package-summary.html
+
+
+Semaphore
+https://developer.android.com/reference/java/util/concurrent/Semaphore.html
+https://www.geeksforgeeks.org/semaphore-in-java/
+https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Semaphore.html
+
+CameraCaptureSession
+https://developer.android.com/reference/android/hardware/camera2/CameraCaptureSession.html#capture(android.hardware.camera2.CaptureRequest
