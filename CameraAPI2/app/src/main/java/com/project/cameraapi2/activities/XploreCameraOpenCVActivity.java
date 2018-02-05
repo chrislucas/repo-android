@@ -1,7 +1,6 @@
-package com.project.cameraapi2;
+package com.project.cameraapi2.activities;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -14,13 +13,14 @@ import android.util.Log;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 
+import com.project.cameraapi2.R;
+
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.android.InstallCallbackInterface;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
@@ -31,7 +31,7 @@ import java.util.List;
  * Exemplo com OpenCV
  *
  * */
-public class MainActivity extends AppCompatActivity implements CvCameraViewListener2 {
+public class XploreCameraOpenCVActivity extends AppCompatActivity implements CvCameraViewListener2 {
 
 
     private CameraBridgeViewBase openCvCameraView;
@@ -181,9 +181,7 @@ public class MainActivity extends AppCompatActivity implements CvCameraViewListe
         }
     }
 
-
-    private static final int REQUEST_PERM = 0xff;
-
+    private static final int REQUEST_LIST_PERMISSIONS = 0xff;
     private void requestPermissions() {
         List<String> permissionsDenied = new ArrayList<>();
         String permissions [] = {
@@ -202,24 +200,17 @@ public class MainActivity extends AppCompatActivity implements CvCameraViewListe
         if(permissionsDenied.size() > 0) {
             String arrayPermissions [] = new String[permissionsDenied.size()];
             permissionsDenied.toArray(arrayPermissions);
-            ActivityCompat.requestPermissions(this, arrayPermissions, REQUEST_PERM);
+            ActivityCompat.requestPermissions(this, arrayPermissions, REQUEST_LIST_PERMISSIONS);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if( (permissions != null && permissions.length > 0)  && (grantResults != null && grantResults.length > 0)) {
-            /*
-            for(String permission : permissions)
-                Log.d("PERMISSIONS_REQUEST", permission);
-            for(int rs : grantResults)
-                Log.d("PERMISSIONS_REQUEST", String.valueOf(rs));
-            */
-            if(requestCode == REQUEST_PERM && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if( (permissions.length > 0)  && grantResults.length > 0) {
+            if(requestCode == REQUEST_LIST_PERMISSIONS && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openCvCameraView.setCvCameraViewListener(this);
             }
-
             else if(requestCode == REQUEST_PERMISSION_CAMERA && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openCvCameraView.setCvCameraViewListener(this);
             }
