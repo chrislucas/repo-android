@@ -154,9 +154,9 @@ public class XploreCameraOpenCVActivity extends AppCompatActivity implements CvC
         Log.i("MAT_SRC", src.toString());
         Log.i("MAT_EDGE", edge.toString());
         Log.i("MAT_CANNY", cannyEdges.toString());
+
         return cannyEdges;
     }
-
     /**
      * Carregando OpenCV no metodo onResume
      * */

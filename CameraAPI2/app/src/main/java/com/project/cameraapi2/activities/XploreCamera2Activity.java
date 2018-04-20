@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.project.cameraapi2.R;
 import com.project.cameraapi2.utils.Camera2Utils;
+import com.project.cameraapi2.utils.CameraUtils;
 
 public class XploreCamera2Activity extends AppCompatActivity {
 
@@ -19,7 +20,8 @@ public class XploreCamera2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xplore_camera2);
-        tryOpenCamera();
+
+        Camera2Utils.logCameraCharacteristics(this);
     }
 
     private CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
@@ -59,8 +61,6 @@ public class XploreCamera2Activity extends AppCompatActivity {
             return super.sendMessageAtTime(msg, uptimeMillis);
         }
     }
-
-
 
     private void tryOpenCamera() {
         String [] ids = Camera2Utils.getCameraIdList(this);

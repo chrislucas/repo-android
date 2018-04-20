@@ -1,3 +1,9 @@
+https://developer.android.com/guide/topics/media/camera.html
+
+hadrware features
+For a list of camera features, see the manifest Features Reference.
+https://developer.android.com/guide/topics/manifest/uses-feature-element.html#hw-features
+
 https://source.android.com/devices/camera/camera3
 
 https://developer.android.com/reference/android/hardware/camera2/package-summary.html
