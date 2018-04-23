@@ -3,7 +3,12 @@
     package="com.project.cameraapi2">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.camera.any"
         android:required="true" />
@@ -16,8 +21,8 @@
     <uses-feature
         android:name="android.hardware.camera.front.autofocus"
         android:required="true" />
-
-    <uses-feature android:name="android.hardware.camera.level.full"
+    <uses-feature
+        android:name="android.hardware.camera.level.full"
         android:required="true" />
 
     <application
@@ -27,12 +32,22 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.XploreCameraOpenCVActivity"
+        <activity
+            android:name=".activities.ActivityCameraOpencv"
             android:label="@string/title_activity_camera_using_opencv" />
-        <activity android:name=".activities.XploreCamera2Activity"
+        <activity
+            android:name=".activities.ActivityCameraApi2"
             android:label="@string/title_activity_camera_using_api_camera2">
+
+        </activity>
+
+        <activity
+            android:name=".activities.ActivityCameraApi"
+            android:theme="@style/AppTheme.Fullscreen"
+            android:screenOrientation="sensor"
+            android:label="@string/title_activity_camera_using_api_camera">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

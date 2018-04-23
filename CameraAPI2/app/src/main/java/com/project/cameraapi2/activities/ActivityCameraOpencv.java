@@ -31,7 +31,7 @@ import java.util.List;
  * Exemplo com OpenCV
  *
  * */
-public class XploreCameraOpenCVActivity extends AppCompatActivity implements CvCameraViewListener2 {
+public class ActivityCameraOpencv extends AppCompatActivity implements CvCameraViewListener2 {
 
 
     private CameraBridgeViewBase openCvCameraView;

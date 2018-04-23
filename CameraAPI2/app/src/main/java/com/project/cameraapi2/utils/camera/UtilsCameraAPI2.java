@@ -1,4 +1,4 @@
-package com.project.cameraapi2.utils;
+package com.project.cameraapi2.utils.camera;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -19,6 +19,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import com.project.cameraapi2.utils.exception.UtilsException;
+
 import java.util.List;
 
 
@@ -26,7 +28,7 @@ import java.util.List;
  * Created by r028367 on 31/01/2018.
  */
 
-public class Camera2Utils {
+public class UtilsCameraAPI2 {
 
 
     public static final int REQUEST_CAMERA_PERMISSION = 0xf3;
@@ -71,24 +73,25 @@ public class Camera2Utils {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static void openCamera(Activity activity, @NonNull String id
-            , @NonNull CameraDevice.StateCallback stateCallback, @NonNull Handler handler) {
+            , @NonNull CameraDevice.StateCallback callback, @NonNull Handler handler) {
         CameraManager cameraManager = getCameraManager(activity.getApplicationContext());
         if (cameraManager != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
                 }
                 else {
                     try {
-                        cameraManager.openCamera(id, stateCallback, handler);
+                        cameraManager.openCamera(id, callback, handler);
                     }
                     catch (CameraAccessException e) {
-                       Log.e("OPEN_CAMERA_EXCP", e.getMessage());
+                        Log.e("OPEN_CAMERA_EXCP", UtilsException.getMessage(e));
                     }
                 }
             }
         }
     }
+
 
     public static void logCameraCharacteristics(Activity activity) {
         CameraManager cameraManager = getCameraManager(activity.getApplicationContext());
@@ -100,12 +103,15 @@ public class Camera2Utils {
                         CameraCharacteristics c =  cameraManager.getCameraCharacteristics(id);
                         List<CameraCharacteristics.Key<?>> list = c.getKeys();
                         for(CameraCharacteristics.Key k : list) {
-                            Log.i("C_CHAR_KEY", k.getName());
+                            Log.i("C_CHAR_KEY",
+                                    String.format("Nome %s.\nData: %s"
+                                    , k.getName(), k.toString())
+                            );
                         }
                     }
                 }
                 catch (CameraAccessException e) {
-                    Log.e("CAMERA_ACCESS_EXCP", e.getLocalizedMessage());
+                    Log.e("CAMERA_ACCESS_EXCP", UtilsException.getMessage(e));
                 }
             }
         }
