@@ -35,3 +35,13 @@ https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Semaphore.html
 
 CameraCaptureSession
 https://developer.android.com/reference/android/hardware/camera2/CameraCaptureSession.html#capture(android.hardware.camera2.CaptureRequest
+
+
+Tutorial
+http://www.vogella.com/tutorials/AndroidCamera/article.html#tutorial-using-the-camera-api
+https://developer.android.com/training/camera/cameradirect
+https://stackoverflow.com/questions/7790566/how-to-get-raw-preview-data-from-camera-object-at-least-15-frames-per-second-in
+
+Camera2
+https://medium.com/google-developers/detecting-camera-features-with-camera2-61675bb7d1bf
+https://developer.android.com/reference/android/hardware/camera2/package-summary?utm_campaign=adp_series_how_to_camera2_031016&utm_source=medium&utm_medium=blog

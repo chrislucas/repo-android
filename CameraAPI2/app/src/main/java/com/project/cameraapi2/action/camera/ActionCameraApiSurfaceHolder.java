@@ -5,9 +5,9 @@ import android.graphics.Rect;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 
-public class CameraApiSurfaceHolder implements SurfaceHolder {
+public class ActionCameraApiSurfaceHolder implements SurfaceHolder {
 
-    public CameraApiSurfaceHolder() {
+    public ActionCameraApiSurfaceHolder() {
 
     }
 

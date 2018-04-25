@@ -99,4 +99,8 @@ public class ActivityCameraApi extends AppCompatActivity {
     public void takePicture(View view) {
         cameraApiPreview.takeAPicture();
     }
+
+    public void reverseCamera(View view) {
+        cameraApiPreview.reverseCamera();
+    }
 }

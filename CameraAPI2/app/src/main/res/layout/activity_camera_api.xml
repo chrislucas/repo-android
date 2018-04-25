@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context=".activities.ActivityCameraApi">
 
-
     <RelativeLayout
         android:id="@+id/wrapper_preview_camera"
         android:layout_width="match_parent"
@@ -20,7 +19,6 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             />
-
         <ImageButton
             android:id="@+id/image_button_take_picture"
             android:layout_gravity="center"
@@ -32,6 +30,18 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="30sp"
             android:onClick="takePicture"
+            />
+        <ImageButton
+            android:id="@+id/image_button_reverse_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/reverse_icon"
+            android:background="@color/translucent"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@id/camera_api_preview_surface"
+            android:layout_alignEnd="@id/camera_api_preview_surface"
+            android:layout_margin="15sp"
+            android:onClick="reverseCamera"
             />
     </RelativeLayout>
 

@@ -40,6 +40,26 @@ public class UtilsCameraApi {
         return null;
     }
 
+    public static Camera getCamera(Context context, @TypeCamera int type) {
+        try {
+            if(checkIfExistsCameraHardware(context)) {
+                int numberOfCameras = Camera.getNumberOfCameras();
+                Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+                for (int i = 0; i < numberOfCameras; i++) {
+                    Camera.getCameraInfo(i, cameraInfo);
+                    if (cameraInfo.facing == type) {
+                        return Camera.open(i);
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            Log.e("EXCP_CAMERA", UtilsException.getMessage(e));
+        }
+        return null;
+    }
+
+
 
 
 }
