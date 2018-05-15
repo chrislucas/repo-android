@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/CameraAPI2.iml" filepath="$PROJECT_DIR$/CameraAPI2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/camlib/camlib.iml" filepath="$PROJECT_DIR$/camlib/camlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/camlibapi/camlibapi.iml" filepath="$PROJECT_DIR$/camlibapi/camlibapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/camlibapi2/camlibapi2.iml" filepath="$PROJECT_DIR$/camlibapi2/camlibapi2.iml" />
       <module fileurl="file://$PROJECT_DIR$/openCVLibrary320/openCVLibrary320.iml" filepath="$PROJECT_DIR$/openCVLibrary320/openCVLibrary320.iml" />
     </modules>
   </component>

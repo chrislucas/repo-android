@@ -37,17 +37,22 @@
             android:label="@string/title_activity_camera_using_opencv" />
         <activity
             android:name=".activities.ActivityCameraApi2"
-            android:label="@string/title_activity_camera_using_api_camera2">
-
-        </activity>
-
+            android:label="@string/title_activity_camera_using_api_camera2" />
         <activity
             android:name=".activities.ActivityCameraApi"
-            android:theme="@style/AppTheme.Fullscreen"
+            android:label="@string/title_activity_camera_using_api_camera"
             android:screenOrientation="sensor"
-            android:label="@string/title_activity_camera_using_api_camera">
+            android:theme="@style/AppTheme.Fullscreen"
+            />
+        <activity
+            android:name=".activities.ActivityCameraApiTestLib"
+            android:label="@string/title_activity_camera_using_api_camera2"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Fullscreen"
+            />
+        <activity android:name=".activities.ActivityCallCamera1">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

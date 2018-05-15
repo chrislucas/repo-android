@@ -23,11 +23,8 @@ public class ActivityCameraApi2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xplore_camera2);
-
         UtilsCameraAPI2.logCameraCharacteristics(this);
     }
-
-
 
     private void tryOpenCamera() {
         String [] ids = UtilsCameraAPI2.getCameraIdList(this);

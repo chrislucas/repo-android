@@ -27,7 +27,6 @@ public class ActionCameraApiTakeJPEGPictureCallback implements Camera.PictureCal
     private CameraControl cameraControl;
     private Context context;
 
-
     public ActionCameraApiTakeJPEGPictureCallback(@NonNull Camera camera, @NonNull CameraControl cameraControl, Context context) {
         this.camera = camera;
         this.cameraControl = cameraControl;

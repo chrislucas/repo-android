@@ -41,7 +41,6 @@ public class CameraApiPreview extends SurfaceView implements SurfaceHolder.Callb
     private ActionCameraApiShutterCallback actionCameraApiShutterCallback;
     private ActionOnChangeCameraOrientation actionOnChangeCameraOrientation;
 
-
     private void init(Context context) {
         this.surfaceHolder = getHolder();
         this.surfaceHolder.addCallback(this);
@@ -49,11 +48,9 @@ public class CameraApiPreview extends SurfaceView implements SurfaceHolder.Callb
         this.context = context;
         this.actionCameraApiShutterCallback = new ActionCameraApiShutterCallback();
         this.camera = UtilsCameraApi.getCamera(this.context);
-
         this.camera.setZoomChangeListener(new ActionOnZoomChangeListener());
         this.camera.setAutoFocusMoveCallback(new ActionAutoFocusMove());
         activityFocus();
-
         this.actionCameraApiTakeJPEGPictureCallback = new ActionCameraApiTakeJPEGPictureCallback(camera, this, context);
         this.actionOnChangeCameraOrientation = new ActionOnChangeCameraOrientation(context, camera);
     }

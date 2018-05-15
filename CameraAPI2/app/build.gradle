@@ -5,7 +5,7 @@ android {
     buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.project.cameraapi2"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -29,4 +29,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation project(':openCVLibrary320')
     implementation 'org.tensorflow:tensorflow-android:1.8.0-rc0'
+    implementation project(':camlibapi')
 }

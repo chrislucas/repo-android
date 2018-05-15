@@ -4,13 +4,11 @@ package com.project.cameraapi2.activities;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.hardware.Camera;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
 import com.project.cameraapi2.R;
 import com.project.cameraapi2.customviews.camera.CameraApiPreview;
 import com.project.cameraapi2.utils.camera.UtilsCameraApi;
@@ -37,15 +35,11 @@ public class ActivityCameraApi extends AppCompatActivity {
     }
 
     private void checkPermissions() {
-        String [] permissions = {
-             Manifest.permission.CAMERA
-            ,Manifest.permission.READ_EXTERNAL_STORAGE
-            ,Manifest.permission.WRITE_EXTERNAL_STORAGE
-        };
+        String [] permissions = {Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         ArrayList<String> list = new ArrayList<>();
         for (String permission : permissions) {
-          if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
-              list.add(permission);
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
+                list.add(permission);
         }
         if (list.size() > 0) {
             permissions = new String[list.size()];
