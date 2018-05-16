@@ -2,7 +2,6 @@ package vc.com.icomon.camlibapi.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Picture;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Build;
@@ -25,11 +24,9 @@ import java.util.List;
 import java.util.Locale;
 
 import vc.com.icomon.camlibapi.actions.camera.CameraControl;
-import vc.com.icomon.camlibapi.actions.camera.impl.ActionCameraApiShutterCallback;
-import vc.com.icomon.camlibapi.actions.camera.impl.ActionCameraApiTakeJPEGPictureCallback;
 import vc.com.icomon.camlibapi.actions.camera.impl.ActionOnChangeCameraOrientation;
-import vc.com.icomon.camlibapi.utils.camera.UtilsCameraApi;
-import vc.com.icomon.camlibapi.utils.exception.UtilsException;
+import vc.com.icomon.camlibapi.utils.camera.HelperCameraApi;
+import vc.com.icomon.camlibapi.utils.exception.HelperLogException;
 
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback2, CameraControl {
 
@@ -109,7 +106,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     }
 
     public void tryOpenCamera() {
-        this.camera = UtilsCameraApi.tryOpenCamera(context);
+        this.camera = HelperCameraApi.tryOpenCamera(context);
     }
 
     public Camera getCamera() {
@@ -232,7 +229,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
                 Log.i("CAMERA_API", "Camera Ligada");
             }
             catch (IOException e) {
-                Log.e("EXCP_SURFACE_CREATED", UtilsException.getMessage(e));
+                Log.e("EXCP_SURFACE_CREATED", HelperLogException.getMessage(e));
             }
         }
     }
@@ -289,7 +286,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
                 camera.setPreviewDisplay(null);
             }
             catch (IOException e) {
-               Log.e("EXCP_STOP_CAMERA", UtilsException.getMessage(e));
+               Log.e("EXCP_STOP_CAMERA", HelperLogException.getMessage(e));
             }
             camera.stopPreview();
             isCameraOpen = false;

@@ -18,7 +18,7 @@ import java.util.Locale;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
-public class UtilsFile {
+public class HelperAccessExternalFiles {
 
     @IntDef({TypeOutputMediaFile.VIDEO , TypeOutputMediaFile.IMAGE})
     @Retention(SOURCE)

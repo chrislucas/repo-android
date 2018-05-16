@@ -4,11 +4,9 @@ import android.hardware.Camera;
 import android.support.annotation.NonNull;
 
 import vc.com.icomon.camlibapi.actions.camera.CallbackOnPictureTaken;
-import vc.com.icomon.camlibapi.actions.camera.CameraControl;
 
 
 /**
- *
  * Callback com um array de bytes com a imagem em formato JPEG
  * */
 

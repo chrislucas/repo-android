@@ -8,8 +8,8 @@ import java.lang.annotation.RetentionPolicy;
 
 
 @Retention(RetentionPolicy.SOURCE)
-@IntDef({TypeCamera.FACING_BACK, TypeCamera.FACING_FRONT})
-public @interface TypeCamera {
+@IntDef({DefTypeCamera.FACING_BACK, DefTypeCamera.FACING_FRONT})
+public @interface DefTypeCamera {
     int FACING_BACK = Camera.CameraInfo.CAMERA_FACING_BACK;
     int FACING_FRONT = Camera.CameraInfo.CAMERA_FACING_FRONT;
 }

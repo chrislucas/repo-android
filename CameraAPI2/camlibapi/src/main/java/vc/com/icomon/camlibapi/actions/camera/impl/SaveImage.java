@@ -8,8 +8,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import vc.com.icomon.camlibapi.actions.camera.CameraControl;
-import vc.com.icomon.camlibapi.utils.exception.UtilsException;
-import vc.com.icomon.camlibapi.utils.file.UtilsFile;
+import vc.com.icomon.camlibapi.utils.exception.HelperLogException;
+import vc.com.icomon.camlibapi.utils.file.HelperAccessExternalFiles;
 
 public class SaveImage {
 
@@ -20,7 +20,7 @@ public class SaveImage {
 
     private void saveImage(byte [] data) {
         Log.i("ON_PICTURE_TAKEN", String.format("SIZE_OF %d MB", data.length / (1024 * 1024)));
-        Uri uri = UtilsFile.getExternalOutputMediaFileUri(UtilsFile.TypeOutputMediaFile.IMAGE, UtilsFile.TypeOfEnvironmentDir.DIR_PICTURES, "image", appName, context);
+        Uri uri = HelperAccessExternalFiles.getExternalOutputMediaFileUri(HelperAccessExternalFiles.TypeOutputMediaFile.IMAGE, HelperAccessExternalFiles.TypeOfEnvironmentDir.DIR_PICTURES, "image", appName, context);
         if (uri != null) {
             try {
                 String path = uri.getPath();
@@ -32,7 +32,7 @@ public class SaveImage {
                 cameraControl.restartCamera();
             }
             catch (Exception e) {
-                Log.e("EXCP_ON_PICTURE_TAKEN", UtilsException.getMessage(e));
+                Log.e("EXCP_ON_PICTURE_TAKEN", HelperLogException.getMessage(e));
             }
         }
     }

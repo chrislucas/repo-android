@@ -2,19 +2,22 @@ package vc.com.icomon.camlibapi.utils.camera;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.util.Log;
 
 
-import vc.com.icomon.camlibapi.utils.exception.UtilsException;
+import java.lang.ref.WeakReference;
+
+import vc.com.icomon.camlibapi.utils.bitmap.HelperBitmap;
+import vc.com.icomon.camlibapi.utils.exception.HelperLogException;
 
 
 /**
  * Created by C_Luc on 03/02/2018.
  */
 
-public class UtilsCameraApi {
-
+public class HelperCameraApi {
 
     public static boolean checkCameraHardwareBack(Context context) {
         return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
@@ -35,12 +38,12 @@ public class UtilsCameraApi {
             }
         }
         catch (Exception e) {
-            Log.e("EXCP_CAMERA", UtilsException.getMessage(e));
+            Log.e("EXCP_CAMERA", HelperLogException.getMessage(e));
         }
         return null;
     }
 
-    public static Camera tryOpenCamera(Context context, @TypeCamera int type) {
+    public static Camera tryOpenCamera(Context context, @DefTypeCamera int type) {
         try {
             if(checkIfExistsCameraHardware(context)) {
                 int numberOfCameras = Camera.getNumberOfCameras();
@@ -54,10 +57,16 @@ public class UtilsCameraApi {
             }
         }
         catch (Exception e) {
-            Log.e("EXCP_CAMERA", UtilsException.getMessage(e));
+            Log.e("EXCP_CAMERA", HelperLogException.getMessage(e));
         }
         return null;
     }
+
+    public static WeakReference<Bitmap> generateBitmap(byte [] data) {
+        return HelperBitmap.decodeByteArray(data);
+    }
+
+
 
 
 
