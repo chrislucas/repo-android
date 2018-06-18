@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">API Câmera2</string>
-    <string name="title_activity_camera_using_opencv">Câmera básica Opencv</string>
-    <string name="title_activity_camera_using_api_camera2">Câmera básica API Camera2</string>
-    <string name="title_activity_camera_using_api_camera">Camera API</string>
-</resources>

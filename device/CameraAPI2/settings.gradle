@@ -1,0 +1,2 @@
+include ':app', ':camlibapi2', ':camlib', ':camlibapi', ':camlibapi'
+include ':openCVLibrary320'

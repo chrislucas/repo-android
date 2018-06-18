@@ -1,2 +1,0 @@
-include ':app', ':camlib', ':camlib'
-include ':openCVLibrary320'

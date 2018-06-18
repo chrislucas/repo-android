@@ -1,0 +1,15 @@
+https://developer.android.com/guide/topics/ui/drag-drop?hl=pt-br
+https://developer.android.com/training/gestures/scale
+https://medium.com/@shemag8/android-drag-and-drop-448aa0955bc8
+
+
+http://www.java2s.com/Code/Android/UI/Dragandmoveadot.htm
+
+https://stackoverflow.com/questions/37619708/android-draw-line-and-then-drag-it-with-touch
+https://stackoverflow.com/questions/17826358/drag-and-move-a-circle-drawn-on-canvas
+https://www.oodlestechnologies.com/blogs/Android-Drawing-On-Canvas-And-Object-Dragging-Application
+
+
+ClipaData
+https://developer.android.com/reference/android/content/ClipData
+https://stackoverflow.com/questions/33207809/what-exactly-is-label-parameter-in-clipdata-in-android

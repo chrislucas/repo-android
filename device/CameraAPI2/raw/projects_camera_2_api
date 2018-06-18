@@ -1,0 +1,8 @@
+https://github.com/googlesamples/android-Camera2Basic/
+https://github.com/googlesamples/android-Camera2Raw/
+
+
+Camera Orientation
+https://stackoverflow.com/questions/10660598/android-camera-preview-orientation-in-portrait-mode
+https://github.com/aosp-mirror/platform_packages_apps_camera/blob/master/src/com/android/camera/CameraActivity.java
+https://github.com/aosp-mirror/platform_packages_apps_camera/blob/ics-mr1-release/src/com/android/camera/Camera.java
