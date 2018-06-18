@@ -1,0 +1,16 @@
+example of state design pattern
+
+https://www.geeksforgeeks.org/state-design-pattern/
+https://www.journaldev.com/1751/state-design-pattern-java
+https://sourcemaking.com/design_patterns/state
+https://www.tutorialspoint.com/design_pattern/state_pattern.htm
+
+
+
+example of Decorator design pattern
+https://www.journaldev.com/1540/decorator-design-pattern-in-java-example
+https://www.tutorialspoint.com/design_pattern/decorator_pattern.htm
+
+
+https://brizeno.wordpress.com/category/padroes-de-projeto/chain-of-responsibility/
+https://www.geeksforgeeks.org/chain-responsibility-design-pattern/

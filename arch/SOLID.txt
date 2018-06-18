@@ -1,0 +1,27 @@
+S - Single Responsibility Principle:
+
+"Uma classe deve ter uma e somente uma responsabilidade."
+
+O principio de responsabilidade única nos sugere que ao projetar uma classe ela deva ter uma única
+responsabilidade, ou diversos métodos que tenham uma única responsabilidade.
+
+Um classe responsável por processar um arquivo, criptografa-lo e envia-lo para um determinado destinatario
+não deve ter todas essas acoes num único método, isso porque primeiro,
+podemos reaproveitar algumas ou todas essas funcionalidades no sistema e segundo se algo precisar mudar numa
+dessas implementações podemos facilmente mudar e testar o seu funcionamento
+
+
+O - Open-Closed Principle:
+
+"Classes, modulos e funcoes devem ser abertas para extensões mas fechadas a modificacoes"
+. EXPERT Android programming
+
+
+L - Liskov Substitution Principle
+
+
+I - Interface Segregation Principle
+
+
+D - Depency inversion Principle
+
