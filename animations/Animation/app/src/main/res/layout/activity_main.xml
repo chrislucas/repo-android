@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:layout_margin="5sp"
-        android:background="@drawable/button_insta"
+        android:background="@drawable/background_button"
         />
 
 </LinearLayout>
