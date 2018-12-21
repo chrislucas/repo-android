@@ -19,9 +19,21 @@ O - Open-Closed Principle:
 
 L - Liskov Substitution Principle
 
+Classes filhas devem tomar cuidado ao sobreescrever comportamentos afim de evitar a modificação
+de comportamento de métodos implementados na classe Pai.
+
 
 I - Interface Segregation Principle
 
+Criar interfaces com poucos métodos para que a classes que implementam os tais interfaces
+implementem todos os métodos dela.
+
 
 D - Depency inversion Principle
+https://en.wikipedia.org/wiki/Dependency_inversion_principle
 
+1) Modulos ou classes de Alto nível nao devem ser dependentes de modulos ou classes de baixo mais baixo,
+ambos devem depender de abstracoes
+
+
+2)
